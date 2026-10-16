@@ -8,9 +8,9 @@
  "metrics": {
   "balance": null,
   "pnl": null,
-  "alerts": 87
+  "alerts": 91
  },
- "generatedAt": "2026-10-15 23:13 CT",
+ "generatedAt": "2026-10-16 00:12 CT",
  "bots": [
   {
    "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
@@ -76,15 +76,15 @@
    "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
    "name": "자동 매매_대장",
    "description": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
-   "lastTurnAt": 1792123759000,
-   "lastActivity": "2026-10-15 23:09 CT",
+   "lastTurnAt": 1792127279000,
+   "lastActivity": "2026-10-16 00:07 CT",
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "working",
    "dept": "자본",
    "summary": "연구 round92 진행, 페이퍼 5기·수집기 정상, #396·395W 게이트 대기 중 (가상)",
    "summaryLive": true,
    "metrics": {
-    "alerts": 80
+    "alerts": 84
    }
   },
   {
