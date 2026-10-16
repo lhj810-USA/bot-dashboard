@@ -1,15 +1,16 @@
 {
  "health": {
   "known": 0,
-  "total": 8
+  "ok": 0,
+  "total": 8,
+  "pct": null
  },
  "metrics": {
   "balance": null,
   "pnl": null,
-  "balanceNote": "연결 필요 — 박스에 실시간 잔고 데이터 없음",
-  "pnlNote": "데이터 없음 — 박스에 체결/손익 기록 없음"
+  "alerts": 0
  },
- "generatedAt": "2026-10-15 20:39 CT",
+ "generatedAt": "2026-10-15 20:53 CT",
  "bots": [
   {
    "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
@@ -20,7 +21,9 @@
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "core",
-   "summary": "The user's primary bot."
+   "summary": "The user's primary bot.",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
@@ -31,7 +34,9 @@
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "자본",
-   "summary": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응…"
+   "summary": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응…",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "c16480ab-9b7e-4832-9edc-b6a27ff82899",
@@ -42,7 +47,9 @@
    "localFileModified": "2026-10-11 10:06 CT",
    "status": "unknown",
    "dept": "지식",
-   "summary": "알 수 없음"
+   "summary": "알 수 없음",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "61c15c0d-aeeb-488f-99bf-88878e64b446",
@@ -53,7 +60,9 @@
    "localFileModified": "2026-10-15 10:15 CT",
    "status": "unknown",
    "dept": "알림",
-   "summary": "알 수 없음"
+   "summary": "알 수 없음",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
@@ -64,7 +73,9 @@
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "자본",
-   "summary": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율"
+   "summary": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "92919409-9721-49b6-b150-79aaee08b3a2",
@@ -75,7 +86,9 @@
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "아르바이트",
-   "summary": "알 수 없음"
+   "summary": "알 수 없음",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "ec952ea5-d6ba-48db-8957-34895ac75c50",
@@ -86,7 +99,9 @@
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "자본",
-   "summary": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, Gi…"
+   "summary": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, Gi…",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "c8f69e15-9014-4347-b118-d63b3ec13b29",
@@ -97,7 +112,9 @@
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "자본",
-   "summary": "알 수 없음"
+   "summary": "알 수 없음",
+   "summaryLive": false,
+   "metrics": null
   }
  ],
  "automations": [
@@ -106,5 +123,89 @@
    "taskId": "ea82d2ea-ee33-499f-b00b-c59055a09071",
    "status": "비활성/아카이브"
   }
- ]
+ ],
+ "connections": {
+  "source": "Grok Bot 연결 목록 스냅샷 (2026-10-15 CT). 계정 수만, 내용 없음",
+  "categories": [
+   {
+    "key": "금융",
+    "items": [
+     [
+      "Finance",
+      1
+     ]
+    ]
+   },
+   {
+    "key": "메일",
+    "items": [
+     [
+      "Gmail",
+      2
+     ]
+    ]
+   },
+   {
+    "key": "일정",
+    "items": [
+     [
+      "Google Calendar",
+      2
+     ]
+    ]
+   },
+   {
+    "key": "문서",
+    "items": [
+     [
+      "Google Drive",
+      2
+     ],
+     [
+      "Google Sheets",
+      1
+     ],
+     [
+      "OneDrive",
+      1
+     ]
+    ]
+   },
+   {
+    "key": "회의",
+    "items": [
+     [
+      "Granola",
+      1
+     ]
+    ]
+   },
+   {
+    "key": "개발",
+    "items": [
+     [
+      "GitHub",
+      2
+     ],
+     [
+      "Origin",
+      1
+     ],
+     [
+      "Meta VR",
+      1
+     ]
+    ]
+   },
+   {
+    "key": "소셜",
+    "items": [
+     [
+      "X",
+      1
+     ]
+    ]
+   }
+  ]
+ }
 }

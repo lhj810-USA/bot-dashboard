@@ -15,13 +15,28 @@ for name,i in IDS:
     d=os.path.join(A,i); p={}
     try: p=json.load(open(os.path.join(d,"profile.json")))
     except Exception: pass
-    lt=p.get("lastTurnAt"); st=p.get("status")
+    lt=p.get("lastTurnAt"); st=p.get("status"); sf={}
+    try: sf=json.load(open(os.path.join(os.path.dirname(__file__),"..","status",i+".json")))
+    except Exception: sf={}
+    if sf.get("status") in ("idle","working","error"): st=sf["status"]
+    upd=None
+    if sf.get("updatedAt"):
+        try: upd=datetime.datetime.fromisoformat(str(sf["updatedAt"]).replace("Z","+00:00")); lt=int(upd.timestamp()*1000)
+        except Exception: pass
     mt=[os.path.getmtime(os.path.join(d,f)) for f in ("store.db","store.db-wal") if os.path.exists(os.path.join(d,f))]
     bots.append({"id":i,"name":p.get("name") or name,"description":p.get("description") or "알 수 없음",
       "lastTurnAt":lt,"lastActivity":fmt(lt) if isinstance(lt,(int,float)) else "알 수 없음",
-      "localFileModified":fmt(max(mt)*1000) if mt else "알 수 없음","status":st or "unknown","dept":DEPT[i[:8]],"summary":summ(p.get("description"))})
-known=sum(1 for b in bots if b["status"]!="unknown")
-out={"health":{"known":known,"total":len(bots)},"metrics":{"balance":None,"pnl":None,"balanceNote":"연결 필요 — 박스에 실시간 잔고 데이터 없음","pnlNote":"데이터 없음 — 박스에 체결/손익 기록 없음"},"generatedAt":datetime.datetime.now(CT).strftime("%Y-%m-%d %H:%M CT"),"bots":bots,
+      "localFileModified":fmt(max(mt)*1000) if mt else "알 수 없음","status":st or "unknown","dept":DEPT[i[:8]],"summary":(str(sf["summary"])[:120] if sf.get("summary") else summ(p.get("description"))),"summaryLive":bool(sf.get("summary")),"metrics":sf.get("metrics") if isinstance(sf.get("metrics"),dict) else None})
+known=sum(1 for b in bots if b["status"]!="unknown"); ok=sum(1 for b in bots if b["status"] in ("idle","working"))
+cap=[b["metrics"] for b in bots if b["dept"]=="자본" and b.get("metrics")]
+def pick(k):
+    v=[m[k] for m in cap if m.get(k) is not None]
+    if not v: return None
+    return sum(v) if all(isinstance(x,(int,float)) for x in v) else v[0]
+out={"health":{"known":known,"ok":ok,"total":len(bots),"pct":round(100*ok/known) if known else None},
+ "metrics":{"balance":pick("balance"),"pnl":pick("pnl"),"alerts":sum(int(m.get("alerts") or 0) for m in [b["metrics"] for b in bots if b.get("metrics")] if isinstance(m.get("alerts") or 0,(int,float)))},"generatedAt":datetime.datetime.now(CT).strftime("%Y-%m-%d %H:%M CT"),"bots":bots,
  "automations":[{"name":"자동화 트레이닝","taskId":"ea82d2ea-ee33-499f-b00b-c59055a09071","status":"비활성/아카이브"}]}
+try: out["connections"]=json.load(open(os.path.join(os.path.dirname(__file__),"connections.json")))
+except Exception: out["connections"]=None
 json.dump(out,open(os.path.join(os.path.dirname(__file__),"..","data.json"),"w"),ensure_ascii=False,indent=1)
 print("ok",out["generatedAt"])

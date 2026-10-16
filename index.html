@@ -18,31 +18,32 @@ button{background:transparent;color:var(--c);border:1px solid rgba(0,240,255,.5)
 .bar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(16px,env(safe-area-inset-bottom));width:min(92vw,460px);display:flex;align-items:center;gap:6px;padding:5px 5px 5px 12px;border:1px solid rgba(0,240,255,.55);border-radius:999px;background:rgba(0,12,16,.8);box-shadow:0 0 18px rgba(0,240,255,.25),inset 0 0 12px rgba(0,240,255,.08);backdrop-filter:blur(6px)}
 .bar select{background:transparent;color:var(--c);border:0;font-size:11px;letter-spacing:1px;max-width:96px;outline:0}.bar input{flex:1;min-width:0;background:transparent;border:0;border-left:1px solid rgba(0,240,255,.25);color:#fff;font-size:13px;padding:6px 8px;outline:0}
 .bar button{width:32px;height:32px;font-size:14px;flex:none}
-#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(max(16px,env(safe-area-inset-bottom)) + 52px);font-size:10px;letter-spacing:1px;color:var(--c);text-align:center;width:90vw;text-shadow:0 0 8px var(--c);pointer-events:none}
+#mic.on{background:rgba(255,59,92,.25);border-color:#ff3b5c;color:#fff;box-shadow:0 0 14px #ff3b5c}#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(max(16px,env(safe-area-inset-bottom)) + 52px);font-size:10px;letter-spacing:1px;color:var(--c);text-align:center;width:90vw;text-shadow:0 0 8px var(--c);pointer-events:none}
 #ov{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
 #ov.on{display:flex}.pn{width:min(86vw,340px);border:1px solid rgba(0,240,255,.5);border-radius:14px;background:rgba(0,10,14,.92);box-shadow:0 0 30px rgba(0,240,255,.25);padding:14px 14px 10px}
 .pn h2{margin:0 0 10px;font-size:12px;letter-spacing:4px;color:var(--c);font-weight:600;display:flex;justify-content:space-between}
 .pn .b{display:flex;align-items:center;gap:10px;padding:8px 4px;border-top:1px solid rgba(0,240,255,.12);cursor:pointer}.pn .b.sel{background:rgba(0,240,255,.08);border-radius:8px}
 .d{width:8px;height:8px;border-radius:50%;flex:none}.pn .n{font-size:13px;flex:1}.pn .s{font-size:9px;color:rgba(234,255,255,.45);letter-spacing:1px}
-.pn .cm{display:flex;gap:6px;margin-top:10px}.pn input{flex:1;background:transparent;border:1px solid rgba(0,240,255,.35);border-radius:999px;color:#fff;padding:7px 12px;font-size:13px;outline:0}.pn .cm button{padding:0 14px}
+.pn .sm{font-size:11px;color:#9fe9f5;padding:0 4px 8px 22px;margin-top:-4px}.pn .cm{display:flex;gap:6px;margin-top:10px}.pn input{flex:1;background:transparent;border:1px solid rgba(0,240,255,.35);border-radius:999px;color:#fff;padding:7px 12px;font-size:13px;outline:0}.pn .cm button{padding:0 14px}
 </style></head><body><div id="bg"></div><svg id="hud"></svg>
 <header><div><h1>혁진님의 JARVIS</h1><div class="ts" id="ts">—</div></div><div class="ic"><button id="refresh" title="새로고침">⟳</button><button id="pushOn" title="알림 허용">◉</button><button id="pushTest" title="테스트 알림">✦</button></div></header>
 <div id="toast"></div>
-<form class="bar" id="bar"><select id="sel"></select><input id="txt" placeholder="명령" autocomplete="off"><button>➤</button></form>
+<form class="bar" id="bar"><select id="sel"></select><input id="txt" placeholder="명령" autocomplete="off"><button type="button" id="mic" title="음성 명령">🎤</button><button>➤</button></form>
 <div id="ov"><div class="pn" id="pn"></div></div>
 <script>
 const FALLBACK={
  "health": {
   "known": 0,
-  "total": 8
+  "ok": 0,
+  "total": 8,
+  "pct": null
  },
  "metrics": {
   "balance": null,
   "pnl": null,
-  "balanceNote": "연결 필요 — 박스에 실시간 잔고 데이터 없음",
-  "pnlNote": "데이터 없음 — 박스에 체결/손익 기록 없음"
+  "alerts": 0
  },
- "generatedAt": "2026-10-15 20:38 CT",
+ "generatedAt": "2026-10-15 20:51 CT",
  "bots": [
   {
    "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
@@ -53,7 +54,9 @@ const FALLBACK={
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "core",
-   "summary": "The user's primary bot."
+   "summary": "The user's primary bot.",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
@@ -64,7 +67,9 @@ const FALLBACK={
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "자본",
-   "summary": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응…"
+   "summary": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응…",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "c16480ab-9b7e-4832-9edc-b6a27ff82899",
@@ -75,7 +80,9 @@ const FALLBACK={
    "localFileModified": "2026-10-11 10:06 CT",
    "status": "unknown",
    "dept": "지식",
-   "summary": "알 수 없음"
+   "summary": "알 수 없음",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "61c15c0d-aeeb-488f-99bf-88878e64b446",
@@ -86,7 +93,9 @@ const FALLBACK={
    "localFileModified": "2026-10-15 10:15 CT",
    "status": "unknown",
    "dept": "알림",
-   "summary": "알 수 없음"
+   "summary": "알 수 없음",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
@@ -97,7 +106,9 @@ const FALLBACK={
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "자본",
-   "summary": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율"
+   "summary": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "92919409-9721-49b6-b150-79aaee08b3a2",
@@ -108,7 +119,9 @@ const FALLBACK={
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "아르바이트",
-   "summary": "알 수 없음"
+   "summary": "알 수 없음",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "ec952ea5-d6ba-48db-8957-34895ac75c50",
@@ -119,7 +132,9 @@ const FALLBACK={
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "자본",
-   "summary": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, Gi…"
+   "summary": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, Gi…",
+   "summaryLive": false,
+   "metrics": null
   },
   {
    "id": "c8f69e15-9014-4347-b118-d63b3ec13b29",
@@ -130,7 +145,9 @@ const FALLBACK={
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "unknown",
    "dept": "자본",
-   "summary": "알 수 없음"
+   "summary": "알 수 없음",
+   "summaryLive": false,
+   "metrics": null
   }
  ],
  "automations": [
@@ -139,18 +156,102 @@ const FALLBACK={
    "taskId": "ea82d2ea-ee33-499f-b00b-c59055a09071",
    "status": "비활성/아카이브"
   }
- ]
+ ],
+ "connections": {
+  "source": "Grok Bot 연결 목록 스냅샷 (2026-10-15 CT). 계정 수만, 내용 없음",
+  "categories": [
+   {
+    "key": "금융",
+    "items": [
+     [
+      "Finance",
+      1
+     ]
+    ]
+   },
+   {
+    "key": "메일",
+    "items": [
+     [
+      "Gmail",
+      2
+     ]
+    ]
+   },
+   {
+    "key": "일정",
+    "items": [
+     [
+      "Google Calendar",
+      2
+     ]
+    ]
+   },
+   {
+    "key": "문서",
+    "items": [
+     [
+      "Google Drive",
+      2
+     ],
+     [
+      "Google Sheets",
+      1
+     ],
+     [
+      "OneDrive",
+      1
+     ]
+    ]
+   },
+   {
+    "key": "회의",
+    "items": [
+     [
+      "Granola",
+      1
+     ]
+    ]
+   },
+   {
+    "key": "개발",
+    "items": [
+     [
+      "GitHub",
+      2
+     ],
+     [
+      "Origin",
+      1
+     ],
+     [
+      "Meta VR",
+      1
+     ]
+    ]
+   },
+   {
+    "key": "소셜",
+    "items": [
+     [
+      "X",
+      1
+     ]
+    ]
+   }
+  ]
+ }
 };
 const B=location.hostname==="localhost"?"":(window.API_BASE||"").replace(/\/$/,"");const AU=p=>(B?B+"/":"")+p;let api=false,D=null;
 const esc=s=>String(s??"—").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const COL={idle:"#3dff9a",busy:"#2f8bff",running:"#2f8bff",unknown:"#4a5a63"};const col=s=>COL[s]||COL.unknown;
+const COL={idle:"#3dff9a",working:"#2f8bff",busy:"#2f8bff",running:"#2f8bff",error:"#ff3b5c",unknown:"#4a5a63"};const col=s=>COL[s]||COL.unknown;
 const DEPTS=[["core","CORE"],["자본","자본"],["지식","지식"],["아르바이트","알바"],["알림","알림"]];
 const $=id=>document.getElementById(id),T=m=>{$("toast").textContent=m;clearTimeout(T.t);T.t=setTimeout(()=>$("toast").textContent="",5000)};
 function alerts(d){const a=[];if(!d.bots.some(b=>b.status!=="unknown"))a.push(1);if(!d.bots.some(b=>b.lastTurnAt))a.push(1);if(!api)a.push(1);return a.length}
 function draw(){if(!D)return;const W=innerWidth,H=innerHeight,por=H>W,cx=W/2,cy=por?H*0.44:H*0.45;
  const R=por?Math.min(W*0.25,H*0.135):Math.min(H*0.21,W*0.16);const rx=por?W*0.4:R*2.9,ry=por?H*0.31:H*0.34;
- const known=D.bots.filter(b=>b.status!=="unknown").length,act=D.bots.filter(b=>["idle","busy","running"].includes(b.status)).length,al=alerts(D),tot=D.bots.length;
- const hp=known?Math.round(100*act/tot):null;
+ const known=D.bots.filter(b=>b.status!=="unknown").length,act=D.bots.filter(b=>b.status==="working").length,al=alerts(D)+((D.metrics||{}).alerts||0)+D.bots.filter(b=>b.status==="error").length,tot=D.bots.length;
+ const hp=(D.health||{}).pct??null;
  let s=`<defs><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
  <filter id="g2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
  <linearGradient id="scan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00f0ff" stop-opacity="0"/><stop offset="1" stop-color="#00f0ff" stop-opacity=".9"/></linearGradient>
@@ -165,7 +266,7 @@ function draw(){if(!D)return;const W=innerWidth,H=innerHeight,por=H>W,cx=W/2,cy=
  for(let i=0;i<120;i++){const a=i*3*Math.PI/180,l=i%10?4:10,r0=R*1.22;ticks+=`<line x1="${cx+r0*Math.cos(a)}" y1="${cy+r0*Math.sin(a)}" x2="${cx+(r0+l)*Math.cos(a)}" y2="${cy+(r0+l)*Math.sin(a)}" stroke="rgba(0,240,255,${i%10?.35:.9})" stroke-width="${i%10?1:1.5}"/>`}
  const arc=(r,a0,a1)=>{const p=a=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)],[x0,y0]=p(a0),[x1,y1]=p(a1);return `M${x0} ${y0}A${r} ${r} 0 ${a1-a0>180?1:0} 1 ${x1} ${y1}`};
  s+=`<circle cx="${cx}" cy="${cy}" r="${R*1.6}" fill="url(#core)"/>`;
- s+=g("r4",`<circle cx="${cx}" cy="${cy}" r="${R*1.45}" fill="none" stroke="rgba(0,240,255,.25)" stroke-dasharray="1 5"/>`+[0,90,180,270].map(a=>`<path d="${arc(R*1.45,a+10,a+40)}" stroke="#00f0ff" stroke-width="1.5" fill="none" opacity=".6"/>`).join(""));
+ if(!(D.connections||{}).categories)s+=g("r4",`<circle cx="${cx}" cy="${cy}" r="${R*1.45}" fill="none" stroke="rgba(0,240,255,.25)" stroke-dasharray="1 5"/>`+[0,90,180,270].map(a=>`<path d="${arc(R*1.45,a+10,a+40)}" stroke="#00f0ff" stroke-width="1.5" fill="none" opacity=".6"/>`).join(""));
  s+=g("r1",ticks);
  s+=g("r3",`<path d="${arc(R*1.12,-90,-20)}" stroke="url(#scan)" stroke-width="${R*0.05}" fill="none" opacity=".55"/><path d="${arc(R*1.12,-25,-20)}" stroke="#fff" stroke-width="2" fill="none" filter="url(#g)"/>`);
  s+=g("r2",`<circle cx="${cx}" cy="${cy}" r="${R*1.02}" fill="none" stroke="#00f0ff" stroke-width="1" stroke-dasharray="${R*0.5} ${R*0.12} 4 ${R*0.12}" opacity=".8" filter="url(#g)"/>`);
@@ -181,10 +282,10 @@ function draw(){if(!D)return;const W=innerWidth,H=innerHeight,por=H>W,cx=W/2,cy=
  <text x="${cx}" y="${cy+R*0.16}" text-anchor="middle" class="big" font-size="${R*0.52}">${hp===null?"—":hp+"<tspan font-size='"+R*0.22+"'>%</tspan>"}</text>
  <text x="${cx}" y="${cy+R*0.38}" text-anchor="middle" class="t" style="font-size:8px">상태 확인 ${known}/${tot}</text>`;
  // 3 metrics below ring
- const my=cy+R*1.5+(por?68:52),mx=por?W*0.26:R*1.1,mets=[["봇",tot,"#fff"],["활성",known?act:"—",known?"#3dff9a":"#4a5a63"],["알림",al,al?"#ffb020":"#fff"]];
- mets.forEach(([l,v,c],i)=>{const x=cx+(i-1)*mx;s+=`<text x="${x}" y="${my}" text-anchor="middle" font-size="${por?34:42}" font-weight="200" fill="${c}" filter="url(#g)">${v}</text><text x="${x}" y="${my+14}" text-anchor="middle" class="t">${l}</text>`;if(i)s+=`<line x1="${x-mx/2}" y1="${my-26}" x2="${x-mx/2}" y2="${my+12}" stroke="rgba(0,240,255,.2)"/>`});
+ const my=cy+R*1.5+(por?68:52),mx=por?W*0.26:R*1.1,M0=D.metrics||{},fm=v=>typeof v==="number"?v.toLocaleString("ko-KR",{maximumFractionDigits:2}):esc(v),mets=[["봇",tot,"#fff"],["작업 중",known?act:"—",known?"#2f8bff":"#4a5a63"],["알림",al,al?"#ffb020":"#fff"]];if(M0.balance!=null)mets[0]=["잔고",fm(M0.balance),"#fff"];if(M0.pnl!=null)mets.push(["손익",(M0.pnl>0?"+":"")+fm(M0.pnl),M0.pnl>=0?"#3dff9a":"#ff3b5c"]);
+ mets.forEach(([l,v,c],i)=>{const x=cx+(i-(mets.length-1)/2)*mx;s+=`<text x="${x}" y="${my}" text-anchor="middle" font-size="${por?34:42}" font-weight="200" fill="${c}" filter="url(#g)">${v}</text><text x="${x}" y="${my+14}" text-anchor="middle" class="t">${l}</text>`;if(i)s+=`<line x1="${x-mx/2}" y1="${my-26}" x2="${x-mx/2}" y2="${my+12}" stroke="rgba(0,240,255,.2)"/>`});
  // nodes
- for(const n of nodes){const st=n.bots.some(b=>b.status==="busy"||b.status==="running")?"busy":n.bots.some(b=>b.status==="idle")?"idle":"unknown",c=st==="unknown"?"#00f0ff":col(st);
+ for(const n of nodes){const st=n.bots.some(b=>b.status==="error")?"error":n.bots.some(b=>["working","busy","running"].includes(b.status))?"working":n.bots.some(b=>b.status==="idle")?"idle":"unknown",c=st==="unknown"?"#00f0ff":col(st);
   const nr=por?15:19;let dots="";n.bots.forEach((b,j)=>{const dx=n.x+(j-(n.bots.length-1)/2)*11;dots+=`<circle cx="${dx}" cy="${n.y+nr+12}" r="3.2" fill="${col(b.status)}" stroke="rgba(255,255,255,.25)" stroke-width=".5"/>`});
   s+=`<g class="node" onclick="openNode('${n.k}')"><circle cx="${n.x}" cy="${n.y}" r="${nr*2.2}" fill="transparent"/>
   <circle cx="${n.x}" cy="${n.y}" r="${nr+7}" fill="none" stroke="rgba(0,240,255,.25)" stroke-dasharray="2 3"/>
@@ -192,9 +293,14 @@ function draw(){if(!D)return;const W=innerWidth,H=innerHeight,por=H>W,cx=W/2,cy=
   <circle cx="${n.x}" cy="${n.y}" r="${nr*0.32}" fill="${c}" class="pulse" filter="url(#g2)"/>
   <text x="${n.x}" y="${n.y-nr-9}" text-anchor="middle" class="lbl">${n.l}</text>${dots}
   <text x="${n.x}" y="${n.y+nr+28}" text-anchor="middle" class="t" style="font-size:8px">${n.bots.length}</text></g>`}
+ // connections outer ring segments
+ const CN=(D.connections||{}).categories||[];if(CN.length){const rr=R*1.5,seg=360/CN.length;CN.forEach((c,i)=>{const a0=-90+i*seg+3,a1=a0+seg-6,am=(a0+a1)/2*Math.PI/180,n=c.items.reduce((s,x)=>s+x[1],0);
+  s+=`<g class="node" onclick="openConn(${i})"><path d="${arc(rr,a0,a1)}" stroke="transparent" stroke-width="22" fill="none"/><path d="${arc(rr,a0,a1)}" stroke="#00f0ff" stroke-width="3" fill="none" opacity="${n?.85:.15}" filter="url(#g)"/>
+  <text x="${cx+(rr-9)*Math.cos(am)}" y="${cy+(rr-9)*Math.sin(am)+3}" text-anchor="middle" class="t" style="font-size:7.5px;letter-spacing:1px;fill:#bff">${c.key}<tspan fill="#00f0ff"> ${n}</tspan></text></g>`})}
  $("hud").innerHTML=s}
+function openConn(i){const C=D.connections.categories;$("pn").innerHTML=`<h2><span>연결</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>`+C.map((c,j)=>`<div class="b ${j===i?"sel":""}"><span class="d" style="background:#00f0ff;box-shadow:0 0 6px #00f0ff"></span><span class="n">${c.key}</span><span class="s">${c.items.map(x=>x[0]+(x[1]>1?" ×"+x[1]:"")).join(" · ")}</span></div>`).join("")+`<div class="s" style="padding:8px 4px 0;font-size:9px;color:rgba(234,255,255,.4)">연결 상태와 계정 수만 표시</div>`;$("ov").classList.add("on")}
 function openNode(k){const n=DEPTS.find(x=>x[0]==k),bs=D.bots.filter(b=>b.dept===k);let sel=bs[0].id;
- const r=()=>{$("pn").innerHTML=`<h2><span>${n[1]}</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>`+bs.map(b=>`<div class="b ${b.id===sel?"sel":""}" data-id="${b.id}"><span class="d" style="background:${col(b.status)};box-shadow:0 0 6px ${col(b.status)}"></span><span class="n">${esc(b.name)}</span><span class="s">${b.lastTurnAt?esc(b.lastActivity):"—"}</span></div>`).join("")+
+ const r=()=>{$("pn").innerHTML=`<h2><span>${n[1]}</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>`+bs.map(b=>`<div class="b ${b.id===sel?"sel":""}" data-id="${b.id}"><span class="d" style="background:${col(b.status)};box-shadow:0 0 6px ${col(b.status)}"></span><span class="n">${esc(b.name)}</span><span class="s">${b.lastTurnAt?esc(b.lastActivity.slice(5)):"—"}</span></div>${b.summaryLive?`<div class="sm">${esc(b.summary)}${b.metrics?" · "+Object.entries(b.metrics).map(([k,v])=>k+" "+esc(v)).join(" · "):""}</div>`:""}`).join("")+
  `<form class="cm" id="cmf"><input id="otx" placeholder="명령" autocomplete="off"><button>➤</button></form>`;
  $("pn").querySelectorAll(".b").forEach(e=>e.onclick=()=>{sel=e.dataset.id;r()});$("cmf").onsubmit=async e=>{e.preventDefault();if(await send(sel,$("otx").value))closeOv()};setTimeout(()=>$("otx").focus(),50)};
  r();$("ov").classList.add("on")}
@@ -215,4 +321,15 @@ $("pushOn").onclick=async()=>{try{if(!("PushManager" in window)){T("푸시 미�
  const k=await (await fetch(AU("api/vapid"))).json(),reg=await navigator.serviceWorker.ready,sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(k.publicKey)});
  T((await fetch(AU("api/subscribe"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(sub)})).ok?"알림 구독 완료":"구독 실패")}catch(e){T("알림 서버 미연결")}};
 $("pushTest").onclick=async()=>{try{const j=await (await fetch(AU("api/test-push"),{method:"POST"})).json();T("테스트 발송 "+j.sent+"/"+(j.sent+j.failed))}catch(e){T("알림 서버 미연결")}};
+
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null;
+const ALIAS=[["집사","c8f69e15"],["총괄","927a7b6f"],["감시자","173243fe"],["대장","c134c704"],["실험","ec952ea5"],["영어","c16480ab"],["아르바이트","92919409"],["알바","92919409"],["이벤트","61c15c0d"],["알림","61c15c0d"],["event","61c15c0d"]];
+function route(t){const s=t.trim(),l=s.toLowerCase();for(const [k,id] of ALIAS){if(l.startsWith(k)){const b=D.bots.find(x=>x.id.startsWith(id));if(b){$("sel").value=b.id;return {b,rest:s.slice(k.length).replace(/^(봇|bot)?\s*[,，.:]?\s*/i,"")}}}}return {b:null,rest:s}}
+function say(m){try{const u=new SpeechSynthesisUtterance(m);u.lang="ko-KR";speechSynthesis.speak(u)}catch(e){}}
+$("mic").onclick=()=>{if(!SR){T("이 브라우저는 음성 인식 미지원 · Chrome 또는 최신 Safari 사용");return}
+ if(rec){rec.stop();return}rec=new SR();rec.lang="ko-KR";rec.interimResults=true;rec.continuous=false;$("mic").classList.add("on");T("듣는 중…");
+ rec.onresult=e=>{let f="",im="";for(const r of e.results)(r.isFinal?f+=r[0].transcript:im+=r[0].transcript);const t=f||im;const {b,rest}=route(t);$("txt").value=rest;T((b?"▸ "+b.name+" · ":"")+t+(f?"":" …"));
+  if(f){say((b?b.name+"에게 ":"")+"명령 준비됨. 전송을 누르세요")}};
+ rec.onerror=e=>T(e.error==="not-allowed"?"마이크 권한 거부됨":"음성 인식 오류: "+e.error);rec.onend=()=>{$("mic").classList.remove("on");rec=null}};
+$("txt").addEventListener("change",()=>{const {b,rest}=route($("txt").value);if(b)$("txt").value=rest});
 </script></body></html>
