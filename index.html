@@ -1,18 +1,53 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0f1115"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><script src="config.js"></script><title>봇 요약 대시보드</title><style>
-body{margin:0;background:#0f1115;color:#e6e6e6;font-family:system-ui,sans-serif}header{padding:16px 20px;border-bottom:1px solid #2a2f3a;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
-h1{font-size:20px;margin:0}.muted{color:#8b93a3;font-size:13px}main{padding:20px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.card{background:#181b22;border:1px solid #2a2f3a;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}.card h3{margin:0;font-size:17px}
-.desc{font-size:13px;color:#c3c8d2;max-height:7.5em;overflow:auto}.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600}
-.idle{background:#14532d;color:#86efac}.busy{background:#713f12;color:#fde047}.unknown{background:#374151;color:#d1d5db}
-button{background:#2563eb;color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;font-size:14px}button.sec{background:#374151}
-textarea{width:100%;box-sizing:border-box;min-height:70px;background:#0f1115;color:#e6e6e6;border:1px solid #2a2f3a;border-radius:8px;padding:8px}
-.msg{font-size:12px;color:#93c5fd}h2{font-size:16px;margin:28px 0 12px}code{font-size:11px;color:#8b93a3;word-break:break-all}</style></head><body>
-<header><div><h1>봇 요약 대시보드</h1><div class="muted">마지막 갱신: <span id="gen">-</span> · 모드: <span id="mode">-</span></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="refresh" class="sec">새로고침</button><button id="pushOn">알림 허용</button><button id="pushTest" class="sec">테스트 알림</button></div><div class="msg" id="pmsg" style="width:100%"></div></header>
-<main><div class="grid" id="bots"></div><h2>오토메이션 현황</h2><div class="grid" id="autos"></div></main>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#02070d"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><script src="config.js"></script>
+<title>혁진님의 JARVIS</title><style>
+:root{--c:#3ee8ff;--c2:#1d7bff;--dim:#5f8ea3;--bg:#02070d}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{background:radial-gradient(circle at 50% 30%,#06202e 0,#02070d 60%) fixed;color:#d8f6ff;font-family:system-ui,"Apple SD Gothic Neo",sans-serif;font-size:12px;padding-bottom:96px}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(62,232,255,.03) 0 1px,transparent 1px 3px)}
+header{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 4px;padding-top:max(10px,env(safe-area-inset-top))}
+h1{margin:0;font-size:17px;letter-spacing:2px;color:var(--c);text-shadow:0 0 10px var(--c)}.sub{color:var(--dim);font-size:10px;letter-spacing:1px}
+.btns{display:flex;gap:5px}button{background:rgba(62,232,255,.08);color:var(--c);border:1px solid rgba(62,232,255,.45);border-radius:6px;padding:5px 8px;font-size:11px;cursor:pointer;white-space:nowrap;box-shadow:0 0 8px rgba(62,232,255,.15) inset}
+button:active{background:rgba(62,232,255,.25)}
+.hud{display:grid;grid-template-columns:1fr;gap:8px;padding:4px 10px;max-width:1240px;margin:0 auto}
+.core{display:flex;align-items:center;gap:10px;justify-content:center}
+.ring{position:relative;width:170px;height:170px;flex:none}.ring svg{position:absolute;inset:0;filter:drop-shadow(0 0 6px var(--c))}
+.spin{animation:sp 18s linear infinite;transform-origin:50% 50%}.spin2{animation:sp 30s linear infinite reverse;transform-origin:50% 50%}@keyframes sp{to{transform:rotate(360deg)}}
+.rc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.rc b{font-size:22px;color:var(--c);text-shadow:0 0 12px var(--c)}.rc span{font-size:9px;color:var(--dim);letter-spacing:1px}
+.metrics{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1;max-width:220px}
+.m{border-left:2px solid var(--c);padding:3px 7px;background:linear-gradient(90deg,rgba(62,232,255,.09),transparent)}
+.m .k{font-size:9px;color:var(--dim);letter-spacing:1px}.m .v{font-size:12px;color:#fff}.m .n{font-size:9px;color:#ffb44d}
+.depts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.dept{border:1px solid rgba(62,232,255,.25);border-radius:8px;padding:5px;background:rgba(4,22,34,.6);box-shadow:0 0 12px rgba(29,123,255,.12)}
+.col{display:contents}.dept h2{margin:0 0 4px;font-size:10px;letter-spacing:2px;color:var(--c)}.dept.wide{grid-column:1/-1}
+.bot{padding:4px 5px;border-top:1px solid rgba(62,232,255,.1);cursor:pointer}.bot:first-of-type{border-top:0}
+.bot .t{display:flex;justify-content:space-between;align-items:center;gap:4px}.bot .nm{font-weight:600;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bot .ds{color:#9cc3d3;font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bot .la{color:var(--dim);font-size:9px}
+.b{font-size:8.5px;padding:1px 6px;border-radius:9px;border:1px solid;flex:none}.idle{color:#4dffa6;border-color:#4dffa6;box-shadow:0 0 6px #4dffa6}.running{color:#ffd84d;border-color:#ffd84d;box-shadow:0 0 6px #ffd84d}.unknown{color:#7f97a3;border-color:#3d5563}
+.cmd{position:fixed;left:0;right:0;bottom:0;padding:7px 10px;padding-bottom:max(7px,env(safe-area-inset-bottom));background:rgba(2,10,18,.95);border-top:1px solid rgba(62,232,255,.4);box-shadow:0 -4px 20px rgba(62,232,255,.15)}
+.cmd .row{display:flex;gap:6px;max-width:1240px;margin:0 auto}select,textarea{background:#031520;color:#d8f6ff;border:1px solid rgba(62,232,255,.4);border-radius:6px;font-size:12px;padding:6px}
+select{max-width:38%}textarea{flex:1;height:34px;resize:none}.msg{font-size:10px;color:var(--c);max-width:1240px;margin:3px auto 0;min-height:12px}
+@media(min-width:900px){body{font-size:13px}.hud{grid-template-columns:1fr 1.1fr 1fr;align-items:center;padding-top:16px}.core{flex-direction:column}.ring{width:300px;height:300px}.rc b{font-size:36px}.metrics{max-width:300px;width:100%}
+ .depts{display:contents}.col{display:flex!important;flex-direction:column;gap:10px}.bot .nm{font-size:13px}.bot .ds{font-size:11px;white-space:normal}.dept{padding:9px}.dept h2{font-size:12px}}
+</style></head><body>
+<header><div><h1>혁진님의 JARVIS</h1><div class="sub">마지막 갱신 <span id="gen">-</span> · <span id="mode">-</span></div></div>
+<div class="btns"><button id="refresh">새로고침</button><button id="pushOn">알림 허용</button><button id="pushTest">테스트</button></div></header>
+<main class="hud" id="hud"></main>
+<div class="cmd"><div class="row"><select id="sel"></select><textarea id="txt" placeholder="명령 입력…"></textarea><button id="send">전송</button></div><div class="msg" id="msg"></div></div>
 <script>
 const FALLBACK={
- "generatedAt": "2026-10-15 19:47 CT",
+ "health": {
+  "known": 0,
+  "total": 8
+ },
+ "metrics": {
+  "balance": null,
+  "pnl": null,
+  "balanceNote": "연결 필요 — 박스에 실시간 잔고 데이터 없음",
+  "pnlNote": "데이터 없음 — 박스에 체결/손익 기록 없음"
+ },
+ "generatedAt": "2026-10-15 20:30 CT",
  "bots": [
   {
    "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
@@ -21,7 +56,9 @@ const FALLBACK={
    "lastTurnAt": null,
    "lastActivity": "알 수 없음",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown"
+   "status": "unknown",
+   "dept": "core",
+   "summary": "The user's primary bot."
   },
   {
    "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
@@ -30,7 +67,9 @@ const FALLBACK={
    "lastTurnAt": null,
    "lastActivity": "알 수 없음",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown"
+   "status": "unknown",
+   "dept": "자본",
+   "summary": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응…"
   },
   {
    "id": "c16480ab-9b7e-4832-9edc-b6a27ff82899",
@@ -39,7 +78,9 @@ const FALLBACK={
    "lastTurnAt": null,
    "lastActivity": "알 수 없음",
    "localFileModified": "2026-10-11 10:06 CT",
-   "status": "unknown"
+   "status": "unknown",
+   "dept": "지식",
+   "summary": "알 수 없음"
   },
   {
    "id": "61c15c0d-aeeb-488f-99bf-88878e64b446",
@@ -48,7 +89,9 @@ const FALLBACK={
    "lastTurnAt": null,
    "lastActivity": "알 수 없음",
    "localFileModified": "2026-10-15 10:15 CT",
-   "status": "unknown"
+   "status": "unknown",
+   "dept": "알림",
+   "summary": "알 수 없음"
   },
   {
    "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
@@ -57,7 +100,9 @@ const FALLBACK={
    "lastTurnAt": null,
    "lastActivity": "알 수 없음",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown"
+   "status": "unknown",
+   "dept": "자본",
+   "summary": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율"
   },
   {
    "id": "92919409-9721-49b6-b150-79aaee08b3a2",
@@ -66,7 +111,9 @@ const FALLBACK={
    "lastTurnAt": null,
    "lastActivity": "알 수 없음",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown"
+   "status": "unknown",
+   "dept": "아르바이트",
+   "summary": "알 수 없음"
   },
   {
    "id": "ec952ea5-d6ba-48db-8957-34895ac75c50",
@@ -75,7 +122,20 @@ const FALLBACK={
    "lastTurnAt": null,
    "lastActivity": "알 수 없음",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown"
+   "status": "unknown",
+   "dept": "자본",
+   "summary": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, Gi…"
+  },
+  {
+   "id": "c8f69e15-9014-4347-b118-d63b3ec13b29",
+   "name": "이혁진 집사",
+   "description": "알 수 없음",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown",
+   "dept": "자본",
+   "summary": "알 수 없음"
   }
  ],
  "automations": [
@@ -86,30 +146,38 @@ const FALLBACK={
   }
  ]
 };
-const label={idle:"대기 중 (idle)",busy:"작업 중 (busy)",unknown:"알 수 없음"};
-let api=false;const B=(location.hostname.endsWith("trycloudflare.com")||location.hostname==="localhost")?"":(window.API_BASE||"").replace(/\/$/,"");const AU=p=>(B?B+"/":"")+p;
+const B=(location.hostname==="localhost")?"":(window.API_BASE||"").replace(/\/$/,"");const AU=p=>(B?B+"/":"")+p;let api=false;
 const esc=s=>String(s??"알 수 없음").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-async function load(){let d;try{const r=await fetch(AU("api/health"));api=r.ok}catch(e){api=false}try{const r=await fetch(api&&B?AU("data.json?t="+Date.now()):"data.json?t="+Date.now());d=await r.json()}catch(e){d=FALLBACK}
- 
- document.getElementById("mode").textContent=api?"라이브 서버 (명령 대기열 저장)":"정적 페이지 (명령 복사)";
- if(!d){document.getElementById("bots").textContent="데이터를 불러올 수 없음";return}
- document.getElementById("gen").textContent=d.generatedAt;
- document.getElementById("bots").innerHTML=d.bots.map(b=>{const s=["idle","busy"].includes(b.status)?b.status:"unknown";return `<div class="card"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${esc(b.name)}</h3><span class="badge ${s}">${label[s]}</span></div>
- <div class="desc">${esc(b.description)}</div><div class="muted">마지막 활동: ${esc(b.lastActivity)}</div><div class="muted">로컬 데이터 수정: ${esc(b.localFileModified)}</div><code>${esc(b.id)}</code>
- <button onclick="tog('${b.id}')">명령 보내기</button><div id="f-${b.id}" hidden><textarea id="t-${b.id}" placeholder="${esc(b.name)}에게 보낼 명령"></textarea><button onclick="send('${b.id}','${esc(b.name)}')">전송</button> <span class="msg" id="m-${b.id}"></span></div></div>`}).join("");
- document.getElementById("autos").innerHTML=d.automations.map(a=>`<div class="card"><div style="display:flex;justify-content:space-between"><h3>${esc(a.name)}</h3><span class="badge unknown">${esc(a.status)}</span></div><code>taskId: ${esc(a.taskId)}</code></div>`).join("")}
-function tog(id){const f=document.getElementById("f-"+id);f.hidden=!f.hidden}
-async function send(id,name){const t=document.getElementById("t-"+id).value.trim(),m=document.getElementById("m-"+id);if(!t){m.textContent="명령을 입력하세요";return}
- if(api){try{const r=await fetch(AU("api/command"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({botId:id,botName:name,prompt:t})});const j=await r.json();
-  if(r.ok){m.textContent="대기열에 저장됨 (#"+j.id.slice(0,8)+") — 봇에 자동 전달되지는 않습니다";document.getElementById("t-"+id).value="";return}}catch(e){}}
- const txt=`[${name}] ${t}`;try{await navigator.clipboard.writeText(txt);m.textContent="클립보드에 복사됨 — Grok Bot 앱에서 해당 봇에 붙여넣어 보내세요"}catch(e){m.textContent="복사 실패: "+txt}}
+const ST={idle:["idle","대기"],busy:["running","실행 중"],running:["running","실행 중"]};
+function card(b){const s=ST[b.status]||["unknown","알 수 없음"];return `<div class="bot" onclick="pick('${b.id}')"><div class="t"><span class="nm">${esc(b.name)}</span><span class="b ${s[0]}">${s[1]}</span></div><div class="ds">${esc(b.summary)}</div><div class="la">최근 활동: ${esc(b.lastActivity)}</div></div>`}
+function dept(n,bs,w){return `<section class="dept ${w||""}"><h2>◢ ${n}</h2>${bs.map(card).join("")}</section>`}
+function render(d){const by=k=>d.bots.filter(b=>b.dept===k),h=d.health||{known:0,total:d.bots.length},m=d.metrics||{};
+ const pct=h.known? Math.round(100*d.bots.filter(b=>b.status==="idle"||b.status==="busy"||b.status==="running").length/h.total):null;
+ const C=2*Math.PI*80,frac=h.total?h.known/h.total:0;
+ const alerts=[];if(!h.known)alerts.push("봇 상태 데이터 없음 ("+h.total+"개 전부)");if(!d.bots.some(b=>b.lastTurnAt))alerts.push("최근 활동 기록 없음");if(!api)alerts.push("API 서버 미연결 (복사 모드)");
+ const ring=`<div class="core"><div class="ring"><svg viewBox="0 0 200 200"><g class="spin2"><circle cx="100" cy="100" r="94" fill="none" stroke="#1d7bff" stroke-width="1" stroke-dasharray="2 6" opacity=".7"/></g>
+ <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(62,232,255,.15)" stroke-width="10"/><circle cx="100" cy="100" r="80" fill="none" stroke="#3ee8ff" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C*frac} ${C}" transform="rotate(-90 100 100)"/>
+ <g class="spin"><circle cx="100" cy="100" r="66" fill="none" stroke="#3ee8ff" stroke-width="1.5" stroke-dasharray="40 14 6 14" opacity=".8"/></g><circle cx="100" cy="100" r="56" fill="rgba(62,232,255,.05)" stroke="rgba(62,232,255,.3)"/></svg>
+ <div class="rc"><span>SYSTEM HEALTH</span><b>${pct===null?"알 수 없음":pct+"%"}</b><span>상태 파악 ${h.known}/${h.total} 봇</span></div></div>
+ <div class="metrics"><div class="m"><div class="k">잔고 BALANCE</div><div class="v">${m.balance??"연결 필요"}</div><div class="n">${esc(m.balanceNote)}</div></div>
+ <div class="m"><div class="k">매매 손익 PnL</div><div class="v">${m.pnl??"데이터 없음"}</div><div class="n">${esc(m.pnlNote)}</div></div>
+ <div class="m"><div class="k">주요 알림 ALERTS</div><div class="v">${alerts.length?alerts.map(esc).join("<br>"):"없음"}</div></div></div></div>`;
+ document.getElementById("hud").innerHTML=`<div class="depts"><div class="col">${dept("CORE · 총괄",by("core"),"wide")}${dept("자본",by("자본"),"wide")}</div>${ring}<div class="col">${dept("지식",by("지식"))}${dept("아르바이트",by("아르바이트"))}${dept("알림",by("알림"),"wide")}</div></div>`;
+ const hud=document.getElementById("hud");if(innerWidth<900){const r=hud.querySelector(".core");hud.prepend(r)}
+ document.getElementById("sel").innerHTML=d.bots.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("");document.getElementById("gen").textContent=d.generatedAt}
+async function load(){try{const r=await fetch(AU("api/health"));api=r.ok}catch(e){api=false}document.getElementById("mode").textContent=api?"라이브 서버":"정적 모드";
+ let d;try{d=await (await fetch((api&&B?AU("data.json"):"data.json")+"?t="+Date.now())).json()}catch(e){d=FALLBACK}if(d)render(d)}
+function pick(id){document.getElementById("sel").value=id;document.getElementById("txt").focus()}
+const M=document.getElementById("msg");
+document.getElementById("send").onclick=async()=>{const sel=document.getElementById("sel"),id=sel.value,name=sel.options[sel.selectedIndex].text,t=document.getElementById("txt").value.trim();if(!t){M.textContent="명령을 입력하세요";return}
+ if(api){try{const r=await fetch(AU("api/command"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({botId:id,botName:name,prompt:t})});const j=await r.json();if(r.ok){M.textContent="대기열에 저장됨 (#"+j.id.slice(0,8)+") — 봇에 자동 전달되지 않음";document.getElementById("txt").value="";return}}catch(e){}}
+ const x=`[${name}] ${t}`;try{await navigator.clipboard.writeText(x);M.textContent="클립보드에 복사됨 — Grok Bot 앱에서 "+name+"에게 붙여넣어 보내세요"}catch(e){M.textContent="복사 실패: "+x}};
 document.getElementById("refresh").onclick=load;load();
-const P=document.getElementById("pmsg");if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 const b64=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");s+="=".repeat((4-s.length%4)%4);return Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
-document.getElementById("pushOn").onclick=async()=>{try{if(!("PushManager" in window)){P.textContent="이 브라우저는 푸시 미지원 (iPhone은 홈 화면 앱에서 열어야 함)";return}
- if(await Notification.requestPermission()!=="granted"){P.textContent="알림 권한 거부됨";return}
- const k=await (await fetch(AU("api/vapid"))).json();const reg=await navigator.serviceWorker.ready;
- const sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(k.publicKey)});
- const r=await fetch(AU("api/subscribe"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(sub)});P.textContent=r.ok?"알림 구독 완료":"구독 저장 실패"}catch(e){P.textContent="오류: "+e.message+" (서버 연결 확인)"}};
-document.getElementById("pushTest").onclick=async()=>{try{const j=await (await fetch(AU("api/test-push"),{method:"POST"})).json();P.textContent="테스트 발송: 성공 "+j.sent+" / 실패 "+j.failed}catch(e){P.textContent="서버 연결 실패"}};
+document.getElementById("pushOn").onclick=async()=>{try{if(!("PushManager" in window)){M.textContent="푸시 미지원 (iPhone은 홈 화면 앱에서 열어야 함)";return}
+ if(await Notification.requestPermission()!=="granted"){M.textContent="알림 권한 거부됨";return}
+ const k=await (await fetch(AU("api/vapid"))).json();const reg=await navigator.serviceWorker.ready;const sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(k.publicKey)});
+ const r=await fetch(AU("api/subscribe"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(sub)});M.textContent=r.ok?"알림 구독 완료":"구독 저장 실패"}catch(e){M.textContent="알림 오류: 서버 미연결"}};
+document.getElementById("pushTest").onclick=async()=>{try{const j=await (await fetch(AU("api/test-push"),{method:"POST"})).json();M.textContent="테스트 발송: 성공 "+j.sent+" / 실패 "+j.failed}catch(e){M.textContent="서버 연결 실패"}};
 </script></body></html>
