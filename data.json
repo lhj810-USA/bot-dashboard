@@ -8,9 +8,9 @@
  "metrics": {
   "balance": null,
   "pnl": null,
-  "alerts": 7
+  "alerts": 84
  },
- "generatedAt": "2026-10-15 22:10 CT",
+ "generatedAt": "2026-10-15 22:15 CT",
  "bots": [
   {
    "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
@@ -76,15 +76,15 @@
    "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
    "name": "자동 매매_대장",
    "description": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
-   "lastTurnAt": 1792117153000,
-   "lastActivity": "2026-10-15 21:19 CT",
+   "lastTurnAt": 1792120485000,
+   "lastActivity": "2026-10-15 22:14 CT",
    "localFileModified": "2026-10-11 10:05 CT",
    "status": "working",
    "dept": "자본",
-   "summary": "자동매매 연구 R87 견고성 검증 진행 중, 수집기 2개 24시간 점검 중 (가상 운영)",
+   "summary": "연구 round91 진행, 페이퍼 5기·수집기 정상, #396·395W 게이트 대기 중 (가상)",
    "summaryLive": true,
    "metrics": {
-    "alerts": 0
+    "alerts": 77
    }
   },
   {
