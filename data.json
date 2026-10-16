@@ -1,120 +1,136 @@
 {
  "health": {
-  "known": 0,
-  "ok": 0,
+  "known": 8,
+  "ok": 8,
   "total": 8,
-  "pct": null
+  "pct": 100
  },
  "metrics": {
   "balance": null,
   "pnl": null,
-  "alerts": 0
+  "alerts": 7
  },
- "generatedAt": "2026-10-15 21:15 CT",
+ "generatedAt": "2026-10-15 21:20 CT",
  "bots": [
   {
    "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
    "name": "총괄 Bot",
    "description": "The user's primary bot. Takes any task and routes it to the right one of their other bots. When the user wants a different primary bot, lists their bots with a one-line reason each, asks which, sets it with SetPrimaryBot, and confirms.",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
+   "lastTurnAt": 1792117140000,
+   "lastActivity": "2026-10-15 21:19 CT",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
+   "status": "idle",
    "dept": "core",
-   "summary": "The user's primary bot.",
-   "summaryLive": false,
-   "metrics": null
+   "summary": "대기 중. 일정·메일 점검 루틴 가동, 트레이딩 후보 독립 검토 대기열 비어 있음",
+   "summaryLive": true,
+   "metrics": {
+    "alerts": 0
+   }
   },
   {
    "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
    "name": "자동 매매_감시자",
    "description": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응하는 트레이딩 감시자",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
+   "lastTurnAt": 1792117159000,
+   "lastActivity": "2026-10-15 21:19 CT",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
+   "status": "idle",
    "dept": "자본",
-   "summary": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응…",
-   "summaryLive": false,
-   "metrics": null
+   "summary": "페이퍼 런 5개 정상 감시 중, 급변 없음. 컴퓨터 일시정지로 누적 중단률 조기경보(5%) 초과",
+   "summaryLive": true,
+   "metrics": {
+    "alerts": 1
+   }
   },
   {
    "id": "c16480ab-9b7e-4832-9edc-b6a27ff82899",
    "name": "영어공부 봇",
    "description": "알 수 없음",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
+   "lastTurnAt": 1792117140000,
+   "lastActivity": "2026-10-15 21:19 CT",
    "localFileModified": "2026-10-11 10:06 CT",
-   "status": "unknown",
+   "status": "idle",
    "dept": "지식",
-   "summary": "알 수 없음",
-   "summaryLive": false,
-   "metrics": null
+   "summary": "매일 8:07 영어 표현 브리핑 정상 운영 중 (10/15 3개 전달, 노트 시트 갱신 완료)",
+   "summaryLive": true,
+   "metrics": {
+    "alerts": 0
+   }
   },
   {
    "id": "61c15c0d-aeeb-488f-99bf-88878e64b446",
    "name": "Event 알림봇",
    "description": "알 수 없음",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
+   "lastTurnAt": 1792117140000,
+   "lastActivity": "2026-10-15 21:19 CT",
    "localFileModified": "2026-10-15 10:15 CT",
-   "status": "unknown",
+   "status": "idle",
    "dept": "알림",
-   "summary": "알 수 없음",
-   "summaryLive": false,
-   "metrics": null
+   "summary": "루틴 5개 정상 작동 중. 오늘 행사 24개 전달 완료, 스페이스X 텍사스 주말 발사 일정은 아직 없음",
+   "summaryLive": true,
+   "metrics": {
+    "alerts": 0
+   }
   },
   {
    "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
    "name": "자동 매매_대장",
    "description": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
+   "lastTurnAt": 1792117153000,
+   "lastActivity": "2026-10-15 21:19 CT",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
+   "status": "working",
    "dept": "자본",
-   "summary": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
-   "summaryLive": false,
-   "metrics": null
+   "summary": "자동매매 연구 R87 견고성 검증 진행 중, 수집기 2개 24시간 점검 중 (가상 운영)",
+   "summaryLive": true,
+   "metrics": {
+    "alerts": 0
+   }
   },
   {
    "id": "92919409-9721-49b6-b150-79aaee08b3a2",
    "name": "아르바이트봇",
    "description": "알 수 없음",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
+   "lastTurnAt": 1792117161000,
+   "lastActivity": "2026-10-15 21:19 CT",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
+   "status": "idle",
    "dept": "아르바이트",
-   "summary": "알 수 없음",
-   "summaryLive": false,
-   "metrics": null
+   "summary": "스톡 이미지 1단계 완료(301장, 판매 보류), 위기 ETF 감시 평일 자동 갱신 중",
+   "summaryLive": true,
+   "metrics": {
+    "alerts": 4
+   }
   },
   {
    "id": "ec952ea5-d6ba-48db-8957-34895ac75c50",
    "name": "자동 매매_실험",
    "description": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, GitHub, Jira, Canva, HubSpot, Figma을(를) 사용해요 — 커넥터를 제안하거나 일을 맡을 때 그 도구부터 시작하세요.",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
+   "lastTurnAt": 1792117196000,
+   "lastActivity": "2026-10-15 21:19 CT",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
+   "status": "working",
    "dept": "자본",
-   "summary": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, Gi…",
-   "summaryLive": false,
-   "metrics": null
+   "summary": "r1final-upbit 유니버스 갱신 오류(상장폐지 심볼) 원인 점검·수정 제안서 작성 중",
+   "summaryLive": true,
+   "metrics": {
+    "alerts": 1
+   }
   },
   {
    "id": "c8f69e15-9014-4347-b118-d63b3ec13b29",
    "name": "이혁진 집사",
    "description": "알 수 없음",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
+   "lastTurnAt": 1792117200000,
+   "lastActivity": "2026-10-15 21:20 CT",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
+   "status": "idle",
    "dept": "자본",
-   "summary": "알 수 없음",
-   "summaryLive": false,
-   "metrics": null
+   "summary": "자동 수익 조사 TOP 10 보고 완료, 매일 7:17 CT 지휘 보고 예정. 실행 항목은 보류 중",
+   "summaryLive": true,
+   "metrics": {
+    "alerts": 1
+   }
   }
  ],
  "automations": [
