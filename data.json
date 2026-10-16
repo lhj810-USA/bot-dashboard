@@ -8,9 +8,9 @@
  "metrics": {
   "balance": null,
   "pnl": null,
-  "alerts": 98
+  "alerts": 97
  },
- "generatedAt": "2026-10-16 04:10 CT",
+ "generatedAt": "2026-10-16 04:15 CT",
  "bots": [
   {
    "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
@@ -31,15 +31,15 @@
    "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
    "name": "자동 매매_감시자",
    "description": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응하는 트레이딩 감시자",
-   "lastTurnAt": 1792135080000,
-   "lastActivity": "2026-10-16 02:18 CT",
+   "lastTurnAt": 1792142040000,
+   "lastActivity": "2026-10-16 04:14 CT",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "idle",
+   "status": "working",
    "dept": "자본",
-   "summary": "02:16 CT 페이퍼 런 5개 정상, 급변 없음. 누적 중단률 조기경보(5%) 상태 유지",
+   "summary": "Paper surge watch: checking runs and watchdog",
    "summaryLive": true,
    "metrics": {
-    "alerts": 1
+    "alerts": 0
    }
   },
   {
