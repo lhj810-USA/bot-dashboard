@@ -1,0 +1,5 @@
+commands-queue.json
+server.log
+tunnel.log
+tunnel-url.txt
+*.pem

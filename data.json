@@ -1,0 +1,75 @@
+{
+ "generatedAt": "2026-10-15 19:52 CT",
+ "bots": [
+  {
+   "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
+   "name": "총괄 Bot",
+   "description": "The user's primary bot. Takes any task and routes it to the right one of their other bots. When the user wants a different primary bot, lists their bots with a one-line reason each, asks which, sets it with SetPrimaryBot, and confirms.",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
+   "name": "자동 매매_감시자",
+   "description": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응하는 트레이딩 감시자",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "c16480ab-9b7e-4832-9edc-b6a27ff82899",
+   "name": "영어공부 봇",
+   "description": "알 수 없음",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:06 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "61c15c0d-aeeb-488f-99bf-88878e64b446",
+   "name": "Event 알림봇",
+   "description": "알 수 없음",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-15 10:15 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
+   "name": "자동 매매_대장",
+   "description": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "92919409-9721-49b6-b150-79aaee08b3a2",
+   "name": "아르바이트봇",
+   "description": "알 수 없음",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "ec952ea5-d6ba-48db-8957-34895ac75c50",
+   "name": "자동 매매_실험",
+   "description": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, GitHub, Jira, Canva, HubSpot, Figma을(를) 사용해요 — 커넥터를 제안하거나 일을 맡을 때 그 도구부터 시작하세요.",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  }
+ ],
+ "automations": [
+  {
+   "name": "자동화 트레이닝",
+   "taskId": "ea82d2ea-ee33-499f-b00b-c59055a09071",
+   "status": "비활성/아카이브"
+  }
+ ]
+}

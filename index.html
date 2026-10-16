@@ -1,0 +1,115 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0f1115"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><script src="config.js"></script><title>봇 요약 대시보드</title><style>
+body{margin:0;background:#0f1115;color:#e6e6e6;font-family:system-ui,sans-serif}header{padding:16px 20px;border-bottom:1px solid #2a2f3a;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{font-size:20px;margin:0}.muted{color:#8b93a3;font-size:13px}main{padding:20px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:#181b22;border:1px solid #2a2f3a;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}.card h3{margin:0;font-size:17px}
+.desc{font-size:13px;color:#c3c8d2;max-height:7.5em;overflow:auto}.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600}
+.idle{background:#14532d;color:#86efac}.busy{background:#713f12;color:#fde047}.unknown{background:#374151;color:#d1d5db}
+button{background:#2563eb;color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;font-size:14px}button.sec{background:#374151}
+textarea{width:100%;box-sizing:border-box;min-height:70px;background:#0f1115;color:#e6e6e6;border:1px solid #2a2f3a;border-radius:8px;padding:8px}
+.msg{font-size:12px;color:#93c5fd}h2{font-size:16px;margin:28px 0 12px}code{font-size:11px;color:#8b93a3;word-break:break-all}</style></head><body>
+<header><div><h1>봇 요약 대시보드</h1><div class="muted">마지막 갱신: <span id="gen">-</span> · 모드: <span id="mode">-</span></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="refresh" class="sec">새로고침</button><button id="pushOn">알림 허용</button><button id="pushTest" class="sec">테스트 알림</button></div><div class="msg" id="pmsg" style="width:100%"></div></header>
+<main><div class="grid" id="bots"></div><h2>오토메이션 현황</h2><div class="grid" id="autos"></div></main>
+<script>
+const FALLBACK={
+ "generatedAt": "2026-10-15 19:47 CT",
+ "bots": [
+  {
+   "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
+   "name": "총괄 Bot",
+   "description": "The user's primary bot. Takes any task and routes it to the right one of their other bots. When the user wants a different primary bot, lists their bots with a one-line reason each, asks which, sets it with SetPrimaryBot, and confirms.",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
+   "name": "자동 매매_감시자",
+   "description": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응하는 트레이딩 감시자",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "c16480ab-9b7e-4832-9edc-b6a27ff82899",
+   "name": "영어공부 봇",
+   "description": "알 수 없음",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:06 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "61c15c0d-aeeb-488f-99bf-88878e64b446",
+   "name": "Event 알림봇",
+   "description": "알 수 없음",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-15 10:15 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
+   "name": "자동 매매_대장",
+   "description": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "92919409-9721-49b6-b150-79aaee08b3a2",
+   "name": "아르바이트봇",
+   "description": "알 수 없음",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  },
+  {
+   "id": "ec952ea5-d6ba-48db-8957-34895ac75c50",
+   "name": "자동 매매_실험",
+   "description": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, GitHub, Jira, Canva, HubSpot, Figma을(를) 사용해요 — 커넥터를 제안하거나 일을 맡을 때 그 도구부터 시작하세요.",
+   "lastTurnAt": null,
+   "lastActivity": "알 수 없음",
+   "localFileModified": "2026-10-11 10:05 CT",
+   "status": "unknown"
+  }
+ ],
+ "automations": [
+  {
+   "name": "자동화 트레이닝",
+   "taskId": "ea82d2ea-ee33-499f-b00b-c59055a09071",
+   "status": "비활성/아카이브"
+  }
+ ]
+};
+const label={idle:"대기 중 (idle)",busy:"작업 중 (busy)",unknown:"알 수 없음"};
+let api=false;const B=(location.hostname.endsWith("trycloudflare.com")||location.hostname==="localhost")?"":(window.API_BASE||"").replace(/\/$/,"");const AU=p=>(B?B+"/":"")+p;
+const esc=s=>String(s??"알 수 없음").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function load(){let d;try{const r=await fetch(AU("api/health"));api=r.ok}catch(e){api=false}try{const r=await fetch(api&&B?AU("data.json?t="+Date.now()):"data.json?t="+Date.now());d=await r.json()}catch(e){d=FALLBACK}
+ 
+ document.getElementById("mode").textContent=api?"라이브 서버 (명령 대기열 저장)":"정적 페이지 (명령 복사)";
+ if(!d){document.getElementById("bots").textContent="데이터를 불러올 수 없음";return}
+ document.getElementById("gen").textContent=d.generatedAt;
+ document.getElementById("bots").innerHTML=d.bots.map(b=>{const s=["idle","busy"].includes(b.status)?b.status:"unknown";return `<div class="card"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${esc(b.name)}</h3><span class="badge ${s}">${label[s]}</span></div>
+ <div class="desc">${esc(b.description)}</div><div class="muted">마지막 활동: ${esc(b.lastActivity)}</div><div class="muted">로컬 데이터 수정: ${esc(b.localFileModified)}</div><code>${esc(b.id)}</code>
+ <button onclick="tog('${b.id}')">명령 보내기</button><div id="f-${b.id}" hidden><textarea id="t-${b.id}" placeholder="${esc(b.name)}에게 보낼 명령"></textarea><button onclick="send('${b.id}','${esc(b.name)}')">전송</button> <span class="msg" id="m-${b.id}"></span></div></div>`}).join("");
+ document.getElementById("autos").innerHTML=d.automations.map(a=>`<div class="card"><div style="display:flex;justify-content:space-between"><h3>${esc(a.name)}</h3><span class="badge unknown">${esc(a.status)}</span></div><code>taskId: ${esc(a.taskId)}</code></div>`).join("")}
+function tog(id){const f=document.getElementById("f-"+id);f.hidden=!f.hidden}
+async function send(id,name){const t=document.getElementById("t-"+id).value.trim(),m=document.getElementById("m-"+id);if(!t){m.textContent="명령을 입력하세요";return}
+ if(api){try{const r=await fetch(AU("api/command"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({botId:id,botName:name,prompt:t})});const j=await r.json();
+  if(r.ok){m.textContent="대기열에 저장됨 (#"+j.id.slice(0,8)+") — 봇에 자동 전달되지는 않습니다";document.getElementById("t-"+id).value="";return}}catch(e){}}
+ const txt=`[${name}] ${t}`;try{await navigator.clipboard.writeText(txt);m.textContent="클립보드에 복사됨 — Grok Bot 앱에서 해당 봇에 붙여넣어 보내세요"}catch(e){m.textContent="복사 실패: "+txt}}
+document.getElementById("refresh").onclick=load;load();
+const P=document.getElementById("pmsg");if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
+const b64=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");s+="=".repeat((4-s.length%4)%4);return Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
+document.getElementById("pushOn").onclick=async()=>{try{if(!("PushManager" in window)){P.textContent="이 브라우저는 푸시 미지원 (iPhone은 홈 화면 앱에서 열어야 함)";return}
+ if(await Notification.requestPermission()!=="granted"){P.textContent="알림 권한 거부됨";return}
+ const k=await (await fetch(AU("api/vapid"))).json();const reg=await navigator.serviceWorker.ready;
+ const sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(k.publicKey)});
+ const r=await fetch(AU("api/subscribe"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(sub)});P.textContent=r.ok?"알림 구독 완료":"구독 저장 실패"}catch(e){P.textContent="오류: "+e.message+" (서버 연결 확인)"}};
+document.getElementById("pushTest").onclick=async()=>{try{const j=await (await fetch(AU("api/test-push"),{method:"POST"})).json();P.textContent="테스트 발송: 성공 "+j.sent+" / 실패 "+j.failed}catch(e){P.textContent="서버 연결 실패"}};
+</script></body></html>
