@@ -10,7 +10,7 @@
   "pnl": null,
   "alerts": 97
  },
- "generatedAt": "2026-10-16 04:15 CT",
+ "generatedAt": "2026-10-16 04:20 CT",
  "bots": [
   {
    "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
@@ -31,12 +31,12 @@
    "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
    "name": "자동 매매_감시자",
    "description": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응하는 트레이딩 감시자",
-   "lastTurnAt": 1792142040000,
-   "lastActivity": "2026-10-16 04:14 CT",
+   "lastTurnAt": 1792142220000,
+   "lastActivity": "2026-10-16 04:17 CT",
    "localFileModified": "2026-10-11 10:05 CT",
-   "status": "working",
+   "status": "idle",
    "dept": "자본",
-   "summary": "Paper surge watch: checking runs and watchdog",
+   "summary": "Paper surge watch: no anomalies; all 5 runs alive",
    "summaryLive": true,
    "metrics": {
     "alerts": 0
