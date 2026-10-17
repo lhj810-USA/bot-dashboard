@@ -1,5 +1,6 @@
 #!/bin/sh
 # every 5 min: regenerate data.json (local only) -> encrypted payload.enc.json; push only when the plaintext changed
+export PATH=$HOME/.local/bin:$PATH
 cd "$(dirname "$0")/.."
 while true; do
   python3 scripts/update-data.py >/dev/null 2>&1
