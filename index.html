@@ -1,335 +1,119 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#000"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><script src="config.js"></script>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#000"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="robots" content="noindex"><script src="config.js"></script>
 <title>혁진님의 JARVIS</title><style>
-:root{--c:#00f0ff;--w:#eaffff}*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#000;color:var(--w);font-family:"SF Pro Display",system-ui,"Apple SD Gothic Neo",sans-serif}
-#bg{position:fixed;inset:0;background:radial-gradient(circle at 50% 46%,rgba(0,140,180,.22),transparent 55%),#000}
-#bg:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,240,255,.035) 0 1px,transparent 1px 4px)}
+:root{--c:#00f0ff}*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#000;color:#eaffff;font-family:"SF Pro Display",system-ui,"Apple SD Gothic Neo",sans-serif}
+#bg{position:fixed;inset:0;background:radial-gradient(circle at 50% 55%,rgba(0,140,180,.2),transparent 55%),#000}#bg:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,240,255,.03) 0 1px,transparent 1px 4px)}
 svg#hud{position:fixed;inset:0;width:100%;height:100%}
-.t{font-size:9px;letter-spacing:2.5px;fill:rgba(0,240,255,.7)}.big{fill:#fff;font-weight:200;filter:url(#g2)}.lbl{fill:var(--c);font-size:10px;letter-spacing:3px;font-weight:600}
-.r1{animation:sp 40s linear infinite}.r2{animation:sp 22s linear infinite reverse}.r3{animation:sp 6s linear infinite}.r4{animation:sp 70s linear infinite reverse}
-@keyframes sp{to{transform:rotate(360deg)}}.pulse{animation:pu 2.4s ease-in-out infinite}@keyframes pu{50%{opacity:.35}}
-.flow{stroke-dasharray:3 9;animation:fl 1.6s linear infinite}@keyframes fl{to{stroke-dashoffset:-24}}
-.node{cursor:pointer}
-header{position:fixed;top:0;left:0;right:0;padding:max(14px,env(safe-area-inset-top)) 18px 0;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}
-h1{margin:0;font-size:15px;font-weight:300;letter-spacing:4px;color:#fff;text-shadow:0 0 12px var(--c),0 0 2px #fff}
-.ts{font-size:9px;letter-spacing:2px;color:rgba(0,240,255,.6);margin-top:3px}
-.ic{pointer-events:auto;display:flex;gap:6px}.ic button{width:30px;height:30px;border-radius:50%;padding:0;font-size:13px}
-button{background:transparent;color:var(--c);border:1px solid rgba(0,240,255,.5);border-radius:999px;cursor:pointer;box-shadow:0 0 10px rgba(0,240,255,.25)}
-.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(16px,env(safe-area-inset-bottom));width:min(92vw,460px);display:flex;align-items:center;gap:6px;padding:5px 5px 5px 12px;border:1px solid rgba(0,240,255,.55);border-radius:999px;background:rgba(0,12,16,.8);box-shadow:0 0 18px rgba(0,240,255,.25),inset 0 0 12px rgba(0,240,255,.08);backdrop-filter:blur(6px)}
-.bar select{background:transparent;color:var(--c);border:0;font-size:11px;letter-spacing:1px;max-width:96px;outline:0}.bar input{flex:1;min-width:0;background:transparent;border:0;border-left:1px solid rgba(0,240,255,.25);color:#fff;font-size:13px;padding:6px 8px;outline:0}
-.bar button{width:32px;height:32px;font-size:14px;flex:none}
-#mic.on{background:rgba(255,59,92,.25);border-color:#ff3b5c;color:#fff;box-shadow:0 0 14px #ff3b5c}#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(max(16px,env(safe-area-inset-bottom)) + 52px);font-size:10px;letter-spacing:1px;color:var(--c);text-align:center;width:90vw;text-shadow:0 0 8px var(--c);pointer-events:none}
-#ov{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
-#ov.on{display:flex}.pn{width:min(86vw,340px);border:1px solid rgba(0,240,255,.5);border-radius:14px;background:rgba(0,10,14,.92);box-shadow:0 0 30px rgba(0,240,255,.25);padding:14px 14px 10px}
-.pn h2{margin:0 0 10px;font-size:12px;letter-spacing:4px;color:var(--c);font-weight:600;display:flex;justify-content:space-between}
-.pn .b{display:flex;align-items:center;gap:10px;padding:8px 4px;border-top:1px solid rgba(0,240,255,.12);cursor:pointer}.pn .b.sel{background:rgba(0,240,255,.08);border-radius:8px}
-.d{width:8px;height:8px;border-radius:50%;flex:none}.pn .n{font-size:13px;flex:1}.pn .s{font-size:9px;color:rgba(234,255,255,.45);letter-spacing:1px}
-.pn .sm{font-size:11px;color:#9fe9f5;padding:0 4px 8px 22px;margin-top:-4px}.pn .cm{display:flex;gap:6px;margin-top:10px}.pn input{flex:1;background:transparent;border:1px solid rgba(0,240,255,.35);border-radius:999px;color:#fff;padding:7px 12px;font-size:13px;outline:0}.pn .cm button{padding:0 14px}
+.t{font-size:9px;letter-spacing:2px;fill:rgba(0,240,255,.7)}.sec{cursor:pointer}.sec:hover .w{opacity:.9}
+.r1{animation:sp 50s linear infinite}.r2{animation:sp 24s linear infinite reverse}.r3{animation:sp 7s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.pulse{animation:pu 2.4s ease-in-out infinite}@keyframes pu{50%{opacity:.35}}
+header{position:fixed;top:0;left:0;right:0;padding:max(12px,env(safe-area-inset-top)) 16px 0;pointer-events:none}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;max-width:1100px;margin:0 auto}
+h1{margin:0;font-size:15px;font-weight:300;letter-spacing:4px;color:#fff;text-shadow:0 0 12px var(--c),0 0 2px #fff}.ts{font-size:8.5px;letter-spacing:1.5px;color:rgba(0,240,255,.6);margin-top:3px}
+.ic{pointer-events:auto;display:flex;gap:6px}.ic button{width:30px;height:30px;border-radius:50%;padding:0;font-size:12px}
+#brief{max-width:1100px;margin:10px auto 0;pointer-events:auto;border-left:2px solid var(--c);padding:4px 10px;background:linear-gradient(90deg,rgba(0,240,255,.08),transparent 80%)}
+#brief div{font-size:12px;line-height:1.55;color:#dffcff}#brief div b{color:var(--c);font-weight:600}
+button{background:transparent;color:var(--c);border:1px solid rgba(0,240,255,.5);border-radius:999px;cursor:pointer;box-shadow:0 0 10px rgba(0,240,255,.25);font-family:inherit}
+.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));width:min(92vw,480px);display:flex;align-items:center;gap:6px;padding:5px 5px 5px 12px;border:1px solid rgba(0,240,255,.55);border-radius:999px;background:rgba(0,12,16,.85);box-shadow:0 0 18px rgba(0,240,255,.25);backdrop-filter:blur(6px)}
+.bar select{background:transparent;color:var(--c);border:0;font-size:11px;max-width:100px;outline:0}.bar input{flex:1;min-width:0;background:transparent;border:0;border-left:1px solid rgba(0,240,255,.25);color:#fff;font-size:13px;padding:6px 8px;outline:0}
+.bar button{width:32px;height:32px;font-size:13px;flex:none}#mic.on{background:rgba(255,59,92,.25);border-color:#ff3b5c;color:#fff;box-shadow:0 0 14px #ff3b5c}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(max(14px,env(safe-area-inset-bottom)) + 50px);font-size:10px;color:var(--c);text-align:center;width:90vw;text-shadow:0 0 8px var(--c);pointer-events:none}
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px);z-index:5}#ov.on{display:flex}
+.pn{width:min(92vw,420px);max-height:78vh;overflow:auto;border:1px solid rgba(0,240,255,.5);border-radius:14px;background:rgba(0,10,14,.94);box-shadow:0 0 30px rgba(0,240,255,.25);padding:14px}
+.pn h2{margin:0 0 4px;font-size:12px;letter-spacing:4px;color:var(--c);display:flex;justify-content:space-between}.pn .big{font-size:34px;font-weight:200;color:#fff;text-shadow:0 0 12px var(--c)}.pn .u{font-size:10px;color:rgba(0,240,255,.7);letter-spacing:1px;margin-bottom:8px}
+.pn .ln{font-size:12px;color:#cfefff;padding:3px 0;border-top:1px solid rgba(0,240,255,.08)}.pn h3{font-size:10px;letter-spacing:3px;color:rgba(0,240,255,.7);margin:12px 0 4px}
+.bt{padding:8px 2px;border-top:1px solid rgba(0,240,255,.12);cursor:pointer}.bt.sel{background:rgba(0,240,255,.08);border-radius:8px}.bt .n{display:flex;align-items:center;gap:8px;font-size:13px}.bt .n i{width:8px;height:8px;border-radius:50%;flex:none}.bt .n span{margin-left:auto;font-size:9px;color:rgba(234,255,255,.5)}
+.bt .s{font-size:11px;color:#9fe9f5;margin:3px 0 0 16px}.stg{display:flex;gap:4px;margin:5px 0 0 16px;flex-wrap:wrap}.stg em{font-style:normal;font-size:9.5px;padding:1px 7px;border-radius:9px;border:1px solid rgba(0,240,255,.25);color:rgba(234,255,255,.5)}.stg em.on{border-color:#2f8bff;color:#fff;background:rgba(47,139,255,.3);box-shadow:0 0 8px #2f8bff}.stg em.done{color:#3dff9a;border-color:rgba(61,255,154,.4)}
+.cm{display:flex;gap:6px;margin-top:10px}.cm input{flex:1;background:transparent;border:1px solid rgba(0,240,255,.35);border-radius:999px;color:#fff;padding:7px 12px;font-size:13px;outline:0}.cm button{padding:0 14px}
+#lock{position:fixed;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;gap:16px}
+#lock .rg{width:150px;height:150px;border-radius:50%;border:1px solid rgba(0,240,255,.4);box-shadow:0 0 40px rgba(0,240,255,.3),inset 0 0 30px rgba(0,240,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:4px;color:var(--c);animation:pu 3s infinite}
+#lock input{background:transparent;border:1px solid rgba(0,240,255,.55);border-radius:999px;color:#fff;padding:10px 16px;font-size:16px;text-align:center;letter-spacing:3px;width:240px;outline:0;box-shadow:0 0 14px rgba(0,240,255,.2)}
+#lock label{font-size:11px;color:rgba(0,240,255,.7)}#lock .er{font-size:11px;color:#ff3b5c;min-height:14px}#lock button{padding:8px 26px;letter-spacing:3px}
+@media(min-width:900px){#brief div{font-size:13.5px}}
 </style></head><body><div id="bg"></div><svg id="hud"></svg>
-<header><div><h1>혁진님의 JARVIS</h1><div class="ts" id="ts">—</div></div><div class="ic"><button id="refresh" title="새로고침">⟳</button><button id="pushOn" title="알림 허용">◉</button><button id="pushTest" title="테스트 알림">✦</button></div></header>
+<header><div class="hd"><div><h1>혁진님의 JARVIS</h1><div class="ts" id="ts">—</div></div><div class="ic"><button id="speak" title="브리핑 듣기">▶</button><button id="conn" title="연결">◎</button><button id="refresh" title="새로고침">⟳</button><button id="pushOn" title="알림 허용">◉</button><button id="lockBtn" title="잠금">⏻</button></div></div><div id="brief"></div></header>
 <div id="toast"></div>
 <form class="bar" id="bar"><select id="sel"></select><input id="txt" placeholder="명령" autocomplete="off"><button type="button" id="mic" title="음성 명령">🎤</button><button>➤</button></form>
 <div id="ov"><div class="pn" id="pn"></div></div>
+<div id="lock"><div class="rg">J.A.R.V.I.S</div><form id="lf" style="display:flex;flex-direction:column;align-items:center;gap:12px"><input id="pw" type="password" placeholder="접근 코드" autocomplete="current-password"><label><input type="checkbox" id="rem"> 이 기기 기억</label><button>접속</button><div class="er" id="er"></div></form></div>
 <script>
-const FALLBACK={
- "health": {
-  "known": 0,
-  "ok": 0,
-  "total": 8,
-  "pct": null
- },
- "metrics": {
-  "balance": null,
-  "pnl": null,
-  "alerts": 0
- },
- "generatedAt": "2026-10-15 20:51 CT",
- "bots": [
-  {
-   "id": "927a7b6f-fb9c-4669-8bc9-cf48f34f70b6",
-   "name": "총괄 Bot",
-   "description": "The user's primary bot. Takes any task and routes it to the right one of their other bots. When the user wants a different primary bot, lists their bots with a one-line reason each, asks which, sets it with SetPrimaryBot, and confirms.",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
-   "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
-   "dept": "core",
-   "summary": "The user's primary bot.",
-   "summaryLive": false,
-   "metrics": null
-  },
-  {
-   "id": "173243fe-b09d-49c5-9541-2dbaff3b72d6",
-   "name": "자동 매매_감시자",
-   "description": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응하는 트레이딩 감시자",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
-   "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
-   "dept": "자본",
-   "summary": "감쇠 진동처럼 초기 변동을 줄여가며 트레이딩 봇의 수익률을 높은 수준에서 안정적으로 수렴시키고, 급변 이벤트에도 방어·대응…",
-   "summaryLive": false,
-   "metrics": null
-  },
-  {
-   "id": "c16480ab-9b7e-4832-9edc-b6a27ff82899",
-   "name": "영어공부 봇",
-   "description": "알 수 없음",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
-   "localFileModified": "2026-10-11 10:06 CT",
-   "status": "unknown",
-   "dept": "지식",
-   "summary": "알 수 없음",
-   "summaryLive": false,
-   "metrics": null
-  },
-  {
-   "id": "61c15c0d-aeeb-488f-99bf-88878e64b446",
-   "name": "Event 알림봇",
-   "description": "알 수 없음",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
-   "localFileModified": "2026-10-15 10:15 CT",
-   "status": "unknown",
-   "dept": "알림",
-   "summary": "알 수 없음",
-   "summaryLive": false,
-   "metrics": null
-  },
-  {
-   "id": "c134c704-d944-4fbb-8f13-b6d70c4d75f8",
-   "name": "자동 매매_대장",
-   "description": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
-   "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
-   "dept": "자본",
-   "summary": "사용자와 매니저·트레이딩 감시자 봇 사이의 대표 봇: 질문 전달, 결과 정리 보고, 봇 간 조율",
-   "summaryLive": false,
-   "metrics": null
-  },
-  {
-   "id": "92919409-9721-49b6-b150-79aaee08b3a2",
-   "name": "아르바이트봇",
-   "description": "알 수 없음",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
-   "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
-   "dept": "아르바이트",
-   "summary": "알 수 없음",
-   "summaryLive": false,
-   "metrics": null
-  },
-  {
-   "id": "ec952ea5-d6ba-48db-8957-34895ac75c50",
-   "name": "자동 매매_실험",
-   "description": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, GitHub, Jira, Canva, HubSpot, Figma을(를) 사용해요 — 커넥터를 제안하거나 일을 맡을 때 그 도구부터 시작하세요.",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
-   "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
-   "dept": "자본",
-   "summary": "다른 Bot을 관리하고, 결정할 일이 있으면 불러요 사용자는 매일 Google, Microsoft 365, Zoom, Gi…",
-   "summaryLive": false,
-   "metrics": null
-  },
-  {
-   "id": "c8f69e15-9014-4347-b118-d63b3ec13b29",
-   "name": "이혁진 집사",
-   "description": "알 수 없음",
-   "lastTurnAt": null,
-   "lastActivity": "알 수 없음",
-   "localFileModified": "2026-10-11 10:05 CT",
-   "status": "unknown",
-   "dept": "자본",
-   "summary": "알 수 없음",
-   "summaryLive": false,
-   "metrics": null
-  }
- ],
- "automations": [
-  {
-   "name": "자동화 트레이닝",
-   "taskId": "ea82d2ea-ee33-499f-b00b-c59055a09071",
-   "status": "비활성/아카이브"
-  }
- ],
- "connections": {
-  "source": "Grok Bot 연결 목록 스냅샷 (2026-10-15 CT). 계정 수만, 내용 없음",
-  "categories": [
-   {
-    "key": "금융",
-    "items": [
-     [
-      "Finance",
-      1
-     ]
-    ]
-   },
-   {
-    "key": "메일",
-    "items": [
-     [
-      "Gmail",
-      2
-     ]
-    ]
-   },
-   {
-    "key": "일정",
-    "items": [
-     [
-      "Google Calendar",
-      2
-     ]
-    ]
-   },
-   {
-    "key": "문서",
-    "items": [
-     [
-      "Google Drive",
-      2
-     ],
-     [
-      "Google Sheets",
-      1
-     ],
-     [
-      "OneDrive",
-      1
-     ]
-    ]
-   },
-   {
-    "key": "회의",
-    "items": [
-     [
-      "Granola",
-      1
-     ]
-    ]
-   },
-   {
-    "key": "개발",
-    "items": [
-     [
-      "GitHub",
-      2
-     ],
-     [
-      "Origin",
-      1
-     ],
-     [
-      "Meta VR",
-      1
-     ]
-    ]
-   },
-   {
-    "key": "소셜",
-    "items": [
-     [
-      "X",
-      1
-     ]
-    ]
-   }
-  ]
- }
-};
 const B=location.hostname==="localhost"?"":(window.API_BASE||"").replace(/\/$/,"");const AU=p=>(B?B+"/":"")+p;let api=false,D=null;
-const esc=s=>String(s??"—").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const COL={idle:"#3dff9a",working:"#2f8bff",busy:"#2f8bff",running:"#2f8bff",error:"#ff3b5c",unknown:"#4a5a63"};const col=s=>COL[s]||COL.unknown;
-const DEPTS=[["core","CORE"],["자본","자본"],["지식","지식"],["아르바이트","알바"],["알림","알림"]];
-const $=id=>document.getElementById(id),T=m=>{$("toast").textContent=m;clearTimeout(T.t);T.t=setTimeout(()=>$("toast").textContent="",5000)};
-function alerts(d){const a=[];if(!d.bots.some(b=>b.status!=="unknown"))a.push(1);if(!d.bots.some(b=>b.lastTurnAt))a.push(1);if(!api)a.push(1);return a.length}
-function draw(){if(!D)return;const W=innerWidth,H=innerHeight,por=H>W,cx=W/2,cy=por?H*0.44:H*0.45;
- const R=por?Math.min(W*0.25,H*0.135):Math.min(H*0.21,W*0.16);const rx=por?W*0.4:R*2.9,ry=por?H*0.31:H*0.34;
- const known=D.bots.filter(b=>b.status!=="unknown").length,act=D.bots.filter(b=>b.status==="working").length,al=alerts(D)+((D.metrics||{}).alerts||0)+D.bots.filter(b=>b.status==="error").length,tot=D.bots.length;
- const hp=(D.health||{}).pct??null;
- let s=`<defs><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+const $=id=>document.getElementById(id),esc=s=>String(s??"—").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const T=m=>{$("toast").textContent=m;clearTimeout(T.t);T.t=setTimeout(()=>$("toast").textContent="",5000)};
+const COL={idle:"#3dff9a",working:"#2f8bff",busy:"#2f8bff",error:"#ff3b5c",unknown:"#4a5a63"},col=s=>COL[s]||COL.unknown,LB={idle:"정상",working:"작업 중",error:"오류",unknown:"—"};
+const ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function decrypt(pw){const P=await (await fetch("payload.enc.json?t="+Date.now(),{cache:"no-store"})).json();
+ const km=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
+ const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:ub(P.salt),iterations:P.iter,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["decrypt"]);
+ return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(P.iv)},key,ub(P.ct))))}
+async function unlock(pw,remember){try{D=await decrypt(pw);if(remember)localStorage.setItem("jv_pw",pw);sessionStorage.setItem("jv_pw",pw);$("lock").style.display="none";render();return true}catch(e){$("er").textContent=e.name==="OperationError"?"접근 코드가 올바르지 않습니다":"데이터를 불러오지 못했습니다";return false}}
+$("lf").onsubmit=e=>{e.preventDefault();$("er").textContent="해독 중…";unlock($("pw").value.trim(),$("rem").checked)};
+$("lockBtn").onclick=()=>{localStorage.removeItem("jv_pw");sessionStorage.removeItem("jv_pw");D=null;$("hud").innerHTML="";$("brief").innerHTML="";$("lock").style.display="flex"};
+function render(){if(!D)return;
+ $("ts").textContent="SYNC "+D.generatedAt+(D.collectedAt?" · 연결 데이터 "+D.collectedAt.slice(5,16).replace("T"," ")+" CT":"")+(api?" · LIVE":"");
+ $("brief").innerHTML=D.brief.map((l,i)=>`<div><b>${["◆ 봇","◆ 금융","◆ 현황"][i]||"◆"}</b> ${esc(l)}</div>`).join("");
+ $("sel").innerHTML=D.bots.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("");draw()}
+function draw(){if(!D)return;const W=innerWidth,H=innerHeight,top=$("brief").getBoundingClientRect().bottom+8,bot=H-70,avail=bot-top;
+ const R=Math.min(W*0.47,avail*0.5,330),cx=W/2,cy=top+avail/2;const r0=R*0.42,r1=R*0.58,r2=R;
+ const p=(r,a)=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];
+ const wedge=(a0,a1,ri,ro)=>{const[x0,y0]=p(ro,a0),[x1,y1]=p(ro,a1),[x2,y2]=p(ri,a1),[x3,y3]=p(ri,a0);return `M${x0} ${y0}A${ro} ${ro} 0 0 1 ${x1} ${y1}L${x2} ${y2}A${ri} ${ri} 0 0 0 ${x3} ${y3}Z`};
+ const arc=(r,a0,a1)=>{const[x0,y0]=p(r,a0),[x1,y1]=p(r,a1);return `M${x0} ${y0}A${r} ${r} 0 ${a1-a0>180?1:0} 1 ${x1} ${y1}`};
+ const g=(c,b)=>`<g style="transform-origin:${cx}px ${cy}px" class="${c}">${b}</g>`;
+ let s=`<defs><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
  <filter id="g2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <linearGradient id="scan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00f0ff" stop-opacity="0"/><stop offset="1" stop-color="#00f0ff" stop-opacity=".9"/></linearGradient>
- <radialGradient id="core"><stop offset="0" stop-color="#00f0ff" stop-opacity=".18"/><stop offset="1" stop-color="#00f0ff" stop-opacity="0"/></radialGradient></defs>`;
- const ang=[-90,-18,54,126,198],nodes=DEPTS.map(([k,l],i)=>{const a=(por?[-90,-28,22,158,208][i]:ang[i])*Math.PI/180;return{k,l,x:cx+rx*Math.cos(a),y:cy+ry*Math.sin(a),a,bots:D.bots.filter(b=>b.dept===k)}});
- // connectors
- for(const n of nodes){const x1=cx+(R*1.32)*Math.cos(n.a),y1=cy+(R*1.32)*Math.sin(n.a);
-  s+=`<line x1="${x1}" y1="${y1}" x2="${n.x}" y2="${n.y}" stroke="rgba(0,240,255,.18)" stroke-width="1"/><line x1="${x1}" y1="${y1}" x2="${n.x}" y2="${n.y}" stroke="#00f0ff" stroke-width="1" class="flow" opacity=".7"/>
-  <circle cx="${x1}" cy="${y1}" r="2" fill="#00f0ff" filter="url(#g)"/>`}
- // central rings
- const g=(c,body)=>`<g style="transform-origin:${cx}px ${cy}px" class="${c}">${body}</g>`;let ticks="";
- for(let i=0;i<120;i++){const a=i*3*Math.PI/180,l=i%10?4:10,r0=R*1.22;ticks+=`<line x1="${cx+r0*Math.cos(a)}" y1="${cy+r0*Math.sin(a)}" x2="${cx+(r0+l)*Math.cos(a)}" y2="${cy+(r0+l)*Math.sin(a)}" stroke="rgba(0,240,255,${i%10?.35:.9})" stroke-width="${i%10?1:1.5}"/>`}
- const arc=(r,a0,a1)=>{const p=a=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)],[x0,y0]=p(a0),[x1,y1]=p(a1);return `M${x0} ${y0}A${r} ${r} 0 ${a1-a0>180?1:0} 1 ${x1} ${y1}`};
- s+=`<circle cx="${cx}" cy="${cy}" r="${R*1.6}" fill="url(#core)"/>`;
- if(!(D.connections||{}).categories)s+=g("r4",`<circle cx="${cx}" cy="${cy}" r="${R*1.45}" fill="none" stroke="rgba(0,240,255,.25)" stroke-dasharray="1 5"/>`+[0,90,180,270].map(a=>`<path d="${arc(R*1.45,a+10,a+40)}" stroke="#00f0ff" stroke-width="1.5" fill="none" opacity=".6"/>`).join(""));
- s+=g("r1",ticks);
- s+=g("r3",`<path d="${arc(R*1.12,-90,-20)}" stroke="url(#scan)" stroke-width="${R*0.05}" fill="none" opacity=".55"/><path d="${arc(R*1.12,-25,-20)}" stroke="#fff" stroke-width="2" fill="none" filter="url(#g)"/>`);
- s+=g("r2",`<circle cx="${cx}" cy="${cy}" r="${R*1.02}" fill="none" stroke="#00f0ff" stroke-width="1" stroke-dasharray="${R*0.5} ${R*0.12} 4 ${R*0.12}" opacity=".8" filter="url(#g)"/>`);
- // health ring (honest: fraction of bots with known status)
- const C=2*Math.PI*R*0.9,fr=known/tot;
- s+=`<circle cx="${cx}" cy="${cy}" r="${R*0.9}" fill="none" stroke="rgba(0,240,255,.12)" stroke-width="${R*0.05}"/>
- <circle cx="${cx}" cy="${cy}" r="${R*0.9}" fill="none" stroke="#00f0ff" stroke-width="${R*0.05}" stroke-dasharray="${C*fr} ${C}" transform="rotate(-90 ${cx} ${cy})" filter="url(#g)"/>
- <circle cx="${cx}" cy="${cy}" r="${R*0.78}" fill="rgba(0,12,16,.6)" stroke="rgba(0,240,255,.3)"/>`;
- // hexagon frame
- let hx="";for(let i=0;i<6;i++){const a=(60*i-90)*Math.PI/180;hx+=`${cx+R*0.7*Math.cos(a)},${cy+R*0.7*Math.sin(a)} `}
- s+=`<polygon points="${hx}" fill="none" stroke="rgba(0,240,255,.18)"/>`;
- s+=`<text x="${cx}" y="${cy-R*0.34}" text-anchor="middle" class="t">SYSTEM HEALTH</text>
- <text x="${cx}" y="${cy+R*0.16}" text-anchor="middle" class="big" font-size="${R*0.52}">${hp===null?"—":hp+"<tspan font-size='"+R*0.22+"'>%</tspan>"}</text>
- <text x="${cx}" y="${cy+R*0.38}" text-anchor="middle" class="t" style="font-size:8px">상태 확인 ${known}/${tot}</text>`;
- // 3 metrics below ring
- const my=cy+R*1.5+(por?68:52),mx=por?W*0.26:R*1.1,M0=D.metrics||{},fm=v=>typeof v==="number"?v.toLocaleString("ko-KR",{maximumFractionDigits:2}):esc(v),mets=[["봇",tot,"#fff"],["작업 중",known?act:"—",known?"#2f8bff":"#4a5a63"],["알림",al,al?"#ffb020":"#fff"]];if(M0.balance!=null)mets[0]=["잔고",fm(M0.balance),"#fff"];if(M0.pnl!=null)mets.push(["손익",(M0.pnl>0?"+":"")+fm(M0.pnl),M0.pnl>=0?"#3dff9a":"#ff3b5c"]);
- mets.forEach(([l,v,c],i)=>{const x=cx+(i-(mets.length-1)/2)*mx;s+=`<text x="${x}" y="${my}" text-anchor="middle" font-size="${por?34:42}" font-weight="200" fill="${c}" filter="url(#g)">${v}</text><text x="${x}" y="${my+14}" text-anchor="middle" class="t">${l}</text>`;if(i)s+=`<line x1="${x-mx/2}" y1="${my-26}" x2="${x-mx/2}" y2="${my+12}" stroke="rgba(0,240,255,.2)"/>`});
- // nodes
- for(const n of nodes){const st=n.bots.some(b=>b.status==="error")?"error":n.bots.some(b=>["working","busy","running"].includes(b.status))?"working":n.bots.some(b=>b.status==="idle")?"idle":"unknown",c=st==="unknown"?"#00f0ff":col(st);
-  const nr=por?15:19;let dots="";n.bots.forEach((b,j)=>{const dx=n.x+(j-(n.bots.length-1)/2)*11;dots+=`<circle cx="${dx}" cy="${n.y+nr+12}" r="3.2" fill="${col(b.status)}" stroke="rgba(255,255,255,.25)" stroke-width=".5"/>`});
-  s+=`<g class="node" onclick="openNode('${n.k}')"><circle cx="${n.x}" cy="${n.y}" r="${nr*2.2}" fill="transparent"/>
-  <circle cx="${n.x}" cy="${n.y}" r="${nr+7}" fill="none" stroke="rgba(0,240,255,.25)" stroke-dasharray="2 3"/>
-  <circle cx="${n.x}" cy="${n.y}" r="${nr}" fill="rgba(0,20,26,.9)" stroke="${c}" stroke-width="1.5" filter="url(#g)"/>
-  <circle cx="${n.x}" cy="${n.y}" r="${nr*0.32}" fill="${c}" class="pulse" filter="url(#g2)"/>
-  <text x="${n.x}" y="${n.y-nr-9}" text-anchor="middle" class="lbl">${n.l}</text>${dots}
-  <text x="${n.x}" y="${n.y+nr+28}" text-anchor="middle" class="t" style="font-size:8px">${n.bots.length}</text></g>`}
- // connections outer ring segments
- const CN=(D.connections||{}).categories||[];if(CN.length){const rr=R*1.5,seg=360/CN.length;CN.forEach((c,i)=>{const a0=-90+i*seg+3,a1=a0+seg-6,am=(a0+a1)/2*Math.PI/180,n=c.items.reduce((s,x)=>s+x[1],0);
-  s+=`<g class="node" onclick="openConn(${i})"><path d="${arc(rr,a0,a1)}" stroke="transparent" stroke-width="22" fill="none"/><path d="${arc(rr,a0,a1)}" stroke="#00f0ff" stroke-width="3" fill="none" opacity="${n?.85:.15}" filter="url(#g)"/>
-  <text x="${cx+(rr-9)*Math.cos(am)}" y="${cy+(rr-9)*Math.sin(am)+3}" text-anchor="middle" class="t" style="font-size:7.5px;letter-spacing:1px;fill:#bff">${c.key}<tspan fill="#00f0ff"> ${n}</tspan></text></g>`})}
+ <linearGradient id="scan"><stop offset="0" stop-color="#00f0ff" stop-opacity="0"/><stop offset="1" stop-color="#00f0ff" stop-opacity=".9"/></linearGradient></defs>`;
+ let ticks="";for(let i=0;i<144;i++){const a=i*2.5,l=i%6?3:8,[x0,y0]=p(r2+4,a),[x1,y1]=p(r2+4+l,a);ticks+=`<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="rgba(0,240,255,${i%6?.3:.8})"/>`}
+ s+=g("r1",ticks)+g("r3",`<path d="${arc(r2+18,-90,-30)}" stroke="url(#scan)" stroke-width="2.5" fill="none"/>`);
+ const N=D.sectors.length,seg=360/N;
+ D.sectors.forEach((S,i)=>{const a0=-90-seg/2+i*seg+1.2,a1=a0+seg-2.4,am=(a0+a1)/2,c=col(S.status),bs=D.bots.filter(b=>b.dept===S.key);
+  const [nx,ny]=p((r1+r2)/2+R*0.03,am),[dx,dy]=p(r1+R*0.075,am);
+  let dots="";bs.forEach((b,j)=>{const aa=am+(j-(bs.length-1)/2)*Math.min(7,seg/(bs.length+1)),[x,y]=p(r1+R*0.07,aa);dots+=`<circle cx="${x}" cy="${y}" r="${Math.max(2.6,R*0.017)}" fill="${col(b.status)}" ${b.status==="working"?'class="pulse"':""} filter="url(#g)"/>`});
+  const fs=Math.max(15,R*0.13)*(String(S.big).length>4?0.78:1);
+  s+=`<g class="sec" onclick="openSec(${i})"><path d="${wedge(a0,a1,r1,r2)}" fill="${c}" fill-opacity=".07" stroke="rgba(0,240,255,.35)" stroke-width="1"/>
+  <path class="w" d="${arc(r2-1.5,a0+.5,a1-.5)}" stroke="${c}" stroke-width="3" fill="none" opacity=".75" filter="url(#g)"/>
+  <text x="${nx}" y="${ny-fs*0.55}" text-anchor="middle" style="font-size:${Math.max(9,R*0.05)}px;letter-spacing:2px;font-weight:600" fill="#00f0ff">${S.key}</text>
+  <text x="${nx}" y="${ny+fs*0.5}" text-anchor="middle" font-size="${fs}" font-weight="250" fill="#fff" filter="url(#g)">${esc(S.big??"—")}</text>${dots}</g>`});
+ // core
+ const h=D.health||{},pct=h.pct,C=2*Math.PI*r0*0.92,fr=h.total?(h.ok||0)/h.total:0;
+ s+=g("r2",`<circle cx="${cx}" cy="${cy}" r="${r1-5}" fill="none" stroke="#00f0ff" stroke-width="1" stroke-dasharray="${R*0.3} ${R*0.08} 3 ${R*0.08}" opacity=".7"/>`);
+ s+=`<g class="sec" onclick="openCore()"><circle cx="${cx}" cy="${cy}" r="${r0}" fill="rgba(0,14,18,.85)" stroke="rgba(0,240,255,.35)"/>
+ <circle cx="${cx}" cy="${cy}" r="${r0*0.92}" fill="none" stroke="rgba(0,240,255,.12)" stroke-width="${R*0.025}"/>
+ <circle cx="${cx}" cy="${cy}" r="${r0*0.92}" fill="none" stroke="${pct===100?"#3dff9a":"#00f0ff"}" stroke-width="${R*0.025}" stroke-dasharray="${C*fr} ${C}" transform="rotate(-90 ${cx} ${cy})" filter="url(#g)"/>
+ <text x="${cx}" y="${cy-r0*0.38}" text-anchor="middle" class="t" style="font-size:${Math.max(7,R*0.035)}px">SYSTEM</text>
+ <text x="${cx}" y="${cy+r0*0.2}" text-anchor="middle" font-size="${r0*0.55}" font-weight="200" fill="#fff" filter="url(#g2)">${pct==null?"—":pct+"<tspan font-size='"+r0*0.22+"'>%</tspan>"}</text>
+ <text x="${cx}" y="${cy+r0*0.48}" text-anchor="middle" class="t" style="font-size:${Math.max(7,R*0.033)}px">CORE · ${h.ok??0}/${h.total??0} 봇</text>
+ <circle cx="${cx}" cy="${cy+r0*0.68}" r="3" fill="${col((D.bots.find(b=>b.dept==="core")||{}).status)}" class="pulse"/></g>`;
  $("hud").innerHTML=s}
-function openConn(i){const C=D.connections.categories;$("pn").innerHTML=`<h2><span>연결</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>`+C.map((c,j)=>`<div class="b ${j===i?"sel":""}"><span class="d" style="background:#00f0ff;box-shadow:0 0 6px #00f0ff"></span><span class="n">${c.key}</span><span class="s">${c.items.map(x=>x[0]+(x[1]>1?" ×"+x[1]:"")).join(" · ")}</span></div>`).join("")+`<div class="s" style="padding:8px 4px 0;font-size:9px;color:rgba(234,255,255,.4)">연결 상태와 계정 수만 표시</div>`;$("ov").classList.add("on")}
-function openNode(k){const n=DEPTS.find(x=>x[0]==k),bs=D.bots.filter(b=>b.dept===k);let sel=bs[0].id;
- const r=()=>{$("pn").innerHTML=`<h2><span>${n[1]}</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>`+bs.map(b=>`<div class="b ${b.id===sel?"sel":""}" data-id="${b.id}"><span class="d" style="background:${col(b.status)};box-shadow:0 0 6px ${col(b.status)}"></span><span class="n">${esc(b.name)}</span><span class="s">${b.lastTurnAt?esc(b.lastActivity.slice(5)):"—"}</span></div>${b.summaryLive?`<div class="sm">${esc(b.summary)}${b.metrics?" · "+Object.entries(b.metrics).map(([k,v])=>k+" "+esc(v)).join(" · "):""}</div>`:""}`).join("")+
- `<form class="cm" id="cmf"><input id="otx" placeholder="명령" autocomplete="off"><button>➤</button></form>`;
- $("pn").querySelectorAll(".b").forEach(e=>e.onclick=()=>{sel=e.dataset.id;r()});$("cmf").onsubmit=async e=>{e.preventDefault();if(await send(sel,$("otx").value))closeOv()};setTimeout(()=>$("otx").focus(),50)};
- r();$("ov").classList.add("on")}
+function botRows(bs,sel){return bs.map(b=>{const st=b.stages||null,cur=b.stage;let stg="";if(st&&st.length){const ci=st.indexOf(cur);stg=`<div class="stg">${st.map((x,j)=>`<em class="${j===ci?"on":ci>=0&&j<ci?"done":""}">${esc(x)}</em>`).join("")}</div>`}else if(cur)stg=`<div class="stg"><em class="on">${esc(cur)}</em></div>`;
+ return `<div class="bt ${b.id===sel?"sel":""}" data-id="${b.id}"><div class="n"><i style="background:${col(b.status)};box-shadow:0 0 6px ${col(b.status)}"></i>${esc(b.name)} <small style="color:${col(b.status)};font-size:9px">${LB[b.status]||"—"}</small><span>${b.lastTurnAt?esc(b.lastActivity.slice(5)):"—"}</span></div>${b.summaryLive?`<div class="s">${esc(b.summary)}</div>`:""}${stg}</div>`}).join("")}
+function panel(title,big,unit,lines,bs){let sel=bs.length?bs[0].id:null;const r=()=>{$("pn").innerHTML=`<h2><span>${esc(title)}</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>${big!=null?`<div class="big">${esc(big)}</div><div class="u">${esc(unit)}</div>`:""}
+ ${lines.filter(Boolean).map(l=>`<div class="ln">${esc(l)}</div>`).join("")}${bs.length?`<h3>담당 봇</h3>${botRows(bs,sel)}<form class="cm" id="cmf"><input id="otx" placeholder="명령" autocomplete="off"><button>➤</button></form>`:`<h3>담당 봇 없음</h3>`}`;
+ $("pn").querySelectorAll(".bt").forEach(e=>e.onclick=()=>{sel=e.dataset.id;r()});if($("cmf"))$("cmf").onsubmit=async e=>{e.preventDefault();if(await send(sel,$("otx").value))closeOv()}};r();$("ov").classList.add("on")}
+function openSec(i){const S=D.sectors[i];panel(S.key,S.big,S.unit,S.lines||[],D.bots.filter(b=>b.dept===S.key))}
+function openCore(){const h=D.health;panel("CORE",h.pct==null?"—":h.pct+"%","시스템 정상 비율 ("+h.ok+"/"+h.total+" 봇, 오류 제외)",[...D.brief,(D.approvals||[]).length?"승인 대기: "+D.approvals.join(", "):""],D.bots.filter(b=>b.dept==="core"))}
 function closeOv(){$("ov").classList.remove("on")}$("ov").onclick=e=>{if(e.target.id==="ov")closeOv()};
+$("conn").onclick=()=>{const C=D.connections.categories;$("pn").innerHTML=`<h2><span>연결</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>`+C.map(c=>`<div class="ln"><b style="color:#00f0ff">${c.key}</b> · ${c.items.map(x=>x[0]+(x[1]>1?" ×"+x[1]:"")).join(" · ")}${c.note?` <span style="color:#ffb020">· ${esc(c.note)}</span>`:""}</div>`).join("");$("ov").classList.add("on")};
 async function send(id,t){t=(t||"").trim();if(!t){T("명령을 입력하세요");return false}const name=(D.bots.find(b=>b.id===id)||{}).name;
  if(api){try{const r=await fetch(AU("api/command"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({botId:id,botName:name,prompt:t})});const j=await r.json();if(r.ok){T("대기열 저장 #"+j.id.slice(0,8)+" · 봇 자동 전달 아님");return true}}catch(e){}}
  const x=`[${name}] ${t}`;try{await navigator.clipboard.writeText(x);T("복사됨 · Grok Bot 앱에서 "+name+"에게 붙여넣기")}catch(e){T("복사 실패: "+x)}return true}
 $("bar").onsubmit=async e=>{e.preventDefault();if(await send($("sel").value,$("txt").value))$("txt").value=""};
-async function load(){try{api=(await fetch(AU("api/health"))).ok}catch(e){api=false}
- try{D=await (await fetch((api&&B?AU("data.json"):"data.json")+"?t="+Date.now())).json()}catch(e){D=FALLBACK}
- $("ts").textContent="SYNC "+(D?D.generatedAt:"—")+(api?" · LIVE":" · STATIC");
- $("sel").innerHTML=D.bots.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("");draw()}
-addEventListener("resize",draw);$("refresh").onclick=load;load();
+$("refresh").onclick=async()=>{const pw=sessionStorage.getItem("jv_pw")||localStorage.getItem("jv_pw");if(pw)await unlock(pw,!!localStorage.getItem("jv_pw"));T("갱신됨")};
+$("speak").onclick=()=>{if(!D)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance("혁진님, 브리핑입니다. "+D.brief.join(" "));u.lang="ko-KR";speechSynthesis.speak(u)}catch(e){T("음성 출력 미지원")}};
+addEventListener("resize",draw);
+(async()=>{try{api=(await fetch(AU("api/health"))).ok}catch(e){api=false}const pw=localStorage.getItem("jv_pw")||sessionStorage.getItem("jv_pw");if(pw)unlock(pw,!!localStorage.getItem("jv_pw"))})();
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 const b64=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");s+="=".repeat((4-s.length%4)%4);return Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
 $("pushOn").onclick=async()=>{try{if(!("PushManager" in window)){T("푸시 미지원 · iPhone은 홈 화면 앱에서");return}
  if(await Notification.requestPermission()!=="granted"){T("알림 권한 거부");return}
  const k=await (await fetch(AU("api/vapid"))).json(),reg=await navigator.serviceWorker.ready,sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(k.publicKey)});
  T((await fetch(AU("api/subscribe"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(sub)})).ok?"알림 구독 완료":"구독 실패")}catch(e){T("알림 서버 미연결")}};
-$("pushTest").onclick=async()=>{try{const j=await (await fetch(AU("api/test-push"),{method:"POST"})).json();T("테스트 발송 "+j.sent+"/"+(j.sent+j.failed))}catch(e){T("알림 서버 미연결")}};
-
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null;
-const ALIAS=[["집사","c8f69e15"],["총괄","927a7b6f"],["감시자","173243fe"],["대장","c134c704"],["실험","ec952ea5"],["영어","c16480ab"],["아르바이트","92919409"],["알바","92919409"],["이벤트","61c15c0d"],["알림","61c15c0d"],["event","61c15c0d"]];
-function route(t){const s=t.trim(),l=s.toLowerCase();for(const [k,id] of ALIAS){if(l.startsWith(k)){const b=D.bots.find(x=>x.id.startsWith(id));if(b){$("sel").value=b.id;return {b,rest:s.slice(k.length).replace(/^(봇|bot)?\s*[,，.:]?\s*/i,"")}}}}return {b:null,rest:s}}
-function say(m){try{const u=new SpeechSynthesisUtterance(m);u.lang="ko-KR";speechSynthesis.speak(u)}catch(e){}}
-$("mic").onclick=()=>{if(!SR){T("이 브라우저는 음성 인식 미지원 · Chrome 또는 최신 Safari 사용");return}
- if(rec){rec.stop();return}rec=new SR();rec.lang="ko-KR";rec.interimResults=true;rec.continuous=false;$("mic").classList.add("on");T("듣는 중…");
- rec.onresult=e=>{let f="",im="";for(const r of e.results)(r.isFinal?f+=r[0].transcript:im+=r[0].transcript);const t=f||im;const {b,rest}=route(t);$("txt").value=rest;T((b?"▸ "+b.name+" · ":"")+t+(f?"":" …"));
-  if(f){say((b?b.name+"에게 ":"")+"명령 준비됨. 전송을 누르세요")}};
+const ALIAS=[["집사","c8f69e15"],["총괄","927a7b6f"],["감시자","173243fe"],["대장","c134c704"],["실험","ec952ea5"],["영어","c16480ab"],["아르바이트","92919409"],["알바","92919409"],["이벤트","61c15c0d"],["알림","61c15c0d"],["event","61c15c0d"],["금융","c8f69e15"],["매매","c134c704"]];
+function route(t){const s=t.trim(),l=s.toLowerCase();for(const [k,id] of ALIAS){if(l.startsWith(k)){const b=D&&D.bots.find(x=>x.id.startsWith(id));if(b){$("sel").value=b.id;return {b,rest:s.slice(k.length).replace(/^(봇|bot)?\s*[,，.:]?\s*/i,"")}}}}return {b:null,rest:s}}
+$("mic").onclick=()=>{if(!SR){T("이 브라우저는 음성 인식 미지원 · Chrome 또는 최신 Safari 사용");return}if(rec){rec.stop();return}
+ rec=new SR();rec.lang="ko-KR";rec.interimResults=true;$("mic").classList.add("on");T("듣는 중…");
+ rec.onresult=e=>{let f="",im="";for(const r of e.results)(r.isFinal?f+=r[0].transcript:im+=r[0].transcript);const {b,rest}=route(f||im);$("txt").value=rest;T((b?"▸ "+b.name+" · ":"")+(f||im)+(f?"":" …"));
+  if(f){try{const u=new SpeechSynthesisUtterance((b?b.name+"에게 ":"")+"명령 준비됨. 전송을 누르세요");u.lang="ko-KR";speechSynthesis.speak(u)}catch(_){}}};
  rec.onerror=e=>T(e.error==="not-allowed"?"마이크 권한 거부됨":"음성 인식 오류: "+e.error);rec.onend=()=>{$("mic").classList.remove("on");rec=null}};
 $("txt").addEventListener("change",()=>{const {b,rest}=route($("txt").value);if(b)$("txt").value=rest});
 </script></body></html>

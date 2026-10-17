@@ -10,11 +10,14 @@
   "status": "idle | working | error",
   "updatedAt": "ISO 8601 시각, 예: 2026-10-15T20:55:00-05:00",
   "summary": "한 줄 요약 (120자 이내)",
-  "metrics": { "balance": 1234.5, "pnl": -12.3, "alerts": 0 }
+  "metrics": { "balance": 1234.5, "pnl": -12.3, "alerts": 0 },
+  "stages": ["분석", "실행", "보고"],
+  "stage": "실행"
 }
 ```
+- `stages`(작업 단계 목록)와 `stage`(지금 단계, stages 중 하나)는 선택 항목이다. HUD에 `분석→실행→보고`처럼 표시하고 현재 단계를 강조한다.
 - `metrics`는 생략할 수 있다. 숫자는 실제 값만 넣고, 모르면 키를 빼라(추정 금지). balance/pnl은 자본 봇만 넣는다. 자본 봇들의 값을 합산해 HUD 중앙에 표시한다.
-- 5분마다 반영된다(`scripts/publish-loop.sh` → data.json → GitHub Pages). **공개 웹페이지**이므로 비밀이나 개인 정보는 넣지 마라.
+- 5분마다 반영된다(`scripts/publish-loop.sh` → data.json → GitHub Pages). 이 파일들은 박스에만 있고, 웹에는 암호화(AES-GCM)된 payload.enc.json으로만 올라간다. 그래도 비밀번호나 키 같은 비밀은 넣지 마라.
 
 예시 (Shell 한 줄, 봇 ID 바꿔서):
 ```sh

@@ -4,3 +4,6 @@ tunnel.log
 tunnel-url.txt
 *.pem
 publish.log
+data.json
+status/*.json
+payload.hash
