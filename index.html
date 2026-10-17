@@ -1,110 +1,123 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#000"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="robots" content="noindex"><script src="config.js"></script>
 <title>혁진님의 JARVIS</title><style>
-:root{--c:#00f0ff}*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#000;color:#eaffff;font-family:"SF Pro Display",system-ui,"Apple SD Gothic Neo",sans-serif}
-#bg{position:fixed;inset:0;background:radial-gradient(circle at 50% 55%,rgba(0,140,180,.2),transparent 55%),#000}#bg:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,240,255,.03) 0 1px,transparent 1px 4px)}
-svg#hud{position:fixed;inset:0;width:100%;height:100%}
-.t{font-size:9px;letter-spacing:2px;fill:rgba(0,240,255,.7)}.sec{cursor:pointer}.sec:hover .w{opacity:.9}
-.r1{animation:sp 50s linear infinite}.r2{animation:sp 24s linear infinite reverse}.r3{animation:sp 7s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
-.pulse{animation:pu 2.4s ease-in-out infinite}@keyframes pu{50%{opacity:.35}}
-header{position:fixed;top:0;left:0;right:0;padding:max(12px,env(safe-area-inset-top)) 16px 0;pointer-events:none}
-.hd{display:flex;justify-content:space-between;align-items:flex-start;max-width:1100px;margin:0 auto}
-h1{margin:0;font-size:15px;font-weight:300;letter-spacing:4px;color:#fff;text-shadow:0 0 12px var(--c),0 0 2px #fff}.ts{font-size:8.5px;letter-spacing:1.5px;color:rgba(0,240,255,.6);margin-top:3px}
-.ic{pointer-events:auto;display:flex;gap:6px}.ic button{width:30px;height:30px;border-radius:50%;padding:0;font-size:12px}
-#brief{max-width:1100px;margin:10px auto 0;pointer-events:auto;border-left:2px solid var(--c);padding:4px 10px;background:linear-gradient(90deg,rgba(0,240,255,.08),transparent 80%)}
-#brief div{font-size:12px;line-height:1.55;color:#dffcff}#brief div b{color:var(--c);font-weight:600}
-button{background:transparent;color:var(--c);border:1px solid rgba(0,240,255,.5);border-radius:999px;cursor:pointer;box-shadow:0 0 10px rgba(0,240,255,.25);font-family:inherit}
-.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));width:min(92vw,480px);display:flex;align-items:center;gap:6px;padding:5px 5px 5px 12px;border:1px solid rgba(0,240,255,.55);border-radius:999px;background:rgba(0,12,16,.85);box-shadow:0 0 18px rgba(0,240,255,.25);backdrop-filter:blur(6px)}
-.bar select{background:transparent;color:var(--c);border:0;font-size:11px;max-width:100px;outline:0}.bar input{flex:1;min-width:0;background:transparent;border:0;border-left:1px solid rgba(0,240,255,.25);color:#fff;font-size:13px;padding:6px 8px;outline:0}
-.bar button{width:32px;height:32px;font-size:13px;flex:none}#mic.on{background:rgba(255,59,92,.25);border-color:#ff3b5c;color:#fff;box-shadow:0 0 14px #ff3b5c}
-#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(max(14px,env(safe-area-inset-bottom)) + 50px);font-size:10px;color:var(--c);text-align:center;width:90vw;text-shadow:0 0 8px var(--c);pointer-events:none}
-#ov{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px);z-index:5}#ov.on{display:flex}
-.pn{width:min(92vw,420px);max-height:78vh;overflow:auto;border:1px solid rgba(0,240,255,.5);border-radius:14px;background:rgba(0,10,14,.94);box-shadow:0 0 30px rgba(0,240,255,.25);padding:14px}
-.pn h2{margin:0 0 4px;font-size:12px;letter-spacing:4px;color:var(--c);display:flex;justify-content:space-between}.pn .big{font-size:34px;font-weight:200;color:#fff;text-shadow:0 0 12px var(--c)}.pn .u{font-size:10px;color:rgba(0,240,255,.7);letter-spacing:1px;margin-bottom:8px}
-.pn .ln{font-size:12px;color:#cfefff;padding:3px 0;border-top:1px solid rgba(0,240,255,.08)}.pn h3{font-size:10px;letter-spacing:3px;color:rgba(0,240,255,.7);margin:12px 0 4px}
-.bt{padding:8px 2px;border-top:1px solid rgba(0,240,255,.12);cursor:pointer}.bt.sel{background:rgba(0,240,255,.08);border-radius:8px}.bt .n{display:flex;align-items:center;gap:8px;font-size:13px}.bt .n i{width:8px;height:8px;border-radius:50%;flex:none}.bt .n span{margin-left:auto;font-size:9px;color:rgba(234,255,255,.5)}
-.bt .s{font-size:11px;color:#9fe9f5;margin:3px 0 0 16px}.stg{display:flex;gap:4px;margin:5px 0 0 16px;flex-wrap:wrap}.stg em{font-style:normal;font-size:9.5px;padding:1px 7px;border-radius:9px;border:1px solid rgba(0,240,255,.25);color:rgba(234,255,255,.5)}.stg em.on{border-color:#2f8bff;color:#fff;background:rgba(47,139,255,.3);box-shadow:0 0 8px #2f8bff}.stg em.done{color:#3dff9a;border-color:rgba(61,255,154,.4)}
-.cm{display:flex;gap:6px;margin-top:10px}.cm input{flex:1;background:transparent;border:1px solid rgba(0,240,255,.35);border-radius:999px;color:#fff;padding:7px 12px;font-size:13px;outline:0}.cm button{padding:0 14px}
+:root{--c:#00f0ff;--ok:#3dff9a;--warn:#ffb020;--err:#ff3b5c;--work:#4d9bff;--mut:#5d7480;--line:rgba(0,240,255,.16);--card:rgba(6,20,26,.72)}
+*{box-sizing:border-box}html,body{margin:0;background:#000;color:#e8fbff;font-family:"SF Pro Text",system-ui,"Apple SD Gothic Neo",sans-serif;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(1200px 600px at 50% -10%,rgba(0,150,190,.22),transparent 60%),#000;min-height:100vh;padding-bottom:90px}
+.wrap{max-width:1180px;margin:0 auto;padding:max(10px,env(safe-area-inset-top)) 14px 0}
+header{display:flex;justify-content:space-between;align-items:center;padding:4px 0 8px}
+h1{margin:0;font-size:15px;font-weight:300;letter-spacing:4px;color:#fff;text-shadow:0 0 12px var(--c)}.ts{font-size:9px;letter-spacing:1px;color:rgba(0,240,255,.55);margin-top:2px}
+.ic{display:flex;gap:6px}.ic button{width:30px;height:30px;border-radius:50%;padding:0;font-size:12px}
+button{background:transparent;color:var(--c);border:1px solid rgba(0,240,255,.45);border-radius:999px;cursor:pointer;font-family:inherit}
+.k{font-size:9.5px;letter-spacing:2px;color:rgba(0,240,255,.7);text-transform:uppercase;font-weight:600}
+.hero{position:relative;border:1px solid rgba(0,240,255,.35);border-radius:18px;padding:14px 14px 12px;background:linear-gradient(135deg,rgba(0,240,255,.10),rgba(0,0,0,.2) 60%);box-shadow:0 0 30px rgba(0,240,255,.12),inset 0 0 40px rgba(0,240,255,.04);overflow:hidden}
+.hero:before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;border:1px dashed rgba(0,240,255,.25);animation:sp 40s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.hl{font-size:18px;line-height:1.4;font-weight:500;margin:6px 0 10px;letter-spacing:-.2px;max-width:640px}.hl b{color:var(--c)}
+.hrow{display:flex;gap:12px;align-items:center}.ring{flex:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{display:flex;align-items:center;gap:6px;font-size:11.5px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.35);cursor:pointer;color:#e8fbff}
+.chip em{font-style:normal;font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:6px;font-weight:700}
+.t-warn{color:var(--warn)!important}.t-ok{color:var(--ok)!important}.t-info{color:var(--c)!important}.t-err{color:var(--err)!important}.t-work{color:var(--work)!important}.t-muted{color:var(--mut)!important}
+.em-warn{background:rgba(255,176,32,.18);color:var(--warn)}.em-ok{background:rgba(61,255,154,.15);color:var(--ok)}.em-info{background:rgba(0,240,255,.15);color:var(--c)}
+section{margin-top:14px}.sh{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 7px}.sh .k{font-size:10px}.sh span{font-size:10px;color:var(--mut)}
+.feed{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none}.feed::-webkit-scrollbar{display:none}
+.fi{flex:0 0 76%;max-width:300px;scroll-snap-align:start;border:1px solid var(--line);border-radius:14px;padding:10px 11px;background:var(--card);cursor:pointer;position:relative}
+.fi .top{display:flex;align-items:center;gap:6px;font-size:9.5px;color:var(--mut);letter-spacing:.5px}.fi .top .fc{color:rgba(0,240,255,.8)}.fi .ttl{font-size:13px;font-weight:600;margin:5px 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fi .dt{font-size:11px;color:#a8cdd8;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.new{font-size:8.5px;font-weight:800;letter-spacing:1px;color:#000;background:var(--c);padding:1px 5px;border-radius:4px;box-shadow:0 0 8px var(--c)}
+.int{display:grid;grid-template-columns:1fr 1fr;gap:8px}.it{border:1px solid var(--line);border-radius:14px;padding:10px 11px;background:var(--card);cursor:pointer;position:relative;overflow:hidden}
+.it:after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tone,var(--c));box-shadow:0 0 10px var(--tone,var(--c))}
+.it .ttl{font-size:10.5px;color:#a8cdd8}.it .big{font-size:24px;font-weight:300;letter-spacing:-.5px;margin:2px 0;color:#fff}.it .sub{font-size:10px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.it .tr{font-size:10px;margin-top:2px}
+.cat{border:1px solid var(--line);border-radius:14px;background:var(--card);margin-bottom:8px;overflow:hidden}
+.ch{display:flex;align-items:center;gap:10px;padding:11px 12px;cursor:pointer}.ch .ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--c);border:1px solid rgba(0,240,255,.3);background:rgba(0,240,255,.06);flex:none}
+.ch .nm{font-size:14px;font-weight:600;flex:1}.ch .nm small{display:block;font-size:10px;color:var(--mut);font-weight:400;margin-top:1px}.ch .bg{font-size:20px;font-weight:300;text-align:right}.ch .bg small{display:block;font-size:9.5px}.ch .dot{width:8px;height:8px;border-radius:50%;flex:none}
+.ch .ar{color:var(--mut);transition:transform .2s;font-size:11px}.cat.open .ch .ar{transform:rotate(90deg)}.cb{display:none;padding:0 12px 12px}.cat.open .cb{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.box{border:1px solid rgba(0,240,255,.1);border-radius:11px;padding:9px 10px;background:rgba(0,0,0,.35)}
+.box .lb{font-size:9.5px;color:var(--mut);letter-spacing:.5px}.box .v{font-size:18px;font-weight:300;margin-top:2px}.box .s{font-size:10px;color:#9cc0cc;margin-top:2px}
+.bars .r{display:grid;grid-template-columns:70px 1fr 54px;gap:8px;align-items:center;font-size:11px;margin:5px 0}.bars .tk{height:7px;border-radius:4px;background:rgba(0,240,255,.08);overflow:hidden}.bars .tk i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#0aa8c8,var(--c));box-shadow:0 0 8px rgba(0,240,255,.6)}.bars .r span:last-child{text-align:right;color:#cfefff}
+.rows .r{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;padding:6px 0;border-top:1px solid rgba(0,240,255,.07)}.rows .r:first-child{border-top:0}.rows .r .a{color:#9cc0cc;font-size:10px}.rows .r .m{white-space:nowrap}
+.h4{font-size:10px;letter-spacing:1.5px;color:rgba(0,240,255,.7);margin:12px 0 5px;font-weight:600}
+.pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);margin:0 4px 4px 0;color:#cfefff}
+.bot{border-top:1px solid rgba(0,240,255,.08);padding:9px 0}.bot:first-child{border-top:0}.bot .n{display:flex;align-items:center;gap:8px;font-size:13px}.bot .n i{width:8px;height:8px;border-radius:50%}.bot .n span{margin-left:auto;font-size:9.5px;color:var(--mut)}
+.bot .s{font-size:11.5px;color:#a8cdd8;margin:3px 0 0 16px;line-height:1.4}.stg{display:flex;align-items:center;gap:0;margin:6px 0 0 16px}.stg em{font-style:normal;font-size:9.5px;padding:2px 8px;border-radius:9px;border:1px solid rgba(0,240,255,.2);color:var(--mut)}.stg b{width:12px;height:1px;background:rgba(0,240,255,.3)}.stg em.on{border-color:var(--work);color:#fff;background:rgba(77,155,255,.3);box-shadow:0 0 8px var(--work)}.stg em.done{color:var(--ok);border-color:rgba(61,255,154,.35)}
+.note{font-size:10px;color:var(--mut);margin-top:8px}.go{font-size:11px;padding:5px 12px;margin-top:8px}
+.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));width:min(94vw,520px);display:flex;align-items:center;gap:6px;padding:5px 5px 5px 12px;border:1px solid rgba(0,240,255,.55);border-radius:999px;background:rgba(0,10,14,.9);box-shadow:0 0 22px rgba(0,240,255,.22);backdrop-filter:blur(8px);z-index:4}
+.bar select{background:transparent;color:var(--c);border:0;font-size:11px;max-width:100px;outline:0}.bar input{flex:1;min-width:0;background:transparent;border:0;border-left:1px solid rgba(0,240,255,.25);color:#fff;font-size:13px;padding:6px 8px;outline:0}.bar button{width:32px;height:32px;font-size:13px;flex:none}#mic.on{background:rgba(255,59,92,.25);border-color:var(--err);color:#fff}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(max(12px,env(safe-area-inset-bottom)) + 50px);font-size:11px;color:var(--c);text-align:center;width:90vw;text-shadow:0 0 8px var(--c);pointer-events:none;z-index:5}
 #lock{position:fixed;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;gap:16px}
-#lock .rg{width:150px;height:150px;border-radius:50%;border:1px solid rgba(0,240,255,.4);box-shadow:0 0 40px rgba(0,240,255,.3),inset 0 0 30px rgba(0,240,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:4px;color:var(--c);animation:pu 3s infinite}
-#lock input{background:transparent;border:1px solid rgba(0,240,255,.55);border-radius:999px;color:#fff;padding:10px 16px;font-size:16px;text-align:center;letter-spacing:3px;width:240px;outline:0;box-shadow:0 0 14px rgba(0,240,255,.2)}
-#lock label{font-size:11px;color:rgba(0,240,255,.7)}#lock .er{font-size:11px;color:#ff3b5c;min-height:14px}#lock button{padding:8px 26px;letter-spacing:3px}
-@media(min-width:900px){#brief div{font-size:13.5px}}
-</style></head><body><div id="bg"></div><svg id="hud"></svg>
-<header><div class="hd"><div><h1>혁진님의 JARVIS</h1><div class="ts" id="ts">—</div></div><div class="ic"><button id="speak" title="브리핑 듣기">▶</button><button id="conn" title="연결">◎</button><button id="refresh" title="새로고침">⟳</button><button id="pushOn" title="알림 허용">◉</button><button id="lockBtn" title="잠금">⏻</button></div></div><div id="brief"></div></header>
+#lock .rg{width:150px;height:150px;border-radius:50%;border:1px solid rgba(0,240,255,.4);box-shadow:0 0 40px rgba(0,240,255,.3),inset 0 0 30px rgba(0,240,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:4px;color:var(--c);animation:pu 3s infinite}@keyframes pu{50%{opacity:.5}}
+#lock input[type=password]{background:transparent;border:1px solid rgba(0,240,255,.55);border-radius:999px;color:#fff;padding:10px 16px;font-size:16px;text-align:center;letter-spacing:3px;width:240px;outline:0}#lock label{font-size:11px;color:rgba(0,240,255,.7)}#lock .er{font-size:11px;color:var(--err);min-height:14px}#lock button{padding:8px 26px;letter-spacing:3px}
+@media(min-width:900px){.wrap{padding-top:18px}.top2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;align-items:start}.top2>*{min-width:0}.top2 section{margin-top:0}.hl{font-size:22px}.fi{flex-basis:46%}.cats{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start}.cat{margin:0}.int .big{font-size:28px}}
+</style></head><body>
+<div class="wrap"><header><div><h1>혁진님의 JARVIS</h1><div class="ts" id="ts">—</div></div><div class="ic"><button id="speak" title="브리핑 듣기">▶</button><button id="refresh" title="새로고침">⟳</button><button id="pushOn" title="알림 허용">◉</button><button id="lockBtn" title="잠금">⏻</button></div></header>
+<div class="top2"><div><div class="hero" id="hero"></div><section><div class="sh"><span class="k">NEW · 새 소식</span><span id="newc"></span></div><div class="feed" id="feed"></div></section></div>
+<section><div class="sh"><span class="k">관심 · 고정</span><span>경제적 자유 · 매매 · 결정</span></div><div class="int" id="int"></div></section></div>
+<section><div class="sh"><span class="k">전체 정보</span><span>탭하여 펼치기</span></div><div class="cats" id="cats"></div></section></div>
 <div id="toast"></div>
-<form class="bar" id="bar"><select id="sel"></select><input id="txt" placeholder="명령" autocomplete="off"><button type="button" id="mic" title="음성 명령">🎤</button><button>➤</button></form>
-<div id="ov"><div class="pn" id="pn"></div></div>
+<form class="bar" id="bar"><select id="sel"></select><input id="txt" placeholder="명령 · 🎤 '집사, …'" autocomplete="off"><button type="button" id="mic" title="음성 명령">🎤</button><button>➤</button></form>
 <div id="lock"><div class="rg">J.A.R.V.I.S</div><form id="lf" style="display:flex;flex-direction:column;align-items:center;gap:12px"><input id="pw" type="password" placeholder="접근 코드" autocomplete="current-password"><label><input type="checkbox" id="rem"> 이 기기 기억</label><button>접속</button><div class="er" id="er"></div></form></div>
 <script>
-const B=location.hostname==="localhost"?"":(window.API_BASE||"").replace(/\/$/,"");const AU=p=>(B?B+"/":"")+p;let api=false,D=null;
+const B=location.hostname==="localhost"?"":(window.API_BASE||"").replace(/\/$/,"");const AU=p=>(B?B+"/":"")+p;let api=false,D=null,LV=0,SEEN={};
 const $=id=>document.getElementById(id),esc=s=>String(s??"—").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const T=m=>{$("toast").textContent=m;clearTimeout(T.t);T.t=setTimeout(()=>$("toast").textContent="",5000)};
-const COL={idle:"#3dff9a",working:"#2f8bff",busy:"#2f8bff",error:"#ff3b5c",unknown:"#4a5a63"},col=s=>COL[s]||COL.unknown,LB={idle:"정상",working:"작업 중",error:"오류",unknown:"—"};
+const SC={idle:"var(--ok)",working:"var(--work)",error:"var(--err)",unknown:"var(--mut)",ok:"var(--ok)",warn:"var(--warn)",work:"var(--work)",info:"var(--c)",muted:"var(--mut)"},LB={idle:"정상",working:"작업 중",error:"오류",unknown:"—"};
+const money=v=>v==null?"—":(v<0?"−":"")+"$"+Math.abs(v).toLocaleString("en-US",{maximumFractionDigits:0});
 const ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function decrypt(pw){const P=await (await fetch("payload.enc.json?t="+Date.now(),{cache:"no-store"})).json();
  const km=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:ub(P.salt),iterations:P.iter,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["decrypt"]);
  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(P.iv)},key,ub(P.ct))))}
-async function unlock(pw,remember){try{D=await decrypt(pw);if(remember)localStorage.setItem("jv_pw",pw);sessionStorage.setItem("jv_pw",pw);$("lock").style.display="none";render();return true}catch(e){$("er").textContent=e.name==="OperationError"?"접근 코드가 올바르지 않습니다":"데이터를 불러오지 못했습니다";return false}}
+async function unlock(pw,rem){try{D=await decrypt(pw);if(rem)localStorage.setItem("jv_pw",pw);sessionStorage.setItem("jv_pw",pw);$("lock").style.display="none";
+ LV=+localStorage.getItem("jv_lastVisit")||0;try{SEEN=JSON.parse(localStorage.getItem("jv_seen")||"{}")}catch(e){SEEN={}}render();
+ setTimeout(()=>{localStorage.setItem("jv_lastVisit",Date.now())},4000);return true}catch(e){$("er").textContent=e.name==="OperationError"?"접근 코드가 올바르지 않습니다":"데이터를 불러오지 못했습니다";return false}}
 $("lf").onsubmit=e=>{e.preventDefault();$("er").textContent="해독 중…";unlock($("pw").value.trim(),$("rem").checked)};
-$("lockBtn").onclick=()=>{localStorage.removeItem("jv_pw");sessionStorage.removeItem("jv_pw");D=null;$("hud").innerHTML="";$("brief").innerHTML="";$("lock").style.display="flex"};
-function render(){if(!D)return;
- $("ts").textContent="SYNC "+D.generatedAt+(D.collectedAt?" · 연결 데이터 "+D.collectedAt.slice(5,16).replace("T"," ")+" CT":"")+(api?" · LIVE":"");
- $("brief").innerHTML=D.brief.map((l,i)=>`<div><b>${["◆ 봇","◆ 금융","◆ 현황"][i]||"◆"}</b> ${esc(l)}</div>`).join("");
- $("sel").innerHTML=D.bots.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("");draw()}
-function draw(){if(!D)return;const W=innerWidth,H=innerHeight,top=$("brief").getBoundingClientRect().bottom+8,bot=H-70,avail=bot-top;
- const R=Math.min(W*0.47,avail*0.5,330),cx=W/2,cy=top+avail/2;const r0=R*0.42,r1=R*0.58,r2=R;
- const p=(r,a)=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];
- const wedge=(a0,a1,ri,ro)=>{const[x0,y0]=p(ro,a0),[x1,y1]=p(ro,a1),[x2,y2]=p(ri,a1),[x3,y3]=p(ri,a0);return `M${x0} ${y0}A${ro} ${ro} 0 0 1 ${x1} ${y1}L${x2} ${y2}A${ri} ${ri} 0 0 0 ${x3} ${y3}Z`};
- const arc=(r,a0,a1)=>{const[x0,y0]=p(r,a0),[x1,y1]=p(r,a1);return `M${x0} ${y0}A${r} ${r} 0 ${a1-a0>180?1:0} 1 ${x1} ${y1}`};
- const g=(c,b)=>`<g style="transform-origin:${cx}px ${cy}px" class="${c}">${b}</g>`;
- let s=`<defs><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <filter id="g2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <linearGradient id="scan"><stop offset="0" stop-color="#00f0ff" stop-opacity="0"/><stop offset="1" stop-color="#00f0ff" stop-opacity=".9"/></linearGradient></defs>`;
- let ticks="";for(let i=0;i<144;i++){const a=i*2.5,l=i%6?3:8,[x0,y0]=p(r2+4,a),[x1,y1]=p(r2+4+l,a);ticks+=`<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="rgba(0,240,255,${i%6?.3:.8})"/>`}
- s+=g("r1",ticks)+g("r3",`<path d="${arc(r2+18,-90,-30)}" stroke="url(#scan)" stroke-width="2.5" fill="none"/>`);
- const N=D.sectors.length,seg=360/N;
- D.sectors.forEach((S,i)=>{const a0=-90-seg/2+i*seg+1.2,a1=a0+seg-2.4,am=(a0+a1)/2,c=col(S.status),bs=D.bots.filter(b=>b.dept===S.key);
-  const [nx,ny]=p((r1+r2)/2+R*0.03,am),[dx,dy]=p(r1+R*0.075,am);
-  let dots="";bs.forEach((b,j)=>{const aa=am+(j-(bs.length-1)/2)*Math.min(7,seg/(bs.length+1)),[x,y]=p(r1+R*0.07,aa);dots+=`<circle cx="${x}" cy="${y}" r="${Math.max(2.6,R*0.017)}" fill="${col(b.status)}" ${b.status==="working"?'class="pulse"':""} filter="url(#g)"/>`});
-  const fs=Math.max(15,R*0.13)*(String(S.big).length>4?0.78:1);
-  s+=`<g class="sec" onclick="openSec(${i})"><path d="${wedge(a0,a1,r1,r2)}" fill="${c}" fill-opacity=".07" stroke="rgba(0,240,255,.35)" stroke-width="1"/>
-  <path class="w" d="${arc(r2-1.5,a0+.5,a1-.5)}" stroke="${c}" stroke-width="3" fill="none" opacity=".75" filter="url(#g)"/>
-  <text x="${nx}" y="${ny-fs*0.55}" text-anchor="middle" style="font-size:${Math.max(9,R*0.05)}px;letter-spacing:2px;font-weight:600" fill="#00f0ff">${S.key}</text>
-  <text x="${nx}" y="${ny+fs*0.5}" text-anchor="middle" font-size="${fs}" font-weight="250" fill="#fff" filter="url(#g)">${esc(S.big??"—")}</text>${dots}</g>`});
- // core
- const h=D.health||{},pct=h.pct,C=2*Math.PI*r0*0.92,fr=h.total?(h.ok||0)/h.total:0;
- s+=g("r2",`<circle cx="${cx}" cy="${cy}" r="${r1-5}" fill="none" stroke="#00f0ff" stroke-width="1" stroke-dasharray="${R*0.3} ${R*0.08} 3 ${R*0.08}" opacity=".7"/>`);
- s+=`<g class="sec" onclick="openCore()"><circle cx="${cx}" cy="${cy}" r="${r0}" fill="rgba(0,14,18,.85)" stroke="rgba(0,240,255,.35)"/>
- <circle cx="${cx}" cy="${cy}" r="${r0*0.92}" fill="none" stroke="rgba(0,240,255,.12)" stroke-width="${R*0.025}"/>
- <circle cx="${cx}" cy="${cy}" r="${r0*0.92}" fill="none" stroke="${pct===100?"#3dff9a":"#00f0ff"}" stroke-width="${R*0.025}" stroke-dasharray="${C*fr} ${C}" transform="rotate(-90 ${cx} ${cy})" filter="url(#g)"/>
- <text x="${cx}" y="${cy-r0*0.38}" text-anchor="middle" class="t" style="font-size:${Math.max(7,R*0.035)}px">SYSTEM</text>
- <text x="${cx}" y="${cy+r0*0.2}" text-anchor="middle" font-size="${r0*0.55}" font-weight="200" fill="#fff" filter="url(#g2)">${pct==null?"—":pct+"<tspan font-size='"+r0*0.22+"'>%</tspan>"}</text>
- <text x="${cx}" y="${cy+r0*0.48}" text-anchor="middle" class="t" style="font-size:${Math.max(7,R*0.033)}px">CORE · ${h.ok??0}/${h.total??0} 봇</text>
- <circle cx="${cx}" cy="${cy+r0*0.68}" r="3" fill="${col((D.bots.find(b=>b.dept==="core")||{}).status)}" class="pulse"/></g>`;
- $("hud").innerHTML=s}
-function botRows(bs,sel){return bs.map(b=>{const st=b.stages||null,cur=b.stage;let stg="";if(st&&st.length){const ci=st.indexOf(cur);stg=`<div class="stg">${st.map((x,j)=>`<em class="${j===ci?"on":ci>=0&&j<ci?"done":""}">${esc(x)}</em>`).join("")}</div>`}else if(cur)stg=`<div class="stg"><em class="on">${esc(cur)}</em></div>`;
- return `<div class="bt ${b.id===sel?"sel":""}" data-id="${b.id}"><div class="n"><i style="background:${col(b.status)};box-shadow:0 0 6px ${col(b.status)}"></i>${esc(b.name)} <small style="color:${col(b.status)};font-size:9px">${LB[b.status]||"—"}</small><span>${b.lastTurnAt?esc(b.lastActivity.slice(5)):"—"}</span></div>${b.summaryLive?`<div class="s">${esc(b.summary)}</div>`:""}${stg}</div>`}).join("")}
-function panel(title,big,unit,lines,bs){let sel=bs.length?bs[0].id:null;const r=()=>{$("pn").innerHTML=`<h2><span>${esc(title)}</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>${big!=null?`<div class="big">${esc(big)}</div><div class="u">${esc(unit)}</div>`:""}
- ${lines.filter(Boolean).map(l=>`<div class="ln">${esc(l)}</div>`).join("")}${bs.length?`<h3>담당 봇</h3>${botRows(bs,sel)}<form class="cm" id="cmf"><input id="otx" placeholder="명령" autocomplete="off"><button>➤</button></form>`:`<h3>담당 봇 없음</h3>`}`;
- $("pn").querySelectorAll(".bt").forEach(e=>e.onclick=()=>{sel=e.dataset.id;r()});if($("cmf"))$("cmf").onsubmit=async e=>{e.preventDefault();if(await send(sel,$("otx").value))closeOv()}};r();$("ov").classList.add("on")}
-function openSec(i){const S=D.sectors[i];panel(S.key,S.big,S.unit,S.lines||[],D.bots.filter(b=>b.dept===S.key))}
-function openCore(){const h=D.health;panel("CORE",h.pct==null?"—":h.pct+"%","시스템 정상 비율 ("+h.ok+"/"+h.total+" 봇, 오류 제외)",[...D.brief,(D.approvals||[]).length?"승인 대기: "+D.approvals.join(", "):""],D.bots.filter(b=>b.dept==="core"))}
-function closeOv(){$("ov").classList.remove("on")}$("ov").onclick=e=>{if(e.target.id==="ov")closeOv()};
-$("conn").onclick=()=>{const C=D.connections.categories;$("pn").innerHTML=`<h2><span>연결</span><span style="cursor:pointer" onclick="closeOv()">✕</span></h2>`+C.map(c=>`<div class="ln"><b style="color:#00f0ff">${c.key}</b> · ${c.items.map(x=>x[0]+(x[1]>1?" ×"+x[1]:"")).join(" · ")}${c.note?` <span style="color:#ffb020">· ${esc(c.note)}</span>`:""}</div>`).join("");$("ov").classList.add("on")};
-async function send(id,t){t=(t||"").trim();if(!t){T("명령을 입력하세요");return false}const name=(D.bots.find(b=>b.id===id)||{}).name;
+$("lockBtn").onclick=()=>{localStorage.removeItem("jv_pw");sessionStorage.removeItem("jv_pw");D=null;["hero","feed","int","cats"].forEach(i=>$(i).innerHTML="");$("lock").style.display="flex"};
+const isNew=x=>!SEEN[x.id]&&(LV?(Date.parse(x.firstSeen)>LV-1000||Date.parse(x.ts)>LV):Date.parse(x.ts)>Date.now()-864e5);
+function markSeen(id){SEEN[id]=1;localStorage.setItem("jv_seen",JSON.stringify(SEEN))}
+function ring(pct,size){const r=size/2-5,C=2*Math.PI*r,f=pct==null?0:pct/100;return `<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="rgba(0,240,255,.12)" stroke-width="4"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${pct===100?"#3dff9a":"#00f0ff"}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${C*f} ${C}" transform="rotate(-90 ${size/2} ${size/2})" style="filter:drop-shadow(0 0 4px #00f0ff)"/><text x="50%" y="48%" text-anchor="middle" fill="#fff" font-size="${size*.24}" font-weight="300">${pct==null?"—":pct}</text><text x="50%" y="68%" text-anchor="middle" fill="rgba(0,240,255,.7)" font-size="${size*.1}" letter-spacing="1">SYSTEM %</text></svg>`}
+function spark(daily){if(!daily||!daily.length)return"";const W=300,H=54,mx=Math.max(...daily.map(d=>d[1]),1),bw=W/daily.length;
+ return `<svg viewBox="0 0 ${W} ${H+14}" width="100%" height="${H+14}">${daily.map((d,i)=>{const h=Math.max(1.5,(d[1]/mx)*H);const cur=i>=daily.length-7;return `<rect x="${i*bw+2}" y="${H-h}" width="${bw-4}" height="${h}" rx="2" fill="${cur?"#00f0ff":"rgba(0,240,255,.28)"}" ${cur?'style="filter:drop-shadow(0 0 3px #00f0ff)"':""}><title>${d[0]} $${d[1]}</title></rect>`}).join("")}
+ <text x="2" y="${H+12}" fill="#5d7480" font-size="9">${daily[0][0]}</text><text x="${W/2}" y="${H+12}" fill="#5d7480" font-size="9" text-anchor="middle">지난주 | 이번 주</text><text x="${W-2}" y="${H+12}" fill="#5d7480" font-size="9" text-anchor="end">${daily[daily.length-1][0]}</text><line x1="${W/2}" y1="0" x2="${W/2}" y2="${H}" stroke="rgba(0,240,255,.25)" stroke-dasharray="2 3"/></svg>`}
+const arrow=t=>t==null?"":`<span class="${t>0?"t-warn":"t-ok"}">${t>0?"▲":"▼"} ${Math.abs(t)}%</span>`;
+const botBy=id=>D.bots.find(b=>b.id===id);
+function botRow(b){const st=b.stages,cur=b.stage;let stg="";if(st&&st.length){const ci=st.indexOf(cur);stg=`<div class="stg">${st.map((x,j)=>(j?"<b></b>":"")+`<em class="${j===ci?"on":ci>=0&&j<ci?"done":""}">${esc(x)}</em>`).join("")}</div>`}else if(cur)stg=`<div class="stg"><em class="on">${esc(cur)}</em></div>`;
+ return `<div class="bot"><div class="n"><i style="background:${SC[b.status]};box-shadow:0 0 6px ${SC[b.status]}"></i>${esc(b.name)} <small style="color:${SC[b.status]};font-size:9.5px">${LB[b.status]||"—"}</small><span>${b.lastTurnAt?esc(b.lastActivity.slice(5)):"—"}</span></div>${b.summaryLive?`<div class="s">${esc(b.summary)}</div>`:""}${stg}${b.metrics&&b.metrics.alerts?`<div class="s t-warn" style="font-size:10px">알림 ${b.metrics.alerts}</div>`:""}</div>`}
+function body(c){let h="";const bots=(c.bots||[]).map(botBy).filter(Boolean);
+ if(c.key==="자산·금융"){h+=`<div class="grid2">${c.accounts.map(a=>`<div class="box"><div class="lb">${esc(a.name)}</div><div class="v ${a.value<0?"t-warn":""}">${money(a.value)}</div><div class="s">${esc(a.extra||(a.kind==="cash"?"현금":""))}</div></div>`).join("")}</div>
+  <div class="h4">주간 지출 ${arrow(c.trend)} <span style="color:#cfefff;letter-spacing:0">${money(c.spendWeek)}</span> <span style="color:var(--mut);letter-spacing:0">vs ${money(c.spendPrevWeek)}</span></div>${spark(c.daily)}
+  <div class="h4">이번 주 카테고리 (${esc(c.weekRange)})</div><div class="bars">${(()=>{const mx=Math.max(...(c.byCategory||[[0,1]]).map(x=>x[1]));return (c.byCategory||[]).map(x=>`<div class="r"><span>${esc(x[0])}</span><div class="tk"><i style="width:${100*x[1]/mx}%"></i></div><span>${money(x[1])}</span></div>`).join("")})()}</div>
+  <div class="h4">대기 중 결제 ${c.pending.length}건 · ${money(-c.pending.reduce((s,p)=>s+p.amount,0))}</div><div class="rows">${c.pending.map(p=>`<div class="r"><span>${esc(p.name)} <span class="a">${esc(p.date.slice(5))}</span></span><span class="m">${money(p.amount)}</span></div>`).join("")}</div>
+  <div class="h4">최근 거래</div><div class="rows">${c.recentTx.map(t=>`<div class="r"><span>${esc(t.name)} <span class="a">${esc(t.date.slice(5))} · ${esc(t.cat)}</span></span><span class="m ${t.amount>0?"t-ok":""}">${t.amount>0?"+":""}${money(t.amount)}</span></div>`).join("")}</div>
+  <div class="note">30일 입금 ${money(c.income30d)} (${c.income30dCount}건, 급여 포함) · ${esc(c.note)}</div>`}
+ if(c.key==="투자·매매")h+=`<div class="grid2"><div class="box"><div class="lb">가동 봇</div><div class="v">${bots.filter(b=>b.status==="working").length}<small style="font-size:12px;color:var(--mut)"> / ${bots.length} 작업 중</small></div></div><div class="box"><div class="lb">손익 PnL</div><div class="v t-muted">—</div><div class="s">데이터 없음</div></div></div><div class="h4">매매 봇 · 단계</div>${bots.map(botRow).join("")}<div class="note">${esc(c.note)}</div>`;
+ if(c.key==="일정·생활"){const e0=(c.events||[])[0];h+=`<div class="grid2"><div class="box"><div class="lb">내 캘린더 7일</div><div class="v">${esc(c.calendar.events7d)}</div><div class="s">${esc(c.calendar.note)}</div></div><div class="box"><div class="lb">오늘 주변 행사</div><div class="v">${e0&&e0.count?e0.count:"—"}</div><div class="s">시더파크 80km · Event 알림봇</div></div></div>
+  ${e0?`<div class="h4">오늘의 TOP</div><div class="box" style="font-size:12px;line-height:1.5">${esc(e0.top)}</div>`:""}<div class="h4">최근 행사 브리핑</div><div class="rows">${(c.events||[]).map(e=>`<div class="r"><span>${esc(e.subject)}</span><span class="a">${e.count?e.count+"개":""}</span></div>`).join("")}</div>${bots.map(botRow).join("")}`}
+ if(c.key==="메일·연락"){const g={};(c.important||[]).forEach(m=>(g[m.type]=g[m.type]||[]).push(m));const mx=Math.max(...(c.groups||[["",1]]).map(x=>x[1]));
+  h+=`<div class="grid2"><div class="box"><div class="lb">안 읽음</div><div class="v">${esc(c.big)}</div></div><div class="box"><div class="lb">중요 · 안 읽음</div><div class="v t-warn">${esc(c.importantUnread)}</div></div></div>
+  <div class="h4">최근 3일 받은 메일 ${c.recent3d}통 · 유형</div><div class="bars">${(c.groups||[]).map(x=>`<div class="r"><span>${esc(x[0])}</span><div class="tk"><i style="width:${100*x[1]/mx}%"></i></div><span>${x[1]}</span></div>`).join("")}</div>
+  ${Object.entries(g).map(([k,ms])=>`<div class="h4">중요 · ${esc(k)} (${ms.length})</div><div class="rows">${ms.slice(0,4).map(m=>`<div class="r"><span>${esc(m.subject)}<br><span class="a">${esc(m.from)}</span></span><span class="a">${esc(m.date.slice(5,10))}</span></div>`).join("")}</div>`).join("")}<div class="note">${esc(c.note)}</div>`}
+ if(c.key==="성장·학습")h+=`${bots.map(botRow).join("")}<div class="h4">Drive 7일 수정 ${c.files.length}개</div><div class="rows">${c.files.map(f=>`<div class="r"><span>${esc(f.name)}</span><span class="a">${esc(f.modified.slice(5,10))}</span></div>`).join("")}</div>`;
+ if(c.key==="부업·알바")h+=`<div class="box"><div class="lb">목표 ${esc(c.goal)} · 한국 지급·패시브 선호</div><div class="v t-muted">추적 시작 필요</div><div class="s">${esc(c.note)}</div></div><div class="h4">알바 봇</div>${bots.map(botRow).join("")}`;
+ if(c.key==="봇 운영")h+=`${c.approvals.length?`<div class="box" style="border-color:rgba(255,176,32,.4)"><div class="lb t-warn">결정 필요</div><div class="s" style="font-size:12px;color:#fff">${c.approvals.map(esc).join(" · ")}</div></div>`:""}<div class="h4">전체 봇 ${bots.length}</div>${bots.map(botRow).join("")}`;
+ if(c.key==="연결")h+=`<div class="rows">${D.connections.categories.map(x=>`<div class="r"><span><b style="color:var(--c)">${esc(x.key)}</b> ${x.note?`<span class="a t-warn">${esc(x.note)}</span>`:""}</span><span class="a">${x.items.map(i=>esc(i[0])+(i[1]>1?" ×"+i[1]:"")).join(" · ")}</span></div>`).join("")}</div><div class="note">연결 데이터 수집: ${esc((D.collectedAt||"").slice(5,16).replace("T"," "))} CT · 에이전트가 수집한 스냅샷</div>`;
+ if(bots.length&&c.key!=="봇 운영")h+=`<button class="go" onclick="pick('${bots[0].id}')">${esc(bots[0].name)}에게 명령</button>`;return h}
+function render(){if(!D)return;$("ts").textContent="SYNC "+D.generatedAt+" · 연결 "+(D.collectedAt||"").slice(5,16).replace("T"," ")+" CT"+(api?" · LIVE":"");
+ const H=D.hero;$("hero").innerHTML=`<div class="k">오늘의 브리핑 · ${esc(D.generatedAt.slice(5))}</div><div class="hrow"><div class="hl">${esc(H.headline)}</div>${ring(D.health.pct,72)}</div><div class="chips">${H.chips.map(c=>`<div class="chip" onclick="openCat('${c.cat}')"><em class="em-${c.tone==="warn"?"warn":c.tone==="ok"?"ok":"info"}">${esc(c.kind)}</em>${esc(c.label)}</div>`).join("")}</div>`;
+ const fd=D.feed.map(x=>({...x,n:isNew(x)}));fd.sort((a,b)=>(b.n-a.n)||(Date.parse(b.ts)-Date.parse(a.ts)));const nc=fd.filter(x=>x.n).length;$("newc").textContent=nc?`새 항목 ${nc}`:"새 항목 없음";
+ $("feed").innerHTML=fd.map(x=>`<div class="fi" onclick="markSeen('${x.id}');openCat('${x.cat}')"><div class="top">${x.n?'<span class="new">NEW</span>':""}<span class="fc">${esc(x.cat)}</span><span style="margin-left:auto">${esc(x.at)}</span></div><div class="ttl ${x.tone==="error"?"t-err":x.tone==="work"?"t-work":x.tone==="in"?"t-ok":""}">${esc(x.title)}</div><div class="dt">${esc(x.detail)}</div></div>`).join("")||`<div class="note">표시할 소식 없음</div>`;
+ $("int").innerHTML=D.interest.map(i=>`<div class="it" style="--tone:${SC[i.tone]}" onclick="openCat('${i.cat}')"><div class="ttl">${esc(i.title)}</div><div class="big ${i.big==="—"?"t-muted":""}">${esc(i.big)}</div><div class="sub">${esc(i.sub)}</div>${i.trendLabel?`<div class="tr">${i.trend!=null?arrow(i.trend)+" ":""}<span style="color:#9cc0cc">${esc(i.trendLabel)}</span></div>`:""}</div>`).join("");
+ $("cats").innerHTML=D.cats.map((c,i)=>`<div class="cat" id="c${i}" data-k="${esc(c.key)}"><div class="ch" onclick="this.parentNode.classList.toggle('open')"><div class="ico">${c.icon}</div><div class="nm">${esc(c.key)}<small>${esc(c.unit)}</small></div><div class="bg">${esc(c.big)}${c.trend!=null?`<small>${arrow(c.trend)}</small>`:""}</div><i class="dot" style="background:${SC[c.status]};box-shadow:0 0 6px ${SC[c.status]}"></i><span class="ar">▶</span></div><div class="cb">${body(c)}</div></div>`).join("");
+ $("sel").innerHTML=D.bots.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("")}
+function openCat(k){const el=[...document.querySelectorAll(".cat")].find(e=>e.dataset.k===k);if(!el)return;el.classList.add("open");el.scrollIntoView({behavior:"smooth",block:"start"})}
+function pick(id){$("sel").value=id;$("txt").focus()}
+async function send(id,t){t=(t||"").trim();if(!t){T("명령을 입력하세요");return false}const name=(botBy(id)||{}).name;
  if(api){try{const r=await fetch(AU("api/command"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({botId:id,botName:name,prompt:t})});const j=await r.json();if(r.ok){T("대기열 저장 #"+j.id.slice(0,8)+" · 봇 자동 전달 아님");return true}}catch(e){}}
  const x=`[${name}] ${t}`;try{await navigator.clipboard.writeText(x);T("복사됨 · Grok Bot 앱에서 "+name+"에게 붙여넣기")}catch(e){T("복사 실패: "+x)}return true}
 $("bar").onsubmit=async e=>{e.preventDefault();if(await send($("sel").value,$("txt").value))$("txt").value=""};
 $("refresh").onclick=async()=>{const pw=sessionStorage.getItem("jv_pw")||localStorage.getItem("jv_pw");if(pw)await unlock(pw,!!localStorage.getItem("jv_pw"));T("갱신됨")};
-$("speak").onclick=()=>{if(!D)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance("혁진님, 브리핑입니다. "+D.brief.join(" "));u.lang="ko-KR";speechSynthesis.speak(u)}catch(e){T("음성 출력 미지원")}};
-addEventListener("resize",draw);
+$("speak").onclick=()=>{if(!D)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance("혁진님, 오늘의 브리핑입니다. "+D.brief.join(" "));u.lang="ko-KR";speechSynthesis.speak(u)}catch(e){T("음성 출력 미지원")}};
 (async()=>{try{api=(await fetch(AU("api/health"))).ok}catch(e){api=false}const pw=localStorage.getItem("jv_pw")||sessionStorage.getItem("jv_pw");if(pw)unlock(pw,!!localStorage.getItem("jv_pw"))})();
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 const b64=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");s+="=".repeat((4-s.length%4)%4);return Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
-$("pushOn").onclick=async()=>{try{if(!("PushManager" in window)){T("푸시 미지원 · iPhone은 홈 화면 앱에서");return}
- if(await Notification.requestPermission()!=="granted"){T("알림 권한 거부");return}
+$("pushOn").onclick=async()=>{try{if(!("PushManager" in window)){T("푸시 미지원 · iPhone은 홈 화면 앱에서");return}if(await Notification.requestPermission()!=="granted"){T("알림 권한 거부");return}
  const k=await (await fetch(AU("api/vapid"))).json(),reg=await navigator.serviceWorker.ready,sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(k.publicKey)});
  T((await fetch(AU("api/subscribe"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(sub)})).ok?"알림 구독 완료":"구독 실패")}catch(e){T("알림 서버 미연결")}};
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null;
