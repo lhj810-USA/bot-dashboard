@@ -70,7 +70,8 @@ table.tb{width:100%;border-collapse:collapse;font-size:12px}.tb th{text-align:le
 .bar[data-go]:active,.row:active,.k[data-go]:active,.tile:active{background:var(--card2);outline:1px solid var(--c)}.seg button:active,.chip:active{transform:scale(.97)}svg .hit:active{fill:rgba(34,227,245,.15)}
 .map{position:relative;height:340px;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:#0b1c22}.mapin{position:absolute;left:0;top:0;width:768px;height:768px}.mapin img{position:absolute;width:256px;height:256px;filter:brightness(.75) saturate(.6)}.mapin img.ov{filter:none;opacity:.85}.pinm{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--c);box-shadow:0 0 0 3px rgba(34,227,245,.35)}
 .sat img{width:100%;border-radius:14px;border:1px solid var(--line);display:block}.note a{color:var(--c)}
-</style></head><body>
+</style><link rel="stylesheet" href="css/v12.css">
+</head><body>
 <header><div class="wrap"><div class="hd"><button class="back" id="back">← 뒤로</button><h1 id="ttl">혁진님의 <b>JARVIS</b></h1><button class="ib" id="speak" title="브리핑 듣기">▶</button><button class="ib" id="refresh" title="새로고침">⟳</button><button class="ib" id="pushOn" title="알림 허용">◉</button><button class="ib" id="lockBtn" title="잠금">⏻</button></div>
 <div class="sbox"><input id="q" placeholder="무엇이든 검색 — 거래·메일·일정·봇·파일" autocomplete="off" enterkeyhint="search"><button class="x" id="qx">✕</button></div><div class="fresh" id="fresh">—</div></div></header>
 <main class="wrap"><div class="view" id="v"></div></main>
@@ -626,4 +627,6 @@ $("mic").onclick=()=>{if(!SR){T("이 브라우저는 음성 인식 미지원 · 
   if(f){try{const u=new SpeechSynthesisUtterance((b?b.name+"에게 ":"")+"명령 준비됨. 전송을 누르세요");u.lang="ko-KR";speechSynthesis.speak(u)}catch(_){}}};
  rec.onerror=e=>T(e.error==="not-allowed"?"마이크 권한 거부됨":"음성 인식 오류: "+e.error);rec.onend=()=>{$("mic").classList.remove("on");rec=null}};
 $("txt").addEventListener("change",()=>{const {b,rest}=route($("txt").value);if(b)$("txt").value=rest});
-</script></body></html>
+</script>
+<script src="js/v12a.js"></script>
+</body></html>

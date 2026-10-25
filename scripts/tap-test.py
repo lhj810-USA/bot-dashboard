@@ -13,7 +13,7 @@ def chk(c,msg):
     else: fail.append(msg)
 with sync_playwright() as p:
     b=p.chromium.launch(executable_path="/usr/bin/google-chrome")
-    ctx=b.new_context(viewport={"width":390,"height":844},has_touch=True,is_mobile=True,device_scale_factor=2);pg=ctx.new_page();errs=[]
+    ctx=b.new_context(viewport={"width":390,"height":844},has_touch=True,is_mobile=True,device_scale_factor=2,reduced_motion="reduce",permissions=["clipboard-read","clipboard-write"]);pg=ctx.new_page();errs=[]
     pg.on("pageerror",lambda e:errs.append(str(e)));pg.set_default_timeout(4000)
     pg.goto(URL);pg.wait_for_timeout(700);pg.fill("#pw",PW);pg.click("#lf button");pg.wait_for_timeout(4500)
     H=lambda:urllib.parse.unquote(pg.evaluate("location.hash.slice(1)"))
