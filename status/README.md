@@ -17,7 +17,11 @@
 ```
 - `stages`(작업 단계 목록)와 `stage`(지금 단계, stages 중 하나)는 선택 항목이다. HUD에 `분석→실행→보고`처럼 표시하고 현재 단계를 강조한다.
 - `metrics`는 생략할 수 있다. 숫자는 실제 값만 넣고, 모르면 키를 빼라(추정 금지). balance/pnl은 자본 봇만 넣는다. 자본 봇들의 값을 합산해 HUD 중앙에 표시한다.
-- 5분마다 반영된다(`scripts/publish-loop.sh` → data.json → GitHub Pages). 이 파일들은 박스에만 있고, 웹에는 암호화(AES-GCM)된 payload.enc.json으로만 올라간다. 그래도 비밀번호나 키 같은 비밀은 넣지 마라.
+- 5분마다 반영된다(`scripts/publish-loop.sh` → data.json → payload.enc.json → GitHub Pages).
+- 이 파일들은 박스에만 있다. 웹에는 **AES-256-GCM 암호문(payload.enc.json)으로만** 올라가고, 접근 코드가 있어야 볼 수 있다.
+- balance/pnl 같은 숫자와 요약은 넣어도 된다. 단, **비밀번호·API 키·토큰·접근 코드 같은 비밀은 절대 넣지 마라.**
+- 대시보드 v8은 `봇` 탭과 홈 타일(봇 상태·자동 매매·영어)에 status, summary, stage/stages, updatedAt(신선도)를 표시한다. 매매 봇의 `metrics.pnl`은 `투자` 탭 PnL에 쓰인다.
+- 루틴이 있으면 `"schedule": "매일 07:00 CT"` 같은 선택 키를 추가할 수 있다(표시 예정, 실제 값만).
 
 예시 (Shell 한 줄, 봇 ID 바꿔서):
 ```sh
