@@ -102,3 +102,4 @@ Object.assign(TITLE,{set:"설정",rich:"부자되기",ai:"AI",news:"뉴스",cats
 // keep tab highlighting for new sections
 const _render0=render;render=function(){applyST();_render0();const k=cur().split(":")[0];if(["rich","ai","set"].includes(k)){document.querySelectorAll("#tabs button").forEach((b,i)=>b.classList.toggle("on",TABS[i]&&TABS[i][0]===k))}};
 if(D)render();
+window.addEventListener("hashchange",()=>closePal());
