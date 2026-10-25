@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""JARVIS v9 payload builder: data.json (bots, local only) + secrets/collected.json (connector snapshot collected
+"""JARVIS v10 payload builder: data.json (bots, local only) + secrets/collected.json (connector snapshot collected
 by the agent on 'JARVIS 업데이트') -> payload.enc.json (AES-256-GCM, key = PBKDF2-SHA256 310k from passcode).
 Only ciphertext is written to the repo. NEW tracking: secrets/firstseen.json (item id -> first seen on box)."""
 import json, os, hashlib, base64, datetime, zoneinfo, sys
@@ -54,9 +54,28 @@ conn=json.load(open(os.path.join(D,"scripts","connections.json")))
 for c in conn["categories"]:
     if c["key"]=="회의": c["note"]="Granola 계정 미생성 — 연결 필요"
     if c["key"]=="개발": c["note"]="GitHub 알림 권한 없음(403)"
-plain={"v":3,"generatedAt":data["generatedAt"],"collectedAt":col.get("collectedAt"),"health":data["health"],"bots":bots,"approvals":appr,
+def _mk():
+    try: return json.load(open(os.path.join(S,"market.json")))
+    except Exception: return None
+MK=_mk()
+def _paper():
+    import csv
+    f="/workspace/trading-system/reports/paper-forward/daily.csv"
+    try: rows=list(csv.DictReader(open(f)))
+    except Exception: return None
+    R={}
+    for r in rows: R.setdefault(r["strategy"],{}).setdefault(r["run_id"],[]).append(r)
+    out=[]
+    for st,runs in R.items():
+        allr=[x for rid in sorted(runs) for x in runs[rid]]
+        cur=runs[sorted(runs)[-1]]
+        out.append({"strategy":st,"currency":cur[-1]["currency"],"run":sorted(runs)[-1],"runs":len(runs),"equity":float(cur[-1]["equity_end"]),"start":float(cur[0]["start_equity"]),"cum":float(cur[-1]["cum_return_pct"]),"mdd":float(cur[-1]["mdd_pct"]),"trades":int(cur[-1]["trades_cum"]),
+          "series":[[x["date"],float(x["cum_return_pct"]),x["run_id"][:8]] for x in allr],"updated":cur[-1]["updated_at"]})
+    return {"src":"trading-system/reports/paper-forward/daily.csv (페이퍼·가상자금)","items":out}
+PAPER=_paper()
+plain={"v":4,"generatedAt":data["generatedAt"],"collectedAt":col.get("collectedAt"),"health":data["health"],"bots":bots,"approvals":appr,
  "headline":hl,"weekTrend":tr,"time":tctx,"fin":F,"mail":M,"cal":C,"events":EV,"docs":DOC,"dev":col.get("dev"),"x":col.get("x"),"meet":col.get("meetings"),
- "side":col.get("sideIncome"),"routines":col.get("routines"),"automations":data.get("automations"),"conn":conn,"feed":feed,"reco":col.get("reco"),"interests":col.get("interests"),"mailx":col.get("mailx"),"fortune":col.get("fortune")}
+ "side":col.get("sideIncome"),"routines":col.get("routines"),"automations":data.get("automations"),"conn":conn,"feed":feed,"reco":col.get("reco"),"interests":col.get("interests"),"mailx":col.get("mailx"),"fortune":col.get("fortune"),"profile":col.get("profile"),"market":MK,"paper":PAPER}
 raw=json.dumps(plain,ensure_ascii=False,sort_keys=True).encode()
 h=hashlib.sha256(raw).hexdigest(); hf=os.path.join(S,"payload.hash"); out=os.path.join(D,"payload.enc.json")
 if os.path.exists(out) and os.path.exists(hf) and open(hf).read()==h and "--force" not in sys.argv: print("unchanged"); sys.exit(0)

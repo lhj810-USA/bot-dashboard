@@ -48,6 +48,21 @@ h2{font-size:12px;font-weight:600;color:var(--sub);margin:18px 2px 8px;display:f
 #lock{position:fixed;inset:0;z-index:99;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}#lock .rg{font-size:20px;letter-spacing:8px;color:var(--c)}
 #lock input[type=password]{width:240px;height:44px;border-radius:12px;border:1px solid rgba(34,227,245,.4);background:var(--card);color:#fff;font-size:16px;text-align:center}#lock label{font-size:12px;color:var(--sub)}#lock button{height:40px;width:240px;border-radius:12px;border:0;background:var(--c);color:#000;font-weight:700}.er{font-size:12px;color:var(--warn);min-height:16px}
 .view{display:none}.view.on{display:block}
+.ch{display:block;overflow:visible}.ch .ax,.ax{font-size:8.5px;fill:var(--mut)}.dv{fill:var(--tx);font-weight:600;font-size:15px}.chi{font-size:11px;color:var(--sub);margin-top:4px;min-height:15px}.chi b{color:var(--c)}
+.tdn{display:flex;align-items:center;gap:8px;margin-top:auto}.tdn .mini{display:flex;flex-direction:column;gap:2px;font-size:10px;color:var(--sub);min-width:0}.tdn .mini span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tdn i,.lg i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:4px}
+.lg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:var(--sub);margin:6px 0}.lg span{cursor:pointer}.lg b{color:var(--tx);font-weight:500}.dnw{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:6px 0}.dnw .lg{flex:1;flex-direction:column}
+.seg{display:flex;gap:4px;overflow-x:auto;margin:4px 0 8px;scrollbar-width:none}.seg button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--sub);border-radius:9px;padding:6px 11px;font-size:12px}.seg button.on{background:var(--c);color:#000;border-color:var(--c);font-weight:700}
+.cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}@media(min-width:820px){.cgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ctile{border:1px solid var(--line);border-top:2px solid var(--tone);border-radius:14px;padding:10px 11px;background:var(--card);cursor:pointer;display:flex;flex-direction:column;min-height:150px}.ctile .t{font-size:12.5px;font-weight:600}.ctile .v{font-size:20px;font-weight:600;margin-top:4px}.ctile .v small{font-size:11px;color:var(--mut);font-weight:400;margin-left:3px}.ctile .cx{font-size:10.5px;color:var(--sub);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ctile svg{margin-top:auto}
+.cchips{display:flex;gap:6px;overflow-x:auto;margin-top:10px;scrollbar-width:none}.cchips::-webkit-scrollbar{display:none}.cchips button{flex:none;border:1px solid var(--line);border-left:3px solid var(--tone);background:var(--card);color:var(--tx);border-radius:10px;padding:7px 10px;font-size:12px}.cchips b{color:var(--tone);margin-right:5px}
+.rcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-bottom:8px}.rc{border:1px solid var(--line);border-left:3px solid var(--tone);border-radius:14px;padding:10px 12px;background:linear-gradient(150deg,var(--card2),#030a0c);cursor:pointer}.rc .t{font-size:10.5px;color:var(--tone);display:flex;gap:6px;align-items:center}.rc .t .du{margin-left:auto;color:var(--warn)}.rc .h{font-size:13.5px;font-weight:600;margin:5px 0 4px;line-height:1.35}.rc .w{font-size:11px;color:var(--sub);line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.bub{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;padding:12px}.bub div{border:1.5px solid;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;padding:4px}.bub b{line-height:1.15;font-weight:600}.bub small{font-size:10px;color:var(--sub)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 10px}.chips span{border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:11.5px;background:#000}.cl small{color:var(--mut);font-size:10.5px}
+.tf{display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap}.tf input,.tf select{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-size:12.5px}.tf input{flex:1;min-width:140px}
+table.tb{width:100%;border-collapse:collapse;font-size:12px}.tb th{text-align:left;color:var(--mut);font-weight:500;padding:6px 4px;cursor:pointer;white-space:nowrap;border-bottom:1px solid var(--line)}.tb th.on{color:var(--c)}.tb td{padding:7px 4px;border-top:1px solid rgba(34,227,245,.06)}.tb td:last-child,.tb th:last-child{text-align:right;white-space:nowrap}.tb tr{cursor:pointer}.tb td:nth-child(2){max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wxs{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;padding:6px 0 10px}.wxs div{display:flex;flex-direction:column;gap:2px;font-size:12px}.wxs b{font-size:18px;font-weight:400}.wxs small{font-size:10px;color:var(--mut)}
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}@media(min-width:820px){.fgrid{grid-template-columns:repeat(6,minmax(0,1fr))}}.fc{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:8px;text-align:center}.fc small{font-size:11px;color:var(--sub)}.lc{width:44px;height:44px;border-radius:50%;margin:6px auto 8px;box-shadow:0 0 18px currentColor}
+.t-work{color:var(--work)}
 </style></head><body>
 <header><div class="wrap"><div class="hd"><button class="back" id="back">← 뒤로</button><h1 id="ttl">혁진님의 <b>JARVIS</b></h1><button class="ib" id="speak" title="브리핑 듣기">▶</button><button class="ib" id="refresh" title="새로고침">⟳</button><button class="ib" id="pushOn" title="알림 허용">◉</button><button class="ib" id="lockBtn" title="잠금">⏻</button></div>
 <div class="sbox"><input id="q" placeholder="무엇이든 검색 — 거래·메일·일정·봇·파일" autocomplete="off" enterkeyhint="search"><button class="x" id="qx">✕</button></div><div class="fresh" id="fresh">—</div></div></header>
@@ -95,7 +110,7 @@ const mailRow=m=>row("mail:"+m.id,m.subject,`${m.from} · ${m.type} · ${hm(m.da
 const botRow=b=>{const st=b.stages||[],ci=st.indexOf(b.stage);return `<div class="row" onclick="go('bot:${b.id}')"><i style="width:9px;height:9px;border-radius:50%;background:${SC[b.status]};flex:none"></i><div class="m"><b>${esc(b.name)} <small style="color:${SC[b.status]};font-size:10.5px">${LB[b.status]||"—"}</small></b><span>${b.summaryLive?esc(b.summary):"요약 없음"}</span>${st.length?`<div class="stg">${st.map((x,j)=>`<em class="${j===ci?"on":ci>=0&&j<ci?"done":""}">${esc(x)}</em>`).join("")}</div>`:b.stage?`<div class="stg"><em class="on">${esc(b.stage)}</em></div>`:""}</div><div class="a"><small>${b.updatedAt?rel(b.updatedAt):"—"}</small></div></div>`};
 const GA=()=>D.generatedAt.replace(" ","T").replace(" CT","")+":00-05:00";const F=()=>D.fin||{},M=()=>D.mail||{};
 // ---------- tiles ----------
-function tiles(){const f=F(),m=M(),wk=(f.weeks||[]).map(w=>w.spend),fr=D.collectedAt,bots=D.bots,trade=bots.filter(b=>DEPT["매매"].some(p=>b.id.startsWith(p)));
+function tilesV9(){const f=F(),m=M(),wk=(f.weeks||[]).map(w=>w.spend),fr=D.collectedAt,bots=D.bots,trade=bots.filter(b=>DEPT["매매"].some(p=>b.id.startsWith(p)));
  const ev0=(D.events||[])[0],eng=bots.find(b=>b.id.startsWith("c16480ab")),side=D.side||{};const flag=(m.flagged||[]).length;
  const recM=(f.recurring||[]).filter(r=>r.kind!=="반복(금액 변동)").reduce((s,r)=>s+r.amount,0);
 const cs=coinsNow(),btc=cs[0]||{},w=wxNow(),fo=fortune(),R=RC(),top=(R.items||[]).filter(r=>r.prio===1)[0],mx=MX();
@@ -132,8 +147,8 @@ const cs=coinsNow(),btc=cs[0]||{},w=wxNow(),fo=fortune(),R=RC(),top=(R.items||[]
 function tileHTML(t){const n=t.nk?newOf(t.nk):0;return `<div class="tile" style="--tone:${SC[t.tone]}" onclick="go('${t.k}')"><div class="t"><i></i>${esc(t.t)}${n?`<span class="nb">NEW ${n}</span>`:""}</div><div class="v">${t.v}</div><div class="cx">${esc(t.cx)}</div>${t.sp||""}<div class="fr">${t.fr?"⟳ "+rel(t.fr):"데이터 없음"}</div></div>`}
 const tileSet=keys=>`<div class="tiles">${tiles().filter(t=>keys.includes(t.k)).map(tileHTML).join("")}</div>`;
 // ---------- views ----------
-const TABS=[["home","⌂","홈"],["money","$","돈"],["reco","✦","추천"],["interest","◎","관심사"],["sched","◷","일정"],["bots","⬡","봇"],["more","⋯","더보기"]];
-const TABNEW={reco:x=>x.kind==="reco"||x.kind==="news",interest:x=>x.kind==="news",money:x=>x.kind==="tx",invest:x=>x.kind==="bot"&&DEPT["매매"].some(p=>x.ref.startsWith(p)),sched:x=>x.kind==="mail"||x.kind==="event",bots:x=>x.kind==="bot",more:x=>x.kind==="doc"};
+const TABS=[["home","⌂","홈"],["cats","▦","분류"],["money","$","돈"],["inv","↗","투자"],["reco","✦","추천"],["imap","◎","관심사"],["bots","⬡","봇"]];
+const TABNEW={cats:x=>x.kind==="mail"||x.kind==="event"||x.kind==="doc",imap:x=>x.kind==="news",inv:x=>x.kind==="bot"&&DEPT["매매"].some(p=>x.ref.startsWith(p)),reco:x=>x.kind==="reco"||x.kind==="news",interest:x=>x.kind==="news",money:x=>x.kind==="tx",invest:x=>x.kind==="bot"&&DEPT["매매"].some(p=>x.ref.startsWith(p)),sched:x=>x.kind==="mail"||x.kind==="event",bots:x=>x.kind==="bot",more:x=>x.kind==="doc"};
 const V={};
 V.home=()=>{const f=F(),t=D.time;return `<div class="brief"><div class="d">${t.weekday}요일 ${md(t.now)} · 브리핑</div><ul>${D.headline.map((h,i)=>`<li onclick="go('${["flow","spend","bills","botsall"][i]||"botsall"}')">${esc(h)}</li>`).join("")}</ul></div>
  <div class="pins">${[["net","경제적 자유 · 순현금",money(f.net)],["side","부업 월 $300–500",(D.side||{}).tracked==null?"추적 필요":money(D.side.tracked)],["trade","자동 매매","PnL —"],["botsall","결정 필요",(D.approvals||[]).length+"건"],["events","가족 · 주변 행사",((D.events||[])[0]||{}).count?D.events[0].count+"개":"—"],["eng","영어",LB[(botBy("c16480ab-9b7e-4832-9edc-b6a27ff82899")||{}).status]||"—"]].map(p=>`<div class="pin" onclick="go('${p[0]}')"><div class="l">📌 ${esc(p[1])}</div><div class="v">${esc(p[2])}</div></div>`).join("")}</div>
@@ -183,7 +198,7 @@ V.botsall=V.bots;
 V.bot=id=>{const b=botBy(id);if(!b)return"";markSeen("bot",id);return H2(b.name,LB[b.status])+card(`<dl class="kv"><dt>상태</dt><dd style="color:${SC[b.status]}">${LB[b.status]||"—"}</dd><dt>설명</dt><dd>${esc(b.description)}</dd><dt>요약</dt><dd>${b.summaryLive?esc(b.summary):"—"}</dd><dt>단계</dt><dd>${esc(b.stage||"—")}${(b.stages||[]).length?" / "+b.stages.map(esc).join(" → "):""}</dd><dt>보고 시각</dt><dd>${b.updatedAt?hm(b.updatedAt)+" CT ("+rel(b.updatedAt)+")":"—"}</dd><dt>마지막 대화</dt><dd>${esc(b.lastActivity||"—")}</dd><dt>알림</dt><dd>${(b.metrics||{}).alerts??"—"}</dd><dt>잔고/PnL</dt><dd>${(b.metrics||{}).balance??"—"} / ${(b.metrics||{}).pnl??"—"}</dd></dl>`)+`<button class="btn" onclick="pick('${b.id}')">${esc(b.name)}에게 명령</button>`};
 V.eng=()=>V.bot("c16480ab-9b7e-4832-9edc-b6a27ff82899")+H2("영어 관련 파일")+card((D.docs.files||[]).filter(f=>/영어|english/i.test(f.name)).map(docRow).join("")||row(null,"없음"));
 V.routines=()=>H2("자동화·루틴")+card((D.routines?.items||[]).map(r=>row(null,r.name,`${r.enabled?"활성":"비활성"} · 일정 ${r.schedule} · ${r.note||""}`)).join(""))+`<div class="note">${esc(D.routines?.note||"")}</div>`;
-V.side=()=>{const s=D.side||{},a=botBy("92919409-9721-49b6-b150-79aaee08b3a2");return H2("부업 · "+(s.goal||""))+card(row(null,"이번 달 부업 수입","한국 지급·패시브 선호 · L-1 비자 고려",'<span class="mut">—</span>',"추적 시작 필요"))+`<div class="note">${esc(s.note)}</div>`+H2("아르바이트봇")+card(a?botRow(a):"")};
+V.side=()=>{const s=D.side||{},a=botBy("92919409-9721-49b6-b150-79aaee08b3a2");return H2("부업 · "+(s.goal||""))+card(row(null,"이번 달 부업 수입","한국 지급·패시브 선호 · 체류 조건 고려",'<span class="mut">—</span>',"추적 시작 필요"))+`<div class="note">${esc(s.note)}</div>`+H2("아르바이트봇")+card(a?botRow(a):"")};
 const docRow=f=>row("doc:"+f.id,f.name,`${f.kind} · ${hm(f.modified)}`,null,null,nwId("doc",f.id));
 V.drive=()=>H2("Drive 최근 파일",(D.docs.files||[]).length+"개")+card((D.docs.files||[]).map(docRow).join(""));
 V.doc=id=>{const f=(D.docs.files||[]).find(x=>x.id===id);if(!f)return"";markSeen("doc",id);return H2(f.name)+card(`<dl class="kv"><dt>종류</dt><dd>${esc(f.kind)}</dd><dt>수정</dt><dd>${hm(f.modified)} CT</dd></dl>`)+(f.link?`<a class="btn" style="display:inline-block;text-decoration:none" href="${esc(f.link)}" target="_blank" rel="noopener">Drive에서 열기</a>`:"")};
@@ -198,11 +213,11 @@ const krw=v=>v==null?"—":"₩"+Math.round(v).toLocaleString("ko-KR");const usd
 const pc=v=>v==null?"—":`<span class="${v>=0?"t-ok":"t-err"}">${v>=0?"▲":"▼"}${Math.abs(v).toFixed(2)}%</span>`;
 async function liveFetch(){const j=async u=>{const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw 0;return r.json()};const L={};
  await Promise.allSettled([
-  j("https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH,KRW-XRP").then(a=>{L.up={};a.forEach(x=>L.up[x.market.slice(4)]={krw:x.trade_price,chg:x.signed_change_rate*100});L.upAt=new Date().toISOString()}),
-  j("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,ripple&vs_currencies=usd&include_24hr_change=true").then(a=>{L.cg={BTC:a.bitcoin,ETH:a.ethereum,XRP:a.ripple}}),
+  j("https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH,KRW-XRP,KRW-SOL,KRW-DOGE").then(a=>{L.up={};a.forEach(x=>L.up[x.market.slice(4)]={krw:x.trade_price,chg:x.signed_change_rate*100});L.upAt=new Date().toISOString()}),
+  j("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,ripple,solana,dogecoin&vs_currencies=usd&include_24hr_change=true").then(a=>{L.cg={BTC:a.bitcoin,ETH:a.ethereum,XRP:a.ripple,SOL:a.solana,DOGE:a.dogecoin}}),
   j("https://open.er-api.com/v6/latest/USD").then(a=>{L.fx=a.rates.KRW;L.fxAt=a.time_last_update_utc}),
   j("https://api.open-meteo.com/v1/forecast?latitude=30.5052&longitude=-97.8203&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FChicago").then(a=>{L.wx=a.current})]);
- LIVE=L;if(/^#?(interest|home|crypto|fx|wx)/.test(location.hash.slice(1)||"home")&&!$("q").value)render()}
+ LIVE=L;if(/^#?(interest|home|crypto|fx|wx|inv|coin|imap|cats|c:)/.test(location.hash.slice(1)||"home")&&!$("q").value)render()}
 const WMO={0:"맑음",1:"대체로 맑음",2:"구름 조금",3:"흐림",45:"안개",48:"안개",51:"이슬비",53:"이슬비",55:"이슬비",61:"비",63:"비",65:"강한 비",80:"소나기",81:"소나기",95:"뇌우"};
 function coinsNow(){const s=(IN().crypto||{}).coins||[];return s.map(c=>{const u=LIVE.up&&LIVE.up[c.sym],g=LIVE.cg&&LIVE.cg[c.sym];return {...c,krw:u?u.krw:c.krw,chg:u?u.chg:c.chg,usd:g?g.usd:c.usd,usdChg:g?g.usd_24h_change:c.usdChg,live:!!u}})}
 const fxNow=()=>LIVE.fx||(IN().fx||{}).usdkrw;const wxNow=()=>{const s=IN().weather||{};return LIVE.wx?{tempF:LIVE.wx.temperature_2m,desc:WMO[LIVE.wx.weather_code]||"",wind:LIVE.wx.wind_speed_10m,hum:LIVE.wx.relative_humidity_2m,live:1}:s};
@@ -236,7 +251,7 @@ V.crypto=()=>{const cs=coinsNow(),fx=fxNow(),C=IN().crypto||{};return `${H2("코
  ${H2("코인 뉴스")}${card((RC().news||[]).map(newsRow).join(""))}<div class="note">출처: ${esc(C.src||"")} · 실시간은 페이지에서 직접 공개 API 조회, 실패 시 수집 스냅샷</div>`};
 V.fx=()=>{const f=IN().fx||{};return H2("USD/KRW 환율")+`<div class="kp">${kpi(null,"1 USD",fxNow()?"₩"+fxNow().toFixed(2):"—",LIVE.fx?"LIVE":"스냅샷")}${kpi(null,"$1,000 =",fxNow()?krw(fxNow()*1000):"—","송금 전 참고")}</div>`+`<div class="note">출처 ${esc(f.src||"—")} · 기준 ${esc(LIVE.fxAt||f.at||"—")} (UTC)</div>`};
 V.wx=()=>{const w=wxNow(),s=IN().weather||{};return H2("시더파크 날씨",w.live?"LIVE":"스냅샷 "+hm(s.at))+`<div class="kp">${kpi(null,"지금",w.tempF==null?"—":Math.round(w.tempF)+"<small>°F</small>",w.desc||"")}${kpi(null,"바람 · 습도",(w.wind??"—")+"<small>mph</small>",`습도 ${w.hum??"—"}%`)}</div>`+card((s.daily||[]).map(d=>row(null,`${md(d.date)} (${"일월화수목금토"[new Date(d.date+"T12:00").getDay()]})`,`${d.desc} · 강수 ${d.pop}%`,`${Math.round(d.hi)}° / ${Math.round(d.lo)}°`)).join(""))+`<div class="note">출처 Open-Meteo</div>`};
-V.family=()=>{const x=MX(),it=(RC().items||[]).filter(r=>r.cat==="가족");return H2("가족 · 학교","은지님 · 아이들")+card(it.map(recoRow).join(""))+H2("학교·가족 메일",(x.school||[]).length+"건")+card((x.school||[]).map(m=>row("mail:"+m.id,m.subject,`${m.from} · ${hm(m.date)}`)).join("")||row(null,"데이터 없음"))};
+V.family=()=>{const x=MX(),it=(RC().items||[]).filter(r=>r.cat==="가족");return H2("가족 · 학교","가족 메일·추천")+card(it.map(recoRow).join(""))+H2("학교·가족 메일",(x.school||[]).length+"건")+card((x.school||[]).map(m=>row("mail:"+m.id,m.subject,`${m.from} · ${hm(m.date)}`)).join("")||row(null,"데이터 없음"))};
 V.orders=()=>{const x=MX();return H2("영수증 · 주문",(x.receipts||[]).length+"건")+card((x.receipts||[]).map(m=>row(null,m.subject,`${m.from} · ${hm(m.date)}`)).join("")||row(null,"데이터 없음"))+H2("배송")+card(row(null,"배송 메일 없음",x.packagesNote||""))+H2("여행·예약")+card(row(null,"예약 없음",x.travelNote||""))+H2("프로모션 (7일)",x.promos7d+"건")+card((x.promoTop||[]).map(m=>row(null,m.subject,`${m.from} · ${hm(m.date)}`)).join(""))};
 V.gh=()=>{const d=D.dev||{};return H2("GitHub",(d.repos||[]).length+"개 저장소")+card((d.repos||[]).map(r=>row(null,r.name,r.description||r.updated||"")).join(""))+H2("최근 커밋")+card((d.activity||[]).map(a=>row(null,a.msg,`${a.repo} · ${hm(a.date)}`)).join("")||row(null,"데이터 없음"))+`<div class="note">${esc(d.note||"GitHub 알림 권한 없음(403)")}</div>`};
 V.interest=()=>{const f=F(),sr=f.income30?Math.round(100*f.cash30/f.income30):null,wk=(f.weeks||[]);return `${tileSet(["crypto","fx","wx","fortune"])}
@@ -244,6 +259,235 @@ V.interest=()=>{const f=F(),sr=f.income30?Math.round(100*f.cash30/f.income30):nu
  ${card(`<div class="note" style="margin:6px 0">주간 지출 추이</div>`+spark(wk.map(w=>w.spend),"var(--c)",40,1)+row("invest","투자 · 자동 매매","손익(PnL)·투자 계좌 데이터 없음 — 연결 필요"))}
  ${tileSet(["eng","events","family","orders"])}`};
 
+// ================= v10 charts (inline SVG, no CDN) =================
+const PAL=["#22e3f5","#38e08c","#ffb020","#5aa2ff","#ff4d66","#a78bfa","#ff9f43","#3ddc97","#9fb9c2","#e879f9","#7dd3fc","#fde047"];
+const CH={};let CHN=0;const WDK=["월","화","수","목","금","토","일"];
+const DT=s=>new Date(s.length===10?s+"T12:00:00":s);const ISO=d=>d.toISOString().slice(0,10);
+const TODAY=()=>D.time.now.slice(0,10);const addD=(s,n)=>{const d=DT(s);d.setDate(d.getDate()+n);return ISO(d)};
+const fmtK=v=>Math.abs(v)>=1e8?(v/1e8).toFixed(2)+"억":Math.abs(v)>=1e4?(v/1e4).toFixed(Math.abs(v)>=1e6?0:1)+"만":Math.round(v).toLocaleString();
+function chLine(pts,o={}){if(!pts||pts.length<2)return `<div class="note">차트 데이터 없음</div>`;const id="c"+(++CHN),W=o.w||320,Hh=o.h||110,ax=o.axis,P=ax?[10,50,18,4]:[3,2,3,2];
+ const xs=pts.map(p=>+p[0]),ys=pts.map(p=>+p[1]);let x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);if(o.zero){y0=Math.min(0,y0);y1=Math.max(0,y1)}if(y1===y0){y1+=1;y0-=1}
+ const sx=x=>P[3]+(x-x0)/((x1-x0)||1)*(W-P[1]-P[3]),sy=y=>P[0]+(1-(y-y0)/(y1-y0))*(Hh-P[0]-P[2]);
+ const col=o.color||(ys[ys.length-1]>=ys[0]?"var(--ok)":"var(--err)"),d=pts.map((p,i)=>(i?"L":"M")+sx(+p[0]).toFixed(1)+","+sy(+p[1]).toFixed(1)).join("");
+ const base=sy(o.zero?0:y0),fy=o.fmt||(v=>fmtK(v)),fx=o.xfmt||(x=>"");CH[id]={pts,sx,sy,fy,fx,W,Hh,P};
+ let g=`<defs><linearGradient id="${id}g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" style="stop-color:${col};stop-opacity:.35"/><stop offset="1" style="stop-color:${col};stop-opacity:0"/></linearGradient></defs>`;
+ if(o.area!==false)g+=`<path d="${d}L${sx(x1).toFixed(1)},${base}L${sx(x0).toFixed(1)},${base}Z" fill="url(#${id}g)"/>`;
+ if(o.zero&&y0<0)g+=`<line x1="${P[3]}" x2="${W-P[1]}" y1="${sy(0)}" y2="${sy(0)}" stroke="rgba(255,255,255,.25)" stroke-dasharray="3 3"/>`;
+ (o.marks||[]).forEach(m=>{g+=`<line x1="${sx(m[0])}" x2="${sx(m[0])}" y1="${P[0]}" y2="${Hh-P[2]}" stroke="rgba(255,176,32,.5)" stroke-dasharray="2 3"/>`});
+ g+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="${o.sw||1.6}" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`;
+ if(ax){const t=(y,v)=>`<text x="${W-P[1]+4}" y="${y}" class="ax">${esc(fy(v))}</text>`;g+=t(sy(y1)+3,y1)+t(sy((y0+y1)/2)+3,(y0+y1)/2)+t(sy(y0)+3,y0);
+  g+=`<text x="${P[3]}" y="${Hh-4}" class="ax">${esc(fx(x0))}</text><text x="${W-P[1]}" y="${Hh-4}" class="ax" text-anchor="end">${esc(fx(x1))}</text>`;
+  g+=`<line id="${id}l" x1="0" x2="0" y1="${P[0]}" y2="${Hh-P[2]}" stroke="rgba(255,255,255,.5)" visibility="hidden"/><circle id="${id}c" r="3.5" fill="${col}" visibility="hidden"/>`;
+  g+=`<rect x="0" y="0" width="${W}" height="${Hh}" fill="transparent" onpointermove="chHover(event,'${id}')" onpointerdown="chHover(event,'${id}')"/>`}
+ const lx=sx(xs[xs.length-1]),ly=sy(ys[ys.length-1]);if(!ax&&o.dot!==false)g+=`<circle cx="${lx}" cy="${ly}" r="2.4" fill="${col}"/>`;
+ return `<svg class="ch" viewBox="0 0 ${W} ${Hh}" width="100%" height="${o.ph||Hh}" preserveAspectRatio="none">${g}</svg>${ax?`<div class="chi" id="${id}i">${o.hint||"차트를 누르거나 문지르면 값 표시"}</div>`:""}`}
+function chHover(e,id){const c=CH[id];if(!c)return;const sv=e.currentTarget.ownerSVGElement,r=sv.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*c.W;let bi=0,bd=1e9;c.pts.forEach((p,i)=>{const dd=Math.abs(c.sx(+p[0])-x);if(dd<bd){bd=dd;bi=i}});
+ const p=c.pts[bi],X=c.sx(+p[0]),Y=c.sy(+p[1]),l=$(id+"l"),ci=$(id+"c");l.setAttribute("x1",X);l.setAttribute("x2",X);l.setAttribute("visibility","visible");ci.setAttribute("cx",X);ci.setAttribute("cy",Y);ci.setAttribute("visibility","visible");$(id+"i").innerHTML=`<b>${esc(c.fy(+p[1]))}</b> · ${esc(c.fx(+p[0],1))}`}
+function chBars(vals,o={}){if(!vals||!vals.length)return `<div class="note">데이터 없음</div>`;const W=o.w||320,Hh=o.h||90,lb=o.labels,B=lb?14:2,n=vals.length,gw=W/n,mx=Math.max(...vals.map(Math.abs),1e-9);
+ let g="";vals.forEach((v,i)=>{const h=Math.abs(v)/mx*(Hh-B-(o.vl?12:4)),x=i*gw+gw*.18,w=gw*.64,y=Hh-B-h,c=o.colors?o.colors[i]:(o.hi===i?"var(--warn)":(v<0?"var(--err)":(o.color||"var(--c)")));
+  g+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${Math.max(h,1).toFixed(1)}" rx="2" fill="${c}" ${o.go?`onclick="go('${o.go(i)}')" style="cursor:pointer"`:""}><title>${esc((lb?lb[i]+": ":"")+(o.fmt?o.fmt(v):v))}</title></rect>`;
+  if(o.vl&&v)g+=`<text x="${x+w/2}" y="${y-3}" class="ax" text-anchor="middle">${esc(o.fmt?o.fmt(v):v)}</text>`;
+  if(lb&&(n<=14||i%Math.ceil(n/12)===0))g+=`<text x="${x+w/2}" y="${Hh-3}" class="ax" text-anchor="middle">${esc(lb[i])}</text>`});
+ return `<svg class="ch" viewBox="0 0 ${W} ${Hh}" width="100%" height="${o.ph||Hh}" preserveAspectRatio="none">${g}</svg>`}
+function chDonut(parts,o={}){const S=o.s||120,R=S/2-9,C=2*Math.PI*R,tot=parts.reduce((a,p)=>a+p.v,0)||1;let off=0,g=`<circle cx="${S/2}" cy="${S/2}" r="${R}" fill="none" stroke="rgba(34,227,245,.08)" stroke-width="${o.sw||14}"/>`;
+ parts.forEach((p,i)=>{const L=p.v/tot*C;g+=`<circle cx="${S/2}" cy="${S/2}" r="${R}" fill="none" stroke="${p.c||PAL[i%PAL.length]}" stroke-width="${o.sw||14}" stroke-dasharray="${L.toFixed(2)} ${(C-L).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${S/2} ${S/2})" ${p.go?`onclick="event.stopPropagation();go('${p.go}')" style="cursor:pointer"`:""}><title>${esc(p.l)}</title></circle>`;off+=L});
+ return `<svg viewBox="0 0 ${S} ${S}" width="${o.px||S}" height="${o.px||S}" class="dn">${g}<text x="${S/2}" y="${S/2+(o.sub?1:5)}" text-anchor="middle" class="dv" style="font-size:${o.fs||17}px">${esc(o.center||"")}</text>${o.sub?`<text x="${S/2}" y="${S/2+15}" text-anchor="middle" class="ax">${esc(o.sub)}</text>`:""}</svg>`}
+function chGauge(pct,o={}){const W=120,R=48,cx=60,cy=56,p=Math.max(0,Math.min(100,pct||0)),a=Math.PI*(1-p/100),x=cx+R*Math.cos(a),y=cy-R*Math.sin(a),col=o.color||(p>=70?"var(--err)":p>=30?"var(--warn)":"var(--ok)");
+ return `<svg viewBox="0 0 ${W} 66" width="${o.px||"100%"}" height="${o.h||66}"><path d="M${cx-R},${cy}A${R},${R} 0 0 1 ${cx+R},${cy}" fill="none" stroke="rgba(34,227,245,.1)" stroke-width="10" stroke-linecap="round"/>${p>0?`<path d="M${cx-R},${cy}A${R},${R} 0 0 1 ${x.toFixed(1)},${y.toFixed(1)}" fill="none" stroke="${col}" stroke-width="10" stroke-linecap="round"/>`:""}<text x="${cx}" y="${cy-4}" text-anchor="middle" class="dv">${esc(o.label??Math.round(p)+"%")}</text></svg>`}
+function chHeat(map,o={}){const end=o.end||TODAY(),days=o.days||91,c=o.cell||11,gp=2;const st=addD(end,-(days-1));const sd=DT(st);const off=(sd.getDay()+6)%7;const cols=Math.ceil((days+off)/7);const W=cols*(c+gp)+16,Hh=7*(c+gp)+12;
+ const vals=Object.values(map).filter(v=>v>0);const mx=Math.max(...vals,1);let g="";for(let i=0;i<days;i++){const ds=addD(st,i),k=i+off,cx=16+Math.floor(k/7)*(c+gp),cy=(k%7)*(c+gp),v=map[ds]||0,a=v?.18+.82*Math.min(1,v/mx):.05;
+  g+=`<rect x="${cx}" y="${cy}" width="${c}" height="${c}" rx="2" fill="${o.color||"#22e3f5"}" fill-opacity="${a.toFixed(2)}" ${o.go?`onclick="go('${o.go(ds)}')" style="cursor:pointer"`:""}><title>${md(ds)} ${esc(o.fmt?o.fmt(v):v)}</title></rect>`}
+ [0,2,4,6].forEach(r=>g+=`<text x="0" y="${r*(c+gp)+c-1}" class="ax">${WDK[r]}</text>`);
+ return `<svg viewBox="0 0 ${W} ${Hh}" width="100%" style="max-width:${Math.round(W*1.6)}px" class="ch">${g}</svg>`}
+const legend=parts=>`<div class="lg">${parts.map((p,i)=>`<span ${p.go?`onclick="go('${p.go}')"`:""}><i style="background:${p.c||PAL[i%PAL.length]}"></i>${esc(p.l)} <b>${esc(p.t||"")}</b></span>`).join("")}</div>`;
+const seg=(cur,opts,fn)=>`<div class="seg">${opts.map(o=>`<button class="${o[0]===cur?"on":""}" onclick="${fn}('${o[0]}')">${esc(o[1])}</button>`).join("")}</div>`;
+const hbars=(list,o={})=>{const mx=Math.max(...list.map(x=>x.v),1e-9);return list.map((x,i)=>`<div class="bar" ${x.go?`onclick="go('${x.go}')"`:""}><span>${esc(x.l)}</span><div class="tk"><i style="width:${(100*x.v/mx).toFixed(1)}%;background:${x.c||o.color||"var(--c)"}"></i></div><b>${esc(o.fmt?o.fmt(x.v):x.v)}</b></div>`).join("")};
+
+// ================= money derivations =================
+const isSp=t=>t.amount<0&&t.primary!=="LOAN_PAYMENTS"&&!(t.src==="card"&&t.primary==="TRANSFER_IN");
+const isIn=t=>t.src==="bank"&&t.amount>0&&(t.primary==="INCOME"||t.primary==="TRANSFER_IN");
+const TXP=(n)=>{const s=addD(TODAY(),-(n-1));return (F().tx||[]).filter(t=>t.date>=s)};
+function dailyFlow(n=30){const out=[];for(let i=n-1;i>=0;i--){const d=addD(TODAY(),-i);out.push({d,sp:0,in:0})}const ix=Object.fromEntries(out.map((x,i)=>[x.d,i]));
+ (F().tx||[]).forEach(t=>{const i=ix[t.date];if(i==null)return;if(isSp(t))out[i].sp+=-t.amount;else if(isIn(t))out[i].in+=t.amount});return out}
+function balTrend(n=90){const f=F(),tx=f.tx||[],out=[];if(f.cash==null)return out;for(let i=n-1;i>=0;i--){const d=addD(TODAY(),-i);const after=tx.filter(t=>t.date>d&&!t.pending);
+  const cash=f.cash-after.filter(t=>t.src==="bank").reduce((a,t)=>a+t.amount,0),cardb=(f.cardBalance||0)+after.filter(t=>t.src==="card").reduce((a,t)=>a+t.amount,0);out.push({d,cash,card:cardb,net:cash-cardb})}return out}
+const tsx=d=>DT(d).getTime();
+function weeklySp(n=90){const m={};TXP(n).filter(isSp).forEach(t=>{const d=DT(t.date),mon=new Date(d);mon.setDate(d.getDate()-((d.getDay()+6)%7));const k=ISO(mon);m[k]=(m[k]||0)-t.amount});return Object.entries(m).sort().map(([k,v])=>({k,v}))}
+function wdSp(n=90){const s=[0,0,0,0,0,0,0],c=[0,0,0,0,0,0,0];TXP(n).filter(isSp).forEach(t=>{s[(DT(t.date).getDay()+6)%7]+=-t.amount});for(let i=0;i<n;i++)c[(DT(addD(TODAY(),-i)).getDay()+6)%7]++;return s.map((v,i)=>v/(c[i]||1))}
+function catSp(n=30){const m={};TXP(n).filter(isSp).forEach(t=>m[t.cat]=(m[t.cat]||0)-t.amount);return Object.entries(m).sort((a,b)=>b[1]-a[1]).map(([l,v])=>({l,v}))}
+function merchSp(n=30){const m={};TXP(n).filter(isSp).forEach(t=>{const k=t.name;m[k]=m[k]||{l:k,v:0,n:0};m[k].v-=t.amount;m[k].n++});return Object.values(m).sort((a,b)=>b.v-a.v)}
+const catParts=(n=30,k=6)=>{const c=catSp(n),top=c.slice(0,k),rest=c.slice(k).reduce((a,x)=>a+x.v,0);const p=top.map((x,i)=>({l:x.l,v:x.v,c:PAL[i],t:money(x.v),go:"cat:"+encodeURIComponent(x.l)}));if(rest>0)p.push({l:"기타",v:rest,c:"#3b4f57",t:money(rest)});return p};
+
+// ================= market =================
+const MK=()=>D.market||{};const CGID={BTC:"bitcoin",ETH:"ethereum",XRP:"ripple",SOL:"solana",DOGE:"dogecoin"};const RG=["1D","7D","30D","90D"];let LS={},LSP={};
+window._rg=window._rg||"7D";const setRg=r=>{window._rg=r;render()};
+function snapSer(obj,r){if(!obj)return null;if(obj[r])return obj[r];if(r==="30D"&&obj["90D"]){const a=obj["90D"],t=a[a.length-1][0]-30*864e5;return a.filter(p=>p[0]>=t)}if(r==="7D"&&obj["90D"]){const a=obj["90D"],t=a[a.length-1][0]-7*864e5;return a.filter(p=>p[0]>=t)}return null}
+async function loadCoin(sym,r){const k=sym+"|"+r;if(LS[k]||LSP[k])return;LSP[k]=1;const j=async u=>{const x=await fetch(u,{cache:"no-store"});if(!x.ok)throw 0;return x.json()};const res={};
+ const up={"1D":["minutes/10",144],"7D":["minutes/60",168],"30D":["minutes/240",180],"90D":["days",90]}[r],days={"1D":1,"7D":7,"30D":30,"90D":90}[r];
+ await Promise.allSettled([j(`https://api.upbit.com/v1/candles/${up[0]}?market=KRW-${sym}&count=${up[1]}`).then(a=>{res.krw=a.map(c=>[c.timestamp||Date.parse(c.candle_date_time_utc+"Z"),c.trade_price]).sort((x,y)=>x[0]-y[0])}),
+  CGID[sym]?j(`https://api.coingecko.com/api/v3/coins/${CGID[sym]}/market_chart?vs_currency=usd&days=${days}`).then(a=>{res.usd=a.prices}):Promise.reject()]);
+ res.at=new Date().toISOString();LS[k]=res;delete LSP[k];if(cur().startsWith("coin:"))render()}
+function coinSer(sym,r){const s=(MK().coins||{})[sym]||{},l=LS[sym+"|"+r]||{};return {krw:l.krw||snapSer(s.krw,r),usd:l.usd||snapSer(s.usd,r),liveK:!!l.krw,liveU:!!l.usd,at:l.at||MK().at}}
+function coinNow(sym){const s=(MK().coins||{})[sym]||{},t=s.tick||{},u=LIVE.up&&LIVE.up[sym],g=LIVE.cg&&LIVE.cg[sym];const us=(s.usd||{})["1D"]||[];
+ return {sym,name:s.name||sym,krw:u?u.krw:t.krw,chg:u?u.chg:t.chg,usd:g?g.usd:(us.length?us[us.length-1][1]:null),usdChg:g?g.usd_24h_change:(us.length?100*(us[us.length-1][1]/us[0][1]-1):null),high:t.high,low:t.low,live:!!u}}
+const stat=ser=>{if(!ser||ser.length<2)return null;const v=ser.map(p=>p[1]);return {hi:Math.max(...v),lo:Math.min(...v),first:v[0],last:v[v.length-1],chg:100*(v[v.length-1]/v[0]-1)}};
+const tfmt=r=>(x,full)=>{const d=new Date(+x);return r==="1D"||full?d.toLocaleString("ko-KR",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit",hour12:false,timeZone:"America/Chicago"}):(d.getMonth()+1)+"/"+d.getDate()};
+const fxSer=()=>{const f=MK().fx||{};return (f.series||[]).map(p=>[tsx(p[0]),p[1]])};const fxCur=()=>LIVE.fx||+(MK().fx||{}).now||fxNow();
+
+// ================= tiles (chart-first) =================
+function cTiles(){const f=F(),m=M(),fr=D.collectedAt,mk=MK(),df=dailyFlow(30);let cum=0;const cf=df.map(x=>{cum+=x.in-x.sp;return [tsx(x.d),cum]});
+ const bt=balTrend(90),cp=catParts(30,5),wk=weeklySp(56),cs=["BTC","ETH","XRP"].map(coinNow),fx=fxSer(),w=mk.weather||{},rec=[...(f.bills||[]),...(f.recurring||[])].filter(r=>r.next>=TODAY()).sort((a,b)=>a.next<b.next?-1:1);
+ const heat={};TXP(91).filter(isSp).forEach(t=>heat[t.date]=(heat[t.date]||0)-t.amount);const mc=(m.count30||[]).filter(x=>x.n>0),bots=D.bots,st={ok:0,working:0,warn:0,err:0,idle:0};bots.forEach(b=>st[b.status]=(st[b.status]||0)+1);
+ const pp=(D.paper||{}).items||[],top=(D.profile||{}).topics||[];const ft=fortuneX();
+ return [
+ {k:"flow",t:"30일 현금흐름",v:sg(f.cash30),cx:`입금 ${money(f.income30)} · 지출 ${money(f.spend30)}`,sp:chLine(cf,{h:46,zero:1}),tone:f.cash30>=0?"ok":"warn",fr,nk:x=>x.kind==="tx"},
+ {k:"spend",t:"지출 카테고리 30일",v:money(f.spend30),cx:cp.slice(0,2).map(p=>p.l+" "+p.t).join(" · "),sp:`<div class="tdn">${chDonut(cp,{s:120,px:62,sw:16})}<div class="mini">${cp.slice(0,4).map(p=>`<span><i style="background:${p.c}"></i>${esc(p.l)}</span>`).join("")}</div></div>`,tone:"info",fr},
+ {k:"wk",t:"주간 지출",v:wk.length?money(wk[wk.length-1].v)+"<small>이번 주</small>":"—",cx:wk.length>1?"지난주 "+money(wk[wk.length-2].v):"",sp:chBars(wk.map(x=>x.v),{h:44,hi:wk.length-1}),tone:"info",fr},
+ {k:"net",t:"순현금 추이 (역산)",v:money(f.net),cx:`현금 ${money(f.cash)} − 카드 ${money(f.cardBalance)}`,sp:chLine(bt.map(x=>[tsx(x.d),x.net]),{h:46,color:"var(--c)"}),tone:"ok",fr},
+ {k:"card",t:"카드 사용률",v:(f.cardUtil??"—")+"<small>%</small>",cx:`${money(f.cardBalance)} / 한도 ${money((f.cardBalance||0)+(f.cardAvailable||0))}`,sp:chGauge(f.cardUtil,{h:50}),tone:f.cardUtil>=50?"warn":"ok",fr},
+ ...cs.map(c=>{const s=coinSer(c.sym,"7D");return {k:"coin:"+c.sym,t:c.sym+" · 7일",v:krw(c.krw).replace("₩","₩"),cx:`${usd(c.usd)} · 24h ${c.chg==null?"—":c.chg.toFixed(2)+"%"}`,sp:chLine(s.krw||[],{h:42}),tone:c.chg>=0?"ok":"err",fr:LIVE.upAt||mk.at}}),
+ {k:"fx",t:"USD/KRW · 90일",v:fxCur()?"₩"+(+fxCur()).toFixed(1):"—",cx:fx.length?`90일 고 ${Math.max(...fx.map(p=>p[1])).toFixed(0)} · 저 ${Math.min(...fx.map(p=>p[1])).toFixed(0)}`:"",sp:chLine(fx,{h:42,color:"var(--work)"}),tone:"info",fr:mk.at},
+ {k:"wx",t:"시더파크 날씨 · 48h",v:(w.current?Math.round((LIVE.wx||w.current).temperature_2m)+"<small>°F "+(WMO[(LIVE.wx||w.current).weather_code]||"")+"</small>":"—"),cx:w.daily?`오늘 ${Math.round(w.daily.temperature_2m_min[0])}–${Math.round(w.daily.temperature_2m_max[0])}°F · 내일 ${WMO[w.daily.weather_code[1]]||""}`:"",sp:w.hourly?chLine(w.hourly.time.map((t,i)=>[Date.parse(t),w.hourly.temp[i]]),{h:42,color:"var(--warn)"}):"",tone:"info",fr:mk.at},
+ {k:"heat",t:"일별 지출 히트맵 · 13주",v:Object.keys(heat).length+"<small>일 지출</small>",cx:"진할수록 많이 쓴 날",sp:chHeat(heat,{cell:9,go:d=>"day:"+d,fmt:v=>money(v)}),tone:"info",fr},
+ {k:"mailx",t:"메일 30일 · 유형",v:esc(m.total30Capped?"500+":m.total30??"—")+"<small>통</small>",cx:`안 읽음 ${m.unread} · 중요 ${m.importantUnread}`,sp:chBars(mc.map(x=>x.n),{h:44,labels:mc.map(x=>x.label),colors:mc.map((x,i)=>PAL[i+2])}),tone:"info",fr,nk:x=>x.kind==="mail"},
+ {k:"botsall",t:"봇 상태",v:`${D.health.ok}/${D.health.total}<small>정상</small>`,cx:bots.filter(b=>b.status==="working").map(b=>b.name).join(", ")+(st.working?" 작업 중":""),sp:`<div class="tdn">${chDonut([{l:"정상",v:st.ok||0,c:"var(--ok)"},{l:"작업",v:st.working||0,c:"var(--work)"},{l:"주의",v:(st.warn||0)+(st.err||0),c:"var(--err)"},{l:"대기",v:st.idle||0,c:"var(--mut)"}],{s:120,px:58,sw:18})}<div class="mini"><span><i style="background:var(--ok)"></i>정상 ${st.ok||0}</span><span><i style="background:var(--work)"></i>작업 ${st.working||0}</span></div></div>`,tone:"ok",fr:GA(),nk:x=>x.kind==="bot"},
+ {k:"bills",t:"다가오는 청구 · 35일",v:rec.length+"<small>건 · "+money(rec.filter(r=>r.next<=addD(TODAY(),35)).reduce((a,r)=>a+r.amount,0))+"</small>",cx:rec[0]?`${md(rec[0].next)} ${rec[0].name} ${money(rec[0].amount,2)}`:"예정 없음",sp:billLine(rec,35,40),tone:"warn",fr},
+ {k:"paper",t:"자동매매 페이퍼 (가상)",v:pp.length?pp.length+"<small>전략</small>":'<span class="mut">—</span>',cx:pp.length?pp.map(p=>p.strategy+" "+(p.cum>=0?"+":"")+p.cum.toFixed(2)+"%").slice(0,3).join(" · "):"데이터 없음",sp:pp.length?chBars(pp.map(p=>p.cum),{h:40,labels:pp.map(p=>p.strategy.slice(0,6))}):"",tone:"work",fr:pp[0]&&pp[0].updated},
+ {k:"imap",t:"대화 관심사 TOP",v:top.length?esc(top[0].topic.split(" ")[0])+"<small>"+top[0].n+"회</small>":"—",cx:top.slice(1,4).map(t=>t.topic.split(" ")[0]).join(" · "),sp:chBars(top.slice(0,8).map(t=>t.n),{h:40,colors:PAL}),tone:"info",fr:D.collectedAt},
+ {k:"fortune",t:"오늘 일진 · 재미용",v:ft.total+"<small>점 · "+esc(ft.ss)+"</small>",cx:ft.pillar+"일 · "+ft.hint,sp:chGauge(ft.total,{h:50,color:"var(--c)",label:ft.total+""}),tone:"info",fr:D.time.now},
+ ]}
+function billLine(rec,days,h=40){const W=320,s=TODAY(),xs=d=>8+(tsx(d)-tsx(s))/(days*864e5)*(W-16);let g=`<line x1="8" x2="${W-8}" y1="${h/2}" y2="${h/2}" stroke="rgba(34,227,245,.25)"/>`;
+ for(let i=0;i<=days;i+=7)g+=`<text x="${xs(addD(s,i))}" y="${h-1}" class="ax" text-anchor="middle">${md(addD(s,i))}</text>`;const mx=Math.max(...rec.map(r=>r.amount),1);
+ rec.filter(r=>r.next<=addD(s,days)).forEach(r=>{g+=`<circle cx="${xs(r.next)}" cy="${h/2}" r="${(2.5+6*Math.sqrt(r.amount/mx)).toFixed(1)}" fill="var(--warn)" fill-opacity=".7"><title>${md(r.next)} ${esc(r.name)} ${money(r.amount,2)}</title></circle>`});
+ return `<svg class="ch" viewBox="0 0 ${W} ${h}" width="100%" height="${h}" preserveAspectRatio="none">${g}</svg>`}
+const ctSet=keys=>{const A=cTiles();return `<div class="tiles">${keys.map(k=>A.find(t=>t.k===k)).filter(Boolean).map(tileHTML).join("")}</div>`};
+function tiles(){const a=tilesV9(),ks=new Set(a.map(t=>t.k));return [...a,...cTiles().filter(t=>!ks.has(t.k))]}
+V.wk=()=>{window._ms="wk";return V.money()};V.heat=()=>{window._ms="day";return V.money()};V.mailx=()=>V.c("mail");
+
+// ================= categories =================
+const CATS=[["money","돈","$","var(--ok)"],["inv","투자·코인","↗","var(--warn)"],["life","일정·생활","◷","var(--c)"],["mail","메일·연락","✉","var(--work)"],["grow","성장·학습","✎","#a78bfa"],["imap","관심사","◎","#e879f9"],["reco","추천·운세","✦","#ff9f43"],["bots","봇·시스템","⬡","#38e08c"],["conn","연결","⇄","#9fb9c2"]];
+function catChart(k){const f=F(),m=M(),mk=MK();try{switch(k){
+ case"money":{const df=dailyFlow(30);return [money(f.spend30),"30일 지출 · 순 "+sg(f.cash30),chBars(df.map(x=>x.sp),{h:50,color:"var(--ok)"})]}
+ case"inv":{const s=coinSer("BTC","30D");const c=coinNow("BTC");return [krw(c.krw),"BTC 30일 · ETF "+Object.keys(mk.stocks||{}).length+"종",chLine(s.krw||[],{h:50})]}
+ case"life":{const w=mk.weather||{};return [(D.cal.holidays||[]).length+"<small>공휴일·기념일</small>","행사 "+(D.events||[]).length+" · 7일 기온",w.daily?chBars(w.daily.temperature_2m_max,{h:50,color:"var(--warn)",labels:w.daily.time.map(t=>WDK[(DT(t).getDay()+6)%7]),vl:1,fmt:v=>Math.round(v)}):""]}
+ case"mail":{const mc=(m.count30||[]).filter(x=>x.n);return [esc(m.unread)+"<small>안 읽음</small>","30일 유형별",chBars(mc.map(x=>x.n),{h:50,labels:mc.map(x=>x.label),colors:mc.map((x,i)=>PAL[i+2])})]}
+ case"grow":{const t=((D.profile||{}).topics||[]).find(x=>/영어/.test(x.topic));const h=(D.profile||{}).activityHour||[];return [(t?t.n:"—")+"<small>영어 언급</small>","목표 "+((D.profile||{}).goals||[]).length+"개 · 시간대별 활동",chBars(h,{h:50,color:"#a78bfa"})]}
+ case"imap":{const tp=((D.profile||{}).topics||[]).slice(0,6);return [tp.length+"<small>주제</small>",tp.slice(0,3).map(x=>x.topic.split(" ")[0]).join(" · "),chBars(tp.map(x=>x.n),{h:50,colors:PAL})]}
+ case"reco":{const ft=fortuneX(),it=RC().items||[];return [it.length+"<small>추천</small>","일진 "+ft.pillar+" · "+ft.ss,chGauge(ft.total,{h:52,color:"#ff9f43",label:ft.total+"점"})]}
+ case"bots":{return [D.health.ok+"/"+D.health.total,"정상 봇",chGauge(100*D.health.ok/D.health.total,{h:52,color:"var(--ok)",label:D.health.ok+"/"+D.health.total})]}
+ case"conn":{const cc=(D.conn&&D.conn.categories)||[];let on=0,all=0;cc.forEach(c=>(c.items||[]).forEach(i=>{all++;if(/연결됨|ok|on|✓/i.test(JSON.stringify(i)))on++}));return [all+"<small>항목</small>",cc.length+"개 분류",chBars(cc.map(c=>(c.items||[]).length),{h:50,color:"#9fb9c2",labels:cc.map(c=>String(c.key).slice(0,3))})]}
+ }}catch(e){return ["—","오류",""]}return ["—","",""]}
+const catGo=k=>({money:"money",inv:"inv",imap:"imap",reco:"reco",bots:"bots",conn:"conn"}[k]||"c:"+k);
+V.cats=()=>`${H2("카테고리","9개 · 눌러서 상세")}<div class="cgrid">${CATS.map(([k,l,ic,col])=>{const [v,s,ch]=catChart(k);return `<div class="ctile" style="--tone:${col}" onclick="go('${catGo(k)}')"><div class="t"><b style="color:${col}">${ic}</b> ${esc(l)}</div><div class="v">${v}</div><div class="cx">${esc(s)}</div>${ch}</div>`}).join("")}</div>
+ ${H2("빠른 이동")}${card(row("sched","일정 · 메일 (기존)","캘린더·공휴일·행사·메일")+row("more","더보기","주문·가족·부업·Drive·GitHub·X")+row("newall","새 소식 전체","NEW 항목 모아보기"))}`;
+V.c=k=>{const C=CATS.find(c=>c[0]===k);if(!C)return V.cats();const head=H2(C[1],"카테고리");
+ if(k==="life"){const w=MK().weather||{},cal=D.cal||{};return head+ctSet(["wx","bills"])+tileSet(["cal","events","family","orders"])+H2("7일 예보","Open-Meteo · "+hm(MK().at))+card(wxStrip(w))+H2("앞으로 45일","공휴일·기념일 · 개인 일정 "+((cal.personal||[]).length)+"개")+card((cal.holidays||[]).map(h=>row("hol:"+h.date,h.title,md(h.date)+" · "+WDK[(DT(h.date).getDay()+6)%7]+"요일")).join("")||row(null,"데이터 없음"))+card(row("sched","전체 일정 보기",""))}
+ if(k==="mail"){const m=M(),mc=(m.count30||[]);return head+ctSet(["mailx"])+tileSet(["unread","flag","reply","orders"])+H2("30일 메일 유형",m.total30Capped?"500통 이상 (조회 상한)":"")+card(hbars(mc.map((x,i)=>({l:x.label,v:x.n,c:PAL[i+2],go:"unread"})),{}))+card(row("unread","메일함 요약","")+row("important","중요 메일",""))}
+ if(k==="grow"){const p=D.profile||{};return head+tileSet(["eng","gh","drive"])+H2("목표","대화·메모에서")+card((p.goals||[]).map(g=>row(null,g.t,g.src)).join("")||row(null,"데이터 없음"))+H2("시간대별 활동","봇 대화 기록 · 시")+card(chBars(p.activityHour||[],{h:80,labels:(p.activityHour||[]).map((_,i)=>i%3?"":i),color:"#a78bfa"}))+card(row("imap","관심사·패턴 전체",""))}
+ return V[catGo(k)]?V[catGo(k)]():V.cats()};
+function wxStrip(w){if(!w||!w.daily)return row(null,"데이터 없음");const d=w.daily;const IC=c=>c===0?"☀":c<=2?"⛅":c===3?"☁":c<=48?"🌫":c<=67?"🌧":c<=82?"🌦":"⛈";
+ return `<div class="wxs">${d.time.map((t,i)=>`<div><small>${i?WDK[(DT(t).getDay()+6)%7]:"오늘"}</small><b>${IC(d.weather_code[i])}</b><span>${Math.round(d.temperature_2m_max[i])}°</span><small>${Math.round(d.temperature_2m_min[i])}°</small>${d.precipitation_probability_max?`<small class="t-work">${d.precipitation_probability_max[i]??"—"}%</small>`:""}</div>`).join("")}</div>`+(w.hourly?chLine(w.hourly.time.map((t,i)=>[Date.parse(t),w.hourly.temp[i]]),{h:90,axis:1,color:"var(--warn)",fmt:v=>Math.round(v)+"°F",xfmt:tfmt("1D")}):"")}
+
+// ================= home =================
+V.home=()=>{const t=D.time,it=(RC().items||[]).slice().sort((a,b)=>a.prio-b.prio);return `<div class="brief"><div class="d">${t.weekday}요일 ${md(t.now)} · 브리핑</div><ul>${D.headline.map((h,i)=>`<li onclick="go('${["flow","spend","bills","botsall"][i]||"botsall"}')">${esc(h)}</li>`).join("")}</ul></div>
+ <div class="cchips">${CATS.map(([k,l,ic,col])=>`<button onclick="go('${catGo(k)}')" style="--tone:${col}"><b>${ic}</b>${esc(l)}</button>`).join("")}</div>
+ ${H2("한눈에 보기","차트 · 눌러서 상세")}${ctSet(["flow","spend","wk","net","card","coin:BTC","coin:ETH","coin:XRP","fx","wx","heat","mailx","bills","paper","imap","fortune","botsall"])}
+ ${H2("오늘의 추천 TOP",it.length+"개")}<div class="rcards">${it.slice(0,6).map(rCard).join("")}</div>${card(row("reco","추천 전체 보기",""))}`};
+const RCI={"돈":"$","지역":"⌖","학습":"✎","가족":"♥","관심사":"◎"};
+const rCard=r=>`<div class="rc" style="--tone:${CATC[r.cat]||"#e879f9"}" onclick="go('rec7:${r.id}')"><div class="t"><b>${RCI[r.cat]||"✦"}</b>${esc(r.cat)}${nwId("reco",r.id)}${r.due?`<span class="du">~${md(r.due)}</span>`:""}</div><div class="h">${esc(r.title)}</div><div class="w">${esc(r.why)}</div></div>`;
+CATC["관심사"]="#e879f9";
+
+// ================= invest / coin / stock =================
+V.inv=()=>{const mk=MK(),cs=Object.keys(mk.coins||{}).map(coinNow),st=Object.values(mk.stocks||{}),pp=(D.paper||{}).items||[];
+ const stTile=s=>{const se=(s.series||{})["90D"]||[];return {k:"stk:"+s.sym,t:s.sym+" · "+(s.name||""),v:(s.cur==="KRW"?krw(s.price):usd(+s.price)),cx:`전일 대비 ${s.chg>=0?"+":""}${(+s.chg).toFixed(2)}% · 90일 ${se.length>1?((100*(se[se.length-1][1]/se[0][1]-1)).toFixed(1)+"%"):"—"}`,sp:chLine(se,{h:38}),tone:s.chg>=0?"ok":"err",fr:mk.at}};
+ const grp={};st.forEach(s=>(grp[s.group||"기타"]=grp[s.group||"기타"]||[]).push(s));
+ return `${H2("코인",(LIVE.upAt?"LIVE 시세 · ":"스냅샷 · ")+hm(LIVE.upAt||mk.at))}<div class="tiles">${cs.map(c=>{const s=coinSer(c.sym,"7D");return tileHTML({k:"coin:"+c.sym,t:c.sym+" "+c.name,v:krw(c.krw),cx:`${usd(c.usd)} · 24h ${c.chg==null?"—":c.chg.toFixed(2)+"%"}`,sp:chLine(s.krw||[],{h:40}),tone:c.chg>=0?"ok":"err",fr:LIVE.upAt||mk.at})}).join("")}${tileHTML(cTiles().find(t=>t.k==="fx"))}</div>
+ ${H2("자동매매 페이퍼 성과","가상자금 · 실제 손익 아님")}${card(paperChart(pp)+pp.map(p=>row("paper",p.strategy,`${p.currency} · 시작 ${fmtK(p.start)} → ${fmtK(p.equity)} · 거래 ${p.trades} · MDD ${p.mdd.toFixed(2)}% · 재시작 ${p.runs-1}회`,`<span class="${p.cum>=0?"t-ok":"t-err"}">${p.cum>=0?"+":""}${p.cum.toFixed(2)}%</span>`,"현재 런")).join("")||row(null,"데이터 없음"))}
+ ${Object.entries(grp).map(([g,l])=>H2("주식·ETF · "+g,l.length+"종 · Yahoo 스냅샷 "+hm(mk.at))+`<div class="tiles">${l.map(s=>tileHTML(stTile(s))).join("")}</div>`).join("")}
+ ${H2("매매 봇")}${card(D.bots.filter(b=>DEPT["매매"].some(p=>b.id.startsWith(p))).map(botRow).join(""))}
+ <div class="note">코인: 업비트(KRW)·CoinGecko(USD) 공개 API — 페이지에서 직접 조회, 실패 시 박스 스냅샷. 주식은 브라우저 CORS 차단으로 박스에서 수집한 스냅샷만. 실계좌 보유·손익은 연결 안 됨.</div>`};
+V.invest=V.inv;V.crypto=V.inv;
+function paperChart(pp){if(!pp.length)return"";const lines=pp.map((p,i)=>{const s=p.series.filter(x=>x[2]===p.run.slice(0,8));return {p,s:s.map(x=>[tsx(x[0]),x[1]]),c:PAL[i]}});
+ const all=lines.flatMap(l=>l.s);if(all.length<2)return"";const x0=Math.min(...all.map(p=>p[0])),x1=Math.max(...all.map(p=>p[0])),y0=Math.min(0,...all.map(p=>p[1])),y1=Math.max(0,...all.map(p=>p[1]));const W=320,Hh=110,sx=x=>4+(x-x0)/((x1-x0)||1)*(W-52),sy=y=>8+(1-(y-y0)/((y1-y0)||1))*(Hh-26);
+ let g=`<line x1="4" x2="${W-48}" y1="${sy(0)}" y2="${sy(0)}" stroke="rgba(255,255,255,.25)" stroke-dasharray="3 3"/>`;lines.forEach(l=>{if(l.s.length<1)return;g+=`<path d="${l.s.map((p,i)=>(i?"L":"M")+sx(p[0]).toFixed(1)+","+sy(p[1]).toFixed(1)).join("")}" fill="none" stroke="${l.c}" stroke-width="1.6"/>`;const e=l.s[l.s.length-1];g+=`<circle cx="${sx(e[0])}" cy="${sy(e[1])}" r="2.5" fill="${l.c}"/>`});
+ g+=`<text x="${W-44}" y="${sy(y1)+3}" class="ax">${y1.toFixed(2)}%</text><text x="${W-44}" y="${sy(y0)+3}" class="ax">${y0.toFixed(2)}%</text><text x="4" y="${Hh-3}" class="ax">${md(ISO(new Date(x0)))}</text><text x="${W-48}" y="${Hh-3}" class="ax" text-anchor="end">${md(ISO(new Date(x1)))}</text>`;
+ return `<svg class="ch" viewBox="0 0 ${W} ${Hh}" width="100%" height="${Hh}" preserveAspectRatio="none">${g}</svg>`+legend(lines.map(l=>({l:l.p.strategy,c:l.c,t:(l.p.cum>=0?"+":"")+l.p.cum.toFixed(2)+"%"})))}
+V.paper=()=>{const pp=(D.paper||{}).items||[];return H2("자동매매 페이퍼 성과","가상자금 · "+esc((D.paper||{}).src||""))+card(paperChart(pp))+pp.map(p=>H2(p.strategy,p.currency+" · 런 "+p.run.slice(0,15))+card(chLine(p.series.filter(x=>x[2]===p.run.slice(0,8)).map(x=>[tsx(x[0]),x[1]]),{h:100,axis:1,zero:1,fmt:v=>v.toFixed(2)+"%",xfmt:x=>md(ISO(new Date(x)))})+`<div class="kp" style="margin-top:8px">${kpi(null,"누적",(p.cum>=0?"+":"")+p.cum.toFixed(2)+"%","현재 런")}${kpi(null,"평가금",fmtK(p.equity),"시작 "+fmtK(p.start))}${kpi(null,"MDD",p.mdd.toFixed(2)+"%","")}${kpi(null,"거래",p.trades,"재시작 "+(p.runs-1)+"회")}</div>`)).join("")+`<div class="note">trading-system 일일 요약(daily.csv)을 읽기 전용으로 집계. 업데이트 ${hm(pp[0]&&pp[0].updated)}. 실계좌 손익 아님.</div>`};
+V.coin=sym=>{const r=window._rg,c=coinNow(sym),s=coinSer(sym,r);loadCoin(sym,r);const sk=stat(s.krw),su=stat(s.usd),fx=fxCur(),kp=c.krw&&c.usd&&fx?100*(c.krw/(c.usd*fx)-1):null;
+ return `${H2(sym+" · "+c.name,(s.liveK?"LIVE ":"스냅샷 ")+hm(s.at))}${seg(r,RG.map(x=>[x,x]),"setRg")}
+ <div class="kp">${kpi(null,"KRW (업비트)",krw(c.krw),"24h "+(c.chg==null?"—":c.chg.toFixed(2)+"%"))}${kpi(null,"USD (글로벌)",usd(c.usd),"24h "+(c.usdChg==null?"—":c.usdChg.toFixed(2)+"%"))}${kpi(null,r+" 변동",sk?pc(sk.chg):"—",sk?"고 "+krw(sk.hi)+" · 저 "+krw(sk.lo):"")}${kpi(null,"김치 프리미엄",kp==null?"—":kp.toFixed(2)+"%","KRW ÷ (USD×환율) − 1, 추정")}</div>
+ ${H2("KRW 차트 · 업비트",r+(s.liveK?" · LIVE":" · 스냅샷"))}${card(chLine(s.krw||[],{h:170,axis:1,fmt:v=>"₩"+fmtK(v),xfmt:tfmt(r)}))}
+ ${H2("USD 차트 · CoinGecko",r+(s.liveU?" · LIVE":" · 스냅샷"))}${card(chLine(s.usd||[],{h:150,axis:1,fmt:v=>usd(v),xfmt:tfmt(r)}))}
+ ${card(row(null,r+" 고가 / 저가 (KRW)",sk?`시작 ${krw(sk.first)} → ${krw(sk.last)}`:"",sk?krw(sk.hi):"—",sk?"저 "+krw(sk.lo):"")+row(null,r+" 고가 / 저가 (USD)",su?`변동 ${su.chg.toFixed(2)}%`:"",su?usd(su.hi):"—",su?"저 "+usd(su.lo):"")+row(null,"24h 고가 / 저가 (업비트)","",krw(c.high),"저 "+krw(c.low)))}
+ ${H2("다른 코인")}${card(Object.keys(MK().coins||{}).filter(x=>x!==sym).map(x=>{const n=coinNow(x);return row("coin:"+x,x+" "+n.name,usd(n.usd),krw(n.krw),n.chg==null?"":n.chg.toFixed(2)+"%")}).join(""))}
+ <div class="note">페이지에서 업비트 캔들·CoinGecko market_chart를 직접 조회(LIVE), 실패하면 박스 스냅샷(${hm(MK().at)}). 30D 스냅샷은 90일 일봉에서 잘라 씀.</div>`};
+V.stk=sym=>{const s=(MK().stocks||{})[sym];if(!s)return card(row(null,"종목 데이터 없음"));const r=window._rg,ser=snapSer(s.series,r)||[],st=stat(ser),fx=fxCur(),isK=s.cur==="KRW",f=v=>isK?krw(v):usd(v);
+ return `${H2(sym+" · "+(s.name||""),"Yahoo 스냅샷 · "+hm(MK().at))}${seg(r,RG.map(x=>[x,x]),"setRg")}<div class="kp">${kpi(null,"현재가",f(+s.price),"전일 "+f(+s.prev))}${kpi(null,"전일 대비",pc(+s.chg),"")}${kpi(null,r+" 변동",st?pc(st.chg):"—",st?"고 "+f(st.hi)+" · 저 "+f(st.lo):"")}${kpi(null,isK?"USD 환산":"KRW 환산",fx?(isK?usd(s.price/fx):krw(s.price*fx)):"—","환율 "+(fx?(+fx).toFixed(1):"—"))}</div>
+ ${card(chLine(ser,{h:180,axis:1,fmt:f,xfmt:tfmt(r)}))}<div class="note">그룹: ${esc(s.group||"")} · 주식 시세는 브라우저 CORS 제한으로 박스 수집 스냅샷만 (지연 가능). 7D·30D는 90일 일봉에서 잘라 씀.</div>`};
+V.fx=()=>{const s=fxSer(),st=stat(s),f=MK().fx||{};return H2("USD/KRW 환율","90일 · "+esc(f.src||""))+`<div class="kp">${kpi(null,"1 USD",fxCur()?"₩"+(+fxCur()).toFixed(2):"—",LIVE.fx?"LIVE (er-api)":"스냅샷")}${kpi(null,"$1,000 =",fxCur()?krw(fxCur()*1000):"—","송금 전 참고")}${kpi(null,"90일 고/저",st?st.hi.toFixed(1)+" / "+st.lo.toFixed(1):"—","")}${kpi(null,"90일 변동",st?pc(st.chg):"—","")}</div>`+card(chLine(s,{h:170,axis:1,color:"var(--work)",fmt:v=>"₩"+v.toFixed(1),xfmt:x=>md(ISO(new Date(x)))}))+`<div class="note">Frankfurter(ECB 기준, 영업일) 시계열 + open.er-api 현재값</div>`};
+V.wx=()=>H2("시더파크 날씨","Open-Meteo · "+(LIVE.wx?"LIVE":"스냅샷 "+hm(MK().at)))+ctSet(["wx"])+card(wxStrip(MK().weather));
+
+// ================= spending =================
+window._ms=window._ms||"cat";window._mp=window._mp||30;window._tf=window._tf||{q:"",cat:"",src:"",sort:"date",dir:-1};
+const setMs=v=>{window._ms=v;render()},setMp=v=>{window._mp=+v;render()};
+V.money=()=>{const f=F(),n=window._mp,ms=window._ms,sp=TXP(n).filter(isSp),tot=sp.reduce((a,t)=>a-t.amount,0),inc=TXP(n).filter(isIn).reduce((a,t)=>a+t.amount,0),df=dailyFlow(n);let cum=0;
+ let body="";if(ms==="cat"){const p=catParts(n,8);body=`<div class="dnw">${chDonut(p,{s:150,px:150,center:money(tot),sub:n+"일 지출",fs:15})}${legend(p)}</div>`+hbars(catSp(n).map((x,i)=>({l:x.l,v:x.v,c:PAL[i%PAL.length],go:"cat:"+encodeURIComponent(x.l)})),{fmt:v=>money(v)})}
+ else if(ms==="mer"){const l=merchSp(n).slice(0,15);body=hbars(l.map(x=>({l:x.l,v:x.v,go:""})),{fmt:v=>money(v)})+`<div class="note">상위 15곳 · 이름 기준 묶음</div>`}
+ else if(ms==="wk"){const w=weeklySp(n);body=chBars(w.map(x=>x.v),{h:130,labels:w.map(x=>md(x.k)),vl:1,fmt:v=>"$"+fmtK(v),hi:w.length-1})+`<div class="note">월요일 시작 주 · 이번 주는 진행 중</div>`}
+ else if(ms==="wd"){const w=wdSp(n);body=chBars(w,{h:120,labels:WDK,vl:1,fmt:v=>"$"+Math.round(v),hi:w.indexOf(Math.max(...w))})+`<div class="note">요일별 하루 평균 지출 (${n}일)</div>`}
+ else {const hm2={};sp.forEach(t=>hm2[t.date]=(hm2[t.date]||0)-t.amount);body=chHeat(hm2,{days:n,cell:13,go:d=>"day:"+d,fmt:v=>money(v)})+chBars(df.map(x=>x.sp),{h:80,color:"var(--ok)",labels:df.map(x=>x.d.slice(8))})}
+ const cats=[...new Set((f.tx||[]).map(t=>t.cat))].sort();
+ return `<div class="kp">${kpi("spend",n+"일 지출",money(tot),"")}${kpi("flow",n+"일 입금",money(inc),"")}${kpi("flow","순현금흐름",sg(inc-tot),"")}${kpi("card","카드 사용률",(f.cardUtil??"—")+"%",money(f.cardBalance)+" 사용")}</div>
+ ${H2("현금흐름 누적",n+"일 · 입금 − 지출")}${card(chLine(df.map(x=>{cum+=x.in-x.sp;return [tsx(x.d),cum]}),{h:120,axis:1,zero:1,fmt:v=>sg(Math.round(v)),xfmt:x=>md(ISO(new Date(x)))}))}
+ ${H2("지출 분석")}${seg(String(n),[["30","30일"],["60","60일"],["90","90일"]],"setMp")}${seg(ms,[["cat","카테고리"],["mer","가맹점"],["wk","주별"],["wd","요일"],["day","일별"]],"setMs")}${card(body)}
+ ${H2("순현금 추이","거래 역산 추정 · 90일")}${card(chLine(balTrend(90).map(x=>[tsx(x.d),x.net]),{h:110,axis:1,color:"var(--c)",fmt:v=>money(v),xfmt:x=>md(ISO(new Date(x)))}))}
+ ${H2("청구·정기결제 타임라인","35일")}${card(billLine([...(f.bills||[]),...(f.recurring||[])].filter(r=>r.next>=TODAY()),35,52)+[...(f.recurring||[]).map((r,i)=>({...r,ix:i})),...(f.bills||[]).map(r=>({...r,ix:null}))].filter((r,i,a)=>a.findIndex(y=>y.name===r.name&&y.amount===r.amount)===i).sort((a,b)=>{const T=TODAY(),pa=a.next<T,pb=b.next<T;return pa!==pb?(pa?1:-1):(a.next<b.next?-1:1)}).map(r=>row(r.ix==null?null:"rec:"+r.ix,r.name,`${r.kind} · ${r.cat} · 다음 ${md(r.next)}${r.next<TODAY()?" (지남·추정)":""}`,money(r.amount,2),r.count+"회")).join(""))}
+ ${H2("거래 내역","정렬·필터 · 90일")}<div class="tf"><input id="tfq" placeholder="가맹점·금액 검색" value="${esc(window._tf.q)}" oninput="window._tf.q=this.value;tbRender()"><select onchange="window._tf.cat=this.value;tbRender()"><option value="">전체 분류</option>${cats.map(c=>`<option ${c===window._tf.cat?"selected":""}>${esc(c)}</option>`).join("")}</select><select onchange="window._tf.src=this.value;tbRender()"><option value="">카드+계좌</option><option value="card" ${window._tf.src==="card"?"selected":""}>카드</option><option value="bank" ${window._tf.src==="bank"?"selected":""}>계좌</option></select></div><div class="card" id="tb">${tbHTML()}</div>
+ ${tileSet(["pending","net"])}<div class="note">BoA 거래(Plaid) 기준. 지출 = 카드결제·카드대금 이체 제외. 순현금 추이는 현재 잔액에서 거래를 거꾸로 빼서 계산한 추정치.</div>`};
+const tbSort=k=>{const t=window._tf;t.dir=t.sort===k?-t.dir:(k==="name"||k==="cat"?1:-1);t.sort=k;tbRender()};
+function tbHTML(){const t=window._tf,q=t.q.toLowerCase();let l=(F().tx||[]).filter(x=>(!t.cat||x.cat===t.cat)&&(!t.src||x.src===t.src)&&(!q||x.name.toLowerCase().includes(q)||String(Math.abs(x.amount)).includes(q)||x.date.includes(q)));
+ const k=t.sort;l.sort((a,b)=>{const A=k==="amount"?Math.abs(a.amount):a[k],B=k==="amount"?Math.abs(b.amount):b[k];return (A<B?-1:A>B?1:0)*t.dir});const sum=l.reduce((a,x)=>a+x.amount,0);
+ const th=(k2,l2)=>`<th onclick="tbSort('${k2}')" class="${t.sort===k2?"on":""}">${l2}${t.sort===k2?(t.dir>0?" ▲":" ▼"):""}</th>`;
+ return `<table class="tb"><thead><tr>${th("date","날짜")}${th("name","가맹점")}${th("cat","분류")}${th("amount","금액")}</tr></thead><tbody>${l.slice(0,200).map(x=>`<tr onclick="go('tx:${x.id}')"><td>${md(x.date)}</td><td>${esc(x.name)}${x.pending?' <small class="mut">대기</small>':""}</td><td><small>${esc(x.cat)}</small></td><td class="${x.amount>0?"t-ok":""}">${x.amount>0?"+":""}${money(x.amount,2)}</td></tr>`).join("")}</tbody></table><div class="note">${l.length}건 · 합계 ${sg(Math.round(sum*100)/100)}${l.length>200?" · 상위 200건 표시":""}</div>`}
+function tbRender(){const e=$("tb");if(e)e.innerHTML=tbHTML()}
+V.spend=V.money;
+
+// ================= interests & patterns =================
+V.imap=()=>{const p=D.profile||{},tp=p.topics||[],mx=Math.max(...tp.map(t=>t.n),1),u=p.uses||{},it=(RC().items||[]).filter(r=>r.cat==="관심사");const m=M(),mc=(m.count30||[]).filter(x=>x.n);
+ return `${H2("관심사 지도","봇 대화에서 언급 횟수")}<div class="card bub">${tp.map((t,i)=>{const s=Math.round(46+74*Math.sqrt(t.n/mx));return `<div style="width:${s}px;height:${s}px;background:${PAL[i%PAL.length]}22;border-color:${PAL[i%PAL.length]}" onclick="go('topic:${i}')"><b style="font-size:${Math.max(10,Math.min(14,s/7))}px">${esc(t.topic.split(" (")[0])}</b><small>${t.n}</small></div>`}).join("")}</div>
+ ${H2("이야기해온 관심사 반영 추천",it.length+"개")}<div class="rcards">${it.map(rCard).join("")||card(row(null,"데이터 없음"))}</div>
+ ${H2("관심 시세")}${ctSet(["coin:BTC","fx","wx","paper"])}
+ ${H2("활동 패턴 · 시간대","봇 대화 기록(CT)")}${card(chBars(p.activityHour||[],{h:90,labels:(p.activityHour||[]).map((_,i)=>i%3?"":i+"시"),hi:(p.activityHour||[]).indexOf(Math.max(...(p.activityHour||[0]))),color:"#a78bfa"})+`<div class="note">전체 대화 턴 ${(p.activityHour||[]).reduce((a,b)=>a+b,0)} · 혁진님 직접 메시지 ${p.human??"—"}건 (자동화 메시지 포함 집계)</div>`)}
+ ${H2("활동 패턴 · 요일")}${card(chBars(p.activityWd||[],{h:80,labels:WDK,vl:1,color:"#a78bfa"}))}
+ ${H2("대화 활동 일자")}${card(chHeat(p.days||{},{days:42,cell:14,color:"#a78bfa",fmt:v=>v+"턴"}))}
+ ${H2("지출 패턴 · 요일","90일 하루 평균")}${card(chBars(wdSp(90),{h:80,labels:WDK,vl:1,fmt:v=>"$"+Math.round(v),color:"var(--ok)"}))}
+ ${H2("메일 패턴","30일 유형별")}${card(hbars(mc.map((x,i)=>({l:x.label,v:x.n,c:PAL[i+2]}))))}
+ ${H2("사용하는 것들","커넥터·서비스·저장소·프로젝트")}${card(Object.entries({connectors:"커넥터",services:"서비스",repos:"저장소",projects:"박스 프로젝트"}).map(([k,l])=>(u[k]||[]).length?`<div class="cl"><small>${l} ${(u[k]||[]).length}</small><div class="chips">${u[k].map(x=>`<span>${esc(x)}</span>`).join("")}</div></div>`:"").join(""))}
+ ${H2("목표","메모·대화에서")}${card((p.goals||[]).map(g=>row(null,g.t,g.src)).join("")||row(null,"데이터 없음"))}
+ <div class="note">출처: ${esc(p.src||"—")} · 봇 목록: ${esc((p.bots||[]).join(", "))}. 공개 정보 아님(암호화). 메시지 본문은 저장하지 않고 주제 키워드 횟수만 셈.</div>`};
+V.interest=V.imap;
+V.topic=i=>{const t=((D.profile||{}).topics||[])[+i];if(!t)return card(row(null,"없음"));return H2(t.topic,t.n+"회 언급")+card(t.bots.map(b=>row(null,b,"이 봇 대화에서 언급")).join(""))+H2("관련 추천")+`<div class="rcards">${(RC().items||[]).filter(r=>t.topic.split(/[ ·()/]/).filter(w=>w.length>1).some(w=>(r.title+r.why).includes(w))).map(rCard).join("")||card(row(null,"관련 추천 없음"))}</div>`};
+
+// ================= fortune (saju 일진, 재미용) =================
+const STEM="甲乙丙丁戊己庚辛壬癸",BR="子丑寅卯辰巳午未申酉戌亥",STK="갑을병정무기경신임계",BRK="자축인묘진사오미신유술해",EL=["木","木","火","火","土","土","金","金","水","水"],ELK={"木":"목","火":"화","土":"토","金":"금","水":"수"};
+function dayPillar(iso){const [y,m,d]=iso.split("-").map(Number);const a=Math.floor((14-m)/12),yy=y+4800-a,mm=m+12*a-3;const jdn=d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045;return (jdn+49)%60}
+function sipsung(dm,o){const ord=["木","火","土","金","水"],a=ord.indexOf(EL[dm]),b=ord.indexOf(EL[o]),same=(dm%2)===(o%2),r=(b-a+5)%5;return [["비견","겁재"],["식신","상관"],["편재","정재"],["편관","정관"],["편인","정인"]][r===0?0:r===1?1:r===2?2:r===3?3:4][same?0:1]}
+const SSX={"비견":["자기 주도","경쟁·지출 주의, 내 페이스 유지",-6,0,4,0],"겁재":["경쟁","돈 새는 곳 점검, 충동구매 주의",-10,-2,2,0],"식신":["표현·여유","아이디어·창작이 잘 풀림",6,4,6,4],"상관":["재능 발휘","말·글은 부드럽게, 새 시도 좋음",2,0,4,2],
+ "편재":["재물 기회","부수입·투자 아이디어 점검하기 좋은 날",12,0,4,0],"정재":["안정 재물","가계부·구독 정리 등 꼼꼼한 돈 관리",10,2,4,2],"편관":["압박·책임","업무 압박, 무리하지 말기",-2,-4,-2,4],"정관":["신뢰·질서","약속·서류·규칙 지키면 이득",4,2,4,4],"편인":["직관·연구","공부·연구·전략 구상에 좋음",0,0,2,10],"정인":["도움·학습","배움과 도움이 들어오는 날",2,4,6,12]};
+function fortuneX(){const day=TODAY(),fo=D.fortune||{},dmc=(fo.dayStem||""),dm=STEM.indexOf(dmc)>=0?STEM.indexOf(dmc):6,dp=dayPillar(day),s=dp%10,b=dp%12,ss=sipsung(dm,s),x=SSX[ss],r=prng(day+"|"+(fo.birthday||""));const sc=adj=>Math.max(35,Math.min(98,Math.round(60+r()*28+adj)));
+ const lack=Object.entries(fo.elements||{}).filter(e=>!e[1]).map(e=>e[0]);const LC={"木":["초록","#3ddc97"],"水":["남색","#3b5bdb"],"火":["빨강","#ff5c6c"],"土":["노랑","#ffd24a"],"金":["흰색","#e8f6f8"]};const lc=LC[lack.length?lack[dp%lack.length]:EL[s]];
+ return {day,pillar:STEM[s]+BR[b]+"("+STK[s]+BRK[b]+")",ss,hint:x[0],text:x[1],total:sc(x[2]/2+x[3]/2),money:sc(x[2]),health:sc(x[3]),rel:sc(x[4]),study:sc(x[5]),color:lc,num:1+Math.floor(r()*45),dm:dmc,lack,fo,elStem:EL[s]}}
+V.fortune=()=>{const f=fortuneX(),fo=f.fo,el=fo.elements||{},bars=["木","火","土","金","水"];
+ return `${H2("오늘의 일진 운세",md(f.day)+" · 재미용")}<div class="brief"><div class="d">${esc(f.pillar)}일 · 일간 ${esc(f.dm)}金 기준 십성 <b>${esc(f.ss)}</b></div><ul><li>${esc(f.hint)} — ${esc(f.text)}</li></ul></div>
+ <div class="fgrid">${[["종합",f.total,"var(--c)"],["재물",f.money,"var(--ok)"],["건강",f.health,"var(--warn)"],["관계",f.rel,"#e879f9"],["학습",f.study,"#a78bfa"]].map(([l,v,c])=>`<div class="fc">${chGauge(v,{color:c,h:56,label:v+""})}<small>${l}운</small></div>`).join("")}
+ <div class="fc"><div class="lc" style="background:${f.color[1]}"></div><small>행운의 색 ${esc(f.color[0])} · 숫자 ${f.num}</small></div></div>
+ ${H2("내 사주 오행","생일 "+esc(fo.birthday||"—")+" · "+esc(fo.src||""))}${card(`<div class="note" style="margin:4px 0 8px">${esc((fo.pillars||[]).join(" · "))}</div>`+hbars(bars.map((e,i)=>({l:e+" "+ELK[e],v:el[e]||0,c:["#3ddc97","#ff5c6c","#ffd24a","#e8f6f8","#3b5bdb"][i]})),{})+`<div class="note">부족한 오행: ${esc(f.lack.join("·")||"없음")} → 행운의 색은 부족한 오행 보완 색(민속적 해석). 오늘 천간 ${esc(f.elStem)}.</div>`)}
+ ${H2("이번 주 일진")}${card(`<div class="wxs">${[0,1,2,3,4,5,6].map(i=>{const d=addD(f.day,i),p=dayPillar(d),s2=sipsung(STEM.indexOf(f.dm),p%10);return `<div><small>${i?WDK[(DT(d).getDay()+6)%7]:"오늘"}</small><b style="font-size:15px">${STEM[p%10]}${BR[p%12]}</b><small>${s2}</small></div>`}).join("")}</div>`)}
+ <div class="note">일진(日辰)과 십성은 만세력 공식으로 계산, 점수와 문구는 십성별 경향 + 날짜 기반 난수. 과학적 근거 없음 · 재미로만.</div>`};
+
+V.reco=()=>{const R=RC(),it=R.items||[],cats=["관심사","돈","지역","학습","가족"];const L={"관심사":"이야기해온 관심사 반영","돈":"돈 · 절약 · 패시브 아이디어","지역":"이번 주말 · 주변 행사","학습":"영어","가족":"가족 · 학교"};
+ return `${H2("추천 · 운세",it.length+"개 · "+hm(R.at))}${ctSet(["fortune"])}${cats.map(c=>{const l=it.filter(r=>r.cat===c).sort((a,b)=>a.prio-b.prio);return l.length?H2(L[c],l.length+"개")+`<div class="rcards">${l.map(rCard).join("")}</div>`:""}).join("")}
+ ${H2("코인 뉴스","업비트·KRW 관련")}${card((R.news||[]).map(newsRow).join("")||row(null,"데이터 없음"))}<div class="note">${esc(R.disclaimer||"")}</div>`};
 // ---------- search ----------
 function search(q){const s=q.toLowerCase(),hit=x=>String(x||"").toLowerCase().includes(s),f=F(),m=M();
  const tx=(f.tx||[]).filter(t=>hit(t.name)||hit(t.cat)||hit(t.date)||hit(String(Math.abs(t.amount))));
@@ -257,11 +501,11 @@ function search(q){const s=q.toLowerCase(),hit=x=>String(x||"").toLowerCase().in
 let stack=[];
 function go(p){location.hash=p}
 function cur(){return decodeURIComponent((location.hash||"#home").slice(1))||"home"}
-const TITLE={net:"계좌·잔액",spend:"지출",flow:"현금흐름",card:"카드",bills:"청구 예정",recur:"정기결제",pending:"대기 결제",txall:"전체 거래",unread:"메일",flag:"확인 필요",cal:"일정",events:"주변 행사",drive:"Drive",gh:"GitHub",x:"X",meet:"회의",side:"부업",eng:"영어",routines:"루틴",conn:"연결",newall:"새 소식",fortune:"운세",crypto:"코인",fx:"환율",wx:"날씨",family:"가족·학교",orders:"영수증·주문",rec7:"추천",grok:"구독",invest:"투자"};
+const TITLE={net:"계좌·잔액",spend:"지출",flow:"현금흐름",card:"카드",bills:"청구 예정",recur:"정기결제",pending:"대기 결제",txall:"전체 거래",unread:"메일",flag:"확인 필요",cal:"일정",events:"주변 행사",drive:"Drive",gh:"GitHub",x:"X",meet:"회의",side:"부업",eng:"영어",routines:"루틴",conn:"연결",newall:"새 소식",fortune:"운세",crypto:"코인",fx:"환율",wx:"날씨",family:"가족·학교",orders:"영수증·주문",rec7:"추천",grok:"구독",invest:"투자",cats:"카테고리",c:"카테고리",inv:"투자·코인",coin:"코인 차트",stk:"주식·ETF",paper:"페이퍼 매매",imap:"관심사·패턴",interest:"관심사·패턴",topic:"관심사",wk:"주간 지출",heat:"일별 지출",mailx:"메일·연락"};
 function render(){if(!D)return;const p=cur(),q=$("q").value.trim();const [k,...r]=p.split(":");const a=r.join(":");const tab=TABS.find(t=>t[0]===k);
  const home=k==="home"&&!q;$("back").classList.toggle("on",!home);$("ttl").innerHTML=home?'혁진님의 <b>JARVIS</b>':esc(q?"검색":tab?tab[2]:(TITLE[k]||"상세"));
  $("fresh").textContent=`봇 ${rel(GA())} · 금융·메일 ${rel(D.collectedAt)} 수집 (${hm(D.collectedAt)} CT)`;
- const act=tab?k:(["net","acct","spend","flow","card","bills","recur","pending","txall","cat","week","day","rec","tx"].includes(k)?"money":["trade"].includes(k)?"invest":["unread","important","flag","reply","mailall","mt","mail","cal","hol","events","ev"].includes(k)?"sched":["botsall","bot","routines"].includes(k)?"bots":k==="home"?"home":"more");
+ const act=tab?k:(["net","acct","spend","flow","card","bills","recur","pending","txall","cat","week","day","rec","tx","wk","heat"].includes(k)?"money":["trade","invest","crypto","coin","stk","paper","fx"].includes(k)?"inv":["interest","topic"].includes(k)?"imap":["rec7","fortune","grok","family"].includes(k)?"reco":["botsall","bot","routines"].includes(k)?"bots":k==="home"?"home":"cats");
  $("tabs").innerHTML=TABS.map(t=>{const n=TABNEW[t[0]]?newOf(TABNEW[t[0]]):0;return `<button class="${t[0]===act&&!q?"on":""}" onclick="$('q').value='';$('qx').style.display='none';go('${t[0]}')"><b>${t[1]}</b>${t[2]}${n?`<span class="nb">${n}</span>`:""}</button>`}).join("");
  let h;try{h=q?search(q):(V[k]?V[k](a):V.home())}catch(e){h=card(row(null,"표시 오류",e.message))}
  const v=$("v");v.className="view on";v.innerHTML=h}
