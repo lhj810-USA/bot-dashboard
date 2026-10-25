@@ -44,3 +44,6 @@ v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES
 - 운세: 본인 일간 기준 오늘 일진·십성(만세력 공식) + 재미용 점수.
 - 데이터: `scripts/collect-market.py`(공개 시세·환율·날씨, 30분 간격, publish-loop에 포함) → 비밀 폴더 market.json → 암호화 payload. 페이퍼 매매 성과는 trading-system daily.csv를 읽기 전용 집계(가상자금).
 - 저장소에는 여전히 암호문(payload.enc.json)만. SW 캐시 `bot-dash-v10-charts`.
+
+## v11 (jarvis9)
+차트 전용 홈, 확장 차트·드릴다운, 뉴스(RSS) 4섹션, 관심사 Top 20, 날씨 30일·위성/레이더, 터치 탭 테스트(scripts/tap-test.py, 296/296 통과).

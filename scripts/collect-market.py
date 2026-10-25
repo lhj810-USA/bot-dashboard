@@ -45,5 +45,9 @@ except Exception as e: M["errors"].append(f"fx: {e}");M["fx"]=old.get("fx")
 try:
   w=get("https://api.open-meteo.com/v1/forecast?latitude=30.5052&longitude=-97.8203&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m&hourly=temperature_2m,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FChicago&forecast_days=7")
   M["weather"]={"current":w["current"],"daily":w["daily"],"hourly":{"time":w["hourly"]["time"][:48],"temp":w["hourly"]["temperature_2m"][:48],"pop":w["hourly"]["precipitation_probability"][:48]},"src":"Open-Meteo"}
+  try:
+    m=get("https://api.open-meteo.com/v1/forecast?latitude=30.5052&longitude=-97.8203&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=America%2FChicago&past_days=30&forecast_days=16")
+    M["weather"]["month"]=dict(m["daily"],today=datetime.datetime.now(CT).date().isoformat(),note="오늘 이전 = 과거(Open-Meteo 관측·재분석), 오늘 이후 = 예보(최대 16일)")
+  except Exception as e: M.setdefault("errors",[]).append("weather month: "+type(e).__name__)
 except Exception as e: M["errors"].append(f"weather: {e}");M["weather"]=old.get("weather")
 json.dump(M,open(OUT,"w"));os.chmod(OUT,0o600);print("market ok",len(M["coins"]),len(M["stocks"]),M["errors"])

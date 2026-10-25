@@ -71,3 +71,11 @@
 - 운세: 본인 일간 기준 오늘 일진·십성(만세력 공식) + 재미용 점수.
 - 데이터: `scripts/collect-market.py`(공개 시세·환율·날씨, 30분 간격, publish-loop에 포함) → 비밀 폴더 market.json → 암호화 payload. 페이퍼 매매 성과는 trading-system daily.csv를 읽기 전용 집계(가상자금).
 - 저장소에는 여전히 암호문(payload.enc.json)만. SW 캐시 `bot-dash-v10-charts`.
+
+## v11 — jarvis9 (glance)
+- 홈: 차트 타일만 (라벨·숫자·차트). 탭하면 큰 차트(7/30/60/90일, 탭/드래그 툴팁) → 카테고리 → 가맹점 → 거래, 주별·요일 드릴다운.
+- 뉴스: 주요/지역(Cedar Park·Austin·Williamson County)/미국/한국 — `scripts/collect-news.py`가 박스에서 RSS 수집·중복 제거, 암호화 페이로드에 포함, 30분 루프, 실패 소스는 건너뜀.
+- 관심사 Top 20: 관련도+최신성 점수, 토픽 칩 필터.
+- 날씨: 7일 / 30일(과거 30일 실측 + 최대 16일 예보, 구분 표시) / 위성(NOAA GOES-19)·레이더(RainViewer + OSM) 지도, 실패 시 대체 표시.
+- 탭 버그 수정: 인라인 onclick → `data-go` 위임(아포스트로피 가맹점명 문법 오류), 가맹점 바 핸들러 누락, 같은 경로 재탭 무반응, 작은 SVG 히트 영역, 그리고 `TITLE` TDZ 오류로 라우터(hashchange) 미등록.
+- 테스트: `python scripts/tap-test.py [URL]` — 390x844 터치로 모든 타일·카테고리·가맹점·필터·칩·세그먼트를 탭하고 활성 상태/내용 확인.

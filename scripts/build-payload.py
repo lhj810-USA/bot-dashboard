@@ -58,6 +58,9 @@ def _mk():
     try: return json.load(open(os.path.join(S,"market.json")))
     except Exception: return None
 MK=_mk()
+def _j(n):
+    try: return json.load(open(os.path.join(S,n)))
+    except Exception: return None
 def _paper():
     import csv
     f="/workspace/trading-system/reports/paper-forward/daily.csv"
@@ -75,7 +78,7 @@ def _paper():
 PAPER=_paper()
 plain={"v":4,"generatedAt":data["generatedAt"],"collectedAt":col.get("collectedAt"),"health":data["health"],"bots":bots,"approvals":appr,
  "headline":hl,"weekTrend":tr,"time":tctx,"fin":F,"mail":M,"cal":C,"events":EV,"docs":DOC,"dev":col.get("dev"),"x":col.get("x"),"meet":col.get("meetings"),
- "side":col.get("sideIncome"),"routines":col.get("routines"),"automations":data.get("automations"),"conn":conn,"feed":feed,"reco":col.get("reco"),"interests":col.get("interests"),"mailx":col.get("mailx"),"fortune":col.get("fortune"),"profile":col.get("profile"),"market":MK,"paper":PAPER}
+ "side":col.get("sideIncome"),"routines":col.get("routines"),"automations":data.get("automations"),"conn":conn,"feed":feed,"reco":col.get("reco"),"interests":col.get("interests"),"mailx":col.get("mailx"),"fortune":col.get("fortune"),"profile":col.get("profile"),"market":MK,"news":_j("news.json"),"paper":PAPER}
 raw=json.dumps(plain,ensure_ascii=False,sort_keys=True).encode()
 h=hashlib.sha256(raw).hexdigest(); hf=os.path.join(S,"payload.hash"); out=os.path.join(D,"payload.enc.json")
 if os.path.exists(out) and os.path.exists(hf) and open(hf).read()==h and "--force" not in sys.argv: print("unchanged"); sys.exit(0)
