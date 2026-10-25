@@ -28,7 +28,7 @@ h2{font-size:12px;font-weight:600;color:var(--sub);margin:18px 2px 8px;display:f
 .row{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid rgba(34,227,245,.07);cursor:pointer}.row:first-child{border-top:0}.row .m{flex:1;min-width:0}
 .row .m b{display:block;font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row .m span{display:block;font-size:11px;color:var(--mut);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .a{font-size:13.5px;font-weight:600;white-space:nowrap;text-align:right}.row .a small{display:block;font-size:10px;color:var(--mut);font-weight:400}.row:after{content:"›";color:var(--mut);font-size:16px}.row.nl:after{content:""}
-.nw{display:inline-block;background:var(--c);color:#000;font-size:9px;font-weight:800;border-radius:4px;padding:0 4px;margin-right:5px;vertical-align:1px}
+.row .m b span.nw,.nw{display:inline-block!important;width:auto!important;display:inline-block;background:var(--c);color:#000;font-size:9px;font-weight:800;border-radius:4px;padding:0 4px;margin-right:5px;vertical-align:1px}
 .kp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:8px}@media(min-width:820px){.kp{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .k{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:9px 11px;cursor:pointer}.k .l{font-size:10.5px;color:var(--mut)}.k .v{font-size:19px;font-weight:600;margin-top:2px}.k .s{font-size:10.5px;color:var(--sub);margin-top:1px}
 .bar{display:grid;grid-template-columns:86px 1fr 62px;gap:8px;align-items:center;font-size:12px;padding:6px 0;cursor:pointer}.bar .tk{height:8px;border-radius:4px;background:rgba(34,227,245,.08);overflow:hidden}.bar .tk i{display:block;height:100%;background:var(--c);border-radius:4px}.bar span:last-child{text-align:right}
@@ -38,7 +38,7 @@ h2{font-size:12px;font-weight:600;color:var(--sub);margin:18px 2px 8px;display:f
 .stg{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}.stg em{font-style:normal;font-size:10px;padding:2px 7px;border-radius:8px;border:1px solid var(--line);color:var(--mut)}.stg em.on{border-color:var(--work);color:var(--work)}.stg em.done{color:var(--ok)}
 .kv{display:grid;grid-template-columns:96px 1fr;gap:6px 10px;font-size:13px;padding:10px 0}.kv dt{color:var(--mut)}.kv dd{margin:0;word-break:break-word}
 .btn{border:1px solid rgba(34,227,245,.45);background:transparent;color:var(--c);border-radius:10px;padding:8px 12px;font-size:12.5px;margin:6px 6px 0 0}
-#tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(3,10,13,.97);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr);padding-bottom:env(safe-area-inset-bottom)}
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(3,10,13,.97);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(7,1fr);padding-bottom:env(safe-area-inset-bottom)}
 #tabs button{background:none;border:0;color:var(--mut);font-size:10.5px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}#tabs button b{font-size:17px;font-weight:400;line-height:1}#tabs button.on{color:var(--c)}
 #tabs button .nb{position:absolute;top:3px;left:55%;background:var(--c);color:#000;font-size:8.5px;font-weight:800;border-radius:7px;padding:0 4px}
 #cmd{position:fixed;left:0;right:0;bottom:calc(52px + env(safe-area-inset-bottom));z-index:29;display:flex;gap:6px;padding:7px 10px;background:rgba(0,0,0,.94);border-top:1px solid var(--line);max-width:1180px;margin:0 auto}
@@ -68,7 +68,7 @@ async function decrypt(pw){const P=await (await fetch("payload.enc.json?t="+Date
  const km=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:ub(P.salt),iterations:P.iter,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["decrypt"]);
  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(P.iv)},key,ub(P.ct))))}
-async function unlock(pw,rem){try{D=await decrypt(pw);if(rem)localStorage.setItem("jv_pw",pw);sessionStorage.setItem("jv_pw",pw);$("lock").style.display="none";
+async function unlock(pw,rem){try{D=await decrypt(pw);if(rem)localStorage.setItem("jv_pw",pw);sessionStorage.setItem("jv_pw",pw);$("lock").style.display="none";setTimeout(liveFetch,300);clearInterval(window._lv);window._lv=setInterval(liveFetch,60000);
  LV=+localStorage.getItem("jv_lastVisit")||0;try{SEEN=JSON.parse(localStorage.getItem("jv_seen")||"{}")}catch(e){SEEN={}}
  $("sel").innerHTML=D.bots.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("");render();
  setTimeout(()=>localStorage.setItem("jv_lastVisit",Date.now()),4000);return true}catch(e){$("er").textContent=e.name==="OperationError"?"접근 코드가 올바르지 않습니다":"데이터를 불러오지 못했습니다";return false}}
@@ -98,7 +98,16 @@ const GA=()=>D.generatedAt.replace(" ","T").replace(" CT","")+":00-05:00";const 
 function tiles(){const f=F(),m=M(),wk=(f.weeks||[]).map(w=>w.spend),fr=D.collectedAt,bots=D.bots,trade=bots.filter(b=>DEPT["매매"].some(p=>b.id.startsWith(p)));
  const ev0=(D.events||[])[0],eng=bots.find(b=>b.id.startsWith("c16480ab")),side=D.side||{};const flag=(m.flagged||[]).length;
  const recM=(f.recurring||[]).filter(r=>r.kind!=="반복(금액 변동)").reduce((s,r)=>s+r.amount,0);
+const cs=coinsNow(),btc=cs[0]||{},w=wxNow(),fo=fortune(),R=RC(),top=(R.items||[]).filter(r=>r.prio===1)[0],mx=MX();
  return [
+ {k:"reco",t:"오늘의 추천",v:(R.items||[]).length+"<small>개</small>",cx:top?top.title:"—",tone:top?"warn":"info",nk:x=>x.kind==="reco",fr:R.at},
+ {k:"fortune",t:"오늘의 운세 · 재미용",v:fo.total+"<small>점 "+star(fo.total)+"</small>",cx:`재물 ${fo.money} · 건강 ${fo.health} · ${fo.color[0]} ${fo.num} · ${fo.adv}`,tone:"info",fr:D.time.now},
+ {k:"crypto",t:"BTC · 업비트",v:btc.krw?"₩"+(btc.krw/1e8).toFixed(3)+"<small>억</small>":'<span class="mut">—</span>',cx:cs.map(c=>`${c.sym} ${usd(c.usd)} ${c.chg>=0?"▲":"▼"}${Math.abs(c.chg).toFixed(1)}%`).join(" · ")+(btc.live?" · LIVE":""),tone:"info",nk:x=>x.kind==="news",fr:LIVE.upAt||(IN().crypto||{}).at},
+ {k:"fx",t:"USD/KRW",v:fxNow()?"₩"+fxNow().toFixed(1):'<span class="mut">—</span>',cx:(LIVE.fx?"LIVE · ":"스냅샷 · ")+"open.er-api",tone:"info",fr:(IN().fx||{}).at?IN().at:null},
+ {k:"wx",t:"시더파크 날씨",v:w.tempF==null?'<span class="mut">—</span>':Math.round(w.tempF)+"<small>°F "+esc(w.desc||"")+"</small>",cx:((IN().weather||{}).daily||[]).slice(1,4).map(d=>`${md(d.date)} ${Math.round(d.hi)}°/${Math.round(d.lo)}°`).join(" · "),tone:"info",fr:w.live?new Date().toISOString():(IN().weather||{}).at&&IN().weather.at+":00-05:00"},
+ {k:"family",t:"가족 · 학교",v:(mx.school||[]).length+"<small>건 메일</small>",cx:((R.items||[]).filter(r=>r.cat==="가족")[0]||{}).title||"—",tone:"warn",nk:x=>x.kind==="reco"&&(R.items||[]).some(r=>r.cat==="가족"&&r.id===x.ref),fr:R.at},
+ {k:"orders",t:"영수증 · 주문",v:(mx.receipts||[]).length+"<small>건</small>",cx:`배송 0 · 여행 예약 0 · 프로모션 7일 ${mx.promos7d??"—"}건`,tone:"info",fr:R.at},
+ {k:"grok",t:"구독 가격 인상",v:"11/15",cx:"SuperGrok Heavy ₩149,985 → ₩450,000/월 · 동의 필요",tone:"err",fr:"2026-10-16T04:37:00-05:00"},
  {k:"net",t:"순현금",v:money(f.net),cx:`현금 ${money(f.cash)} − 카드 ${money(f.cardBalance)}`,sp:meter(f.cash?100*f.net/f.cash:0,"var(--ok)"),tone:"ok",nk:x=>x.kind==="tx",fr:f.syncedAt},
  {k:"spend",t:"30일 지출",v:money(f.spend30),cx:`이번 주 ${money(wk[wk.length-1])} · 지난주 대비 ${D.weekTrend==null?"—":(D.weekTrend>0?"▲":"▼")+Math.abs(D.weekTrend)+"%"}`,sp:spark((f.daily||[]).map(d=>d.spend),"var(--c)",28,1),tone:D.weekTrend>15?"warn":"ok",nk:x=>x.kind==="tx"&&x.tone==="out",fr:f.syncedAt},
  {k:"flow",t:"30일 현금흐름",v:sg(f.cash30),cx:`입금 ${money(f.income30)} · ${f.range30||""}`,sp:meter(f.income30?100*f.spend30/f.income30:0,"var(--c)"),tone:f.cash30>=0?"ok":"warn",nk:x=>x.kind==="tx"&&x.tone==="in",fr:f.syncedAt},
@@ -123,14 +132,14 @@ function tiles(){const f=F(),m=M(),wk=(f.weeks||[]).map(w=>w.spend),fr=D.collect
 function tileHTML(t){const n=t.nk?newOf(t.nk):0;return `<div class="tile" style="--tone:${SC[t.tone]}" onclick="go('${t.k}')"><div class="t"><i></i>${esc(t.t)}${n?`<span class="nb">NEW ${n}</span>`:""}</div><div class="v">${t.v}</div><div class="cx">${esc(t.cx)}</div>${t.sp||""}<div class="fr">${t.fr?"⟳ "+rel(t.fr):"데이터 없음"}</div></div>`}
 const tileSet=keys=>`<div class="tiles">${tiles().filter(t=>keys.includes(t.k)).map(tileHTML).join("")}</div>`;
 // ---------- views ----------
-const TABS=[["home","⌂","홈"],["money","$","돈"],["invest","⟁","투자"],["sched","◷","일정·메일"],["bots","⬡","봇"],["more","⋯","더보기"]];
-const TABNEW={money:x=>x.kind==="tx",invest:x=>x.kind==="bot"&&DEPT["매매"].some(p=>x.ref.startsWith(p)),sched:x=>x.kind==="mail"||x.kind==="event",bots:x=>x.kind==="bot",more:x=>x.kind==="doc"};
+const TABS=[["home","⌂","홈"],["money","$","돈"],["reco","✦","추천"],["interest","◎","관심사"],["sched","◷","일정"],["bots","⬡","봇"],["more","⋯","더보기"]];
+const TABNEW={reco:x=>x.kind==="reco"||x.kind==="news",interest:x=>x.kind==="news",money:x=>x.kind==="tx",invest:x=>x.kind==="bot"&&DEPT["매매"].some(p=>x.ref.startsWith(p)),sched:x=>x.kind==="mail"||x.kind==="event",bots:x=>x.kind==="bot",more:x=>x.kind==="doc"};
 const V={};
 V.home=()=>{const f=F(),t=D.time;return `<div class="brief"><div class="d">${t.weekday}요일 ${md(t.now)} · 브리핑</div><ul>${D.headline.map((h,i)=>`<li onclick="go('${["flow","spend","bills","botsall"][i]||"botsall"}')">${esc(h)}</li>`).join("")}</ul></div>
  <div class="pins">${[["net","경제적 자유 · 순현금",money(f.net)],["side","부업 월 $300–500",(D.side||{}).tracked==null?"추적 필요":money(D.side.tracked)],["trade","자동 매매","PnL —"],["botsall","결정 필요",(D.approvals||[]).length+"건"],["events","가족 · 주변 행사",((D.events||[])[0]||{}).count?D.events[0].count+"개":"—"],["eng","영어",LB[(botBy("c16480ab-9b7e-4832-9edc-b6a27ff82899")||{}).status]||"—"]].map(p=>`<div class="pin" onclick="go('${p[0]}')"><div class="l">📌 ${esc(p[1])}</div><div class="v">${esc(p[2])}</div></div>`).join("")}</div>
- ${H2("커맨드 센터","탭하면 상세")}<div class="tiles">${tiles().map(tileHTML).join("")}</div>
+ ${H2("커맨드 센터","탭하면 상세")}<div class="tiles">${tiles().map(tileHTML).join("")}</div>${H2("오늘의 추천 TOP","전체는 추천 탭")}${card((RC().items||[]).slice().sort((a,b)=>a.prio-b.prio).slice(0,4).map(recoRow).join(""))}
  ${H2("새 소식",`NEW ${newOf(()=>1)}`)}${card(D.feed.filter(isNew).slice(0,8).map(feedRow).join("")||row(null,"새 항목 없음","마지막 방문 이후 변화 없음"))}${D.feed.filter(isNew).length>8?`<button class="btn" onclick="go('newall')">새 소식 전체 보기</button>`:""}`};
-const feedRow=x=>row(({tx:"tx:",mail:"mail:",event:"ev:",doc:"doc:",bot:"bot:"})[x.kind]+x.ref,x.title,`${({tx:"거래",mail:"메일",event:"행사",doc:"파일",bot:"봇"})[x.kind]} · ${hm(x.ts)} · ${x.detail}`,null,null,isNew(x)?'<span class="nw">NEW</span>':"");
+const feedRow=x=>row(({tx:"tx:",mail:"mail:",event:"ev:",doc:"doc:",bot:"bot:",reco:"rec7:",news:"crypto:"})[x.kind]+x.ref,x.title,`${({tx:"거래",mail:"메일",event:"행사",doc:"파일",bot:"봇",reco:"추천",news:"뉴스"})[x.kind]} · ${hm(x.ts)} · ${x.detail}`,null,null,isNew(x)?'<span class="nw">NEW</span>':"");
 V.newall=()=>H2("새 소식 전체")+card(D.feed.filter(isNew).map(feedRow).join(""));
 V.money=()=>{const f=F();return `<div class="kp">${kpi("net","순현금",money(f.net),"현금 − 카드")}${kpi("acct:0","입출금 ••4090",money(f.cash),"가용 "+money(f.accounts?.[0]?.available))}${kpi("acct:1","카드 ••6432",money(-f.cardBalance),"사용률 "+f.cardUtil+"%","t-warn")}${kpi("flow","30일 현금흐름",sg(f.cash30),f.range30,f.cash30>=0?"t-ok":"t-warn")}</div>
  ${tileSet(["spend","bills","recur","pending"])}${H2("주간 지출","최근 7주")}${card(weekBars())}${H2("카테고리별 30일")}${card(catBars())}${H2("최근 거래",(f.tx||[]).length+"건")}${card((f.tx||[]).slice(0,12).map(txRow).join("")+`<div class="row" onclick="go('txall')"><div class="m"><b class="t-c">전체 거래 보기</b></div></div>`)}<div class="note">${esc(f.note)} · BoA 동기화 ${hm(f.syncedAt)} CT</div>`};
@@ -152,7 +161,7 @@ V.rec=i=>{const r=F().recurring[i];return H2(r.name)+card(`<dl class="kv"><dt>�
 V.tx=id=>{const t=(F().tx||[]).find(x=>x.id===id);if(!t)return row(null,"거래를 찾을 수 없음");markSeen("tx",id);return H2("거래 상세")+card(`<dl class="kv"><dt>가맹점</dt><dd>${esc(t.name)}</dd><dt>금액</dt><dd class="${t.amount>0?"t-ok":""}">${t.amount>0?"+":""}${money(t.amount,2)}</dd><dt>날짜</dt><dd>${esc(t.date)}</dd><dt>카테고리</dt><dd><a class="t-c" onclick="go('cat:${encodeURIComponent(t.cat)}')">${esc(t.cat)} ›</a></dd><dt>세부</dt><dd>${esc(t.detailed)}</dd><dt>상태</dt><dd>${t.pending?"대기 중":"확정"}</dd><dt>출처</dt><dd>${t.src==="card"?"BoA 카드 ••6432":"BoA 입출금 ••4090"}</dd></dl>`)+H2("같은 가맹점")+card((F().tx||[]).filter(x=>x.name===t.name&&x.id!==id).map(txRow).join("")||row(null,"없음"))};
 V.invest=()=>{const trade=D.bots.filter(b=>DEPT["매매"].some(p=>b.id.startsWith(p))),fm=(M().recent||[]).filter(m=>m.type==="금융·투자");return `<div class="kp">${kpi(null,"손익 PnL",'<span class="mut">—</span>',"데이터 없음")}${kpi(null,"투자 계좌",'<span class="mut">—</span>',"업비트·증권 연결 없음")}${kpi("trade","매매 봇",trade.filter(b=>b.status==="working").length+"/"+trade.length,"작업 중")}${kpi("gh","트레이딩 저장소",(D.dev.repos||[]).filter(r=>/trad/i.test(r.name)).length,"GitHub")}</div>
  ${H2("매매 봇 · 단계")}${card(trade.map(botRow).join(""))}${H2("금융·투자 메일",fm.length+"건 · 7일")}${card(fm.map(mailRow).join("")||row(null,"없음"))}<div class="note">PnL은 매매 봇이 status 파일 metrics.pnl로 보고하면 자동 표시됩니다.</div>`};
-V.trade=V.invest;
+V.trade=V.invest;V.grok=()=>V.rec7('r-grok-price');
 V.sched=()=>{const m=M(),t=D.time;return `<div class="kp">${kpi("cal","14일 개인 일정",(D.cal.personal||[]).length,D.cal.range)}${kpi("events","오늘 주변 행사",((D.events||[])[0]||{}).count??"—","시더파크 80km")}${kpi("unread","안 읽은 메일",esc(m.unread),"추정")}${kpi("flag","확인 필요",(m.flagged||[]).length,"가족·학교 · 금융")}</div>
  ${H2("시간 · 다가오는 날")}${card(row(null,`지금 ${t.weekday}요일 ${hm(t.now)} CT`,"America/Chicago")+(t.next||[]).map(h=>row("hol:"+h.date,h.title,md(h.date),"D-"+h.dday)).join(""))}
  ${H2("확인 필요 메일")}${card((m.flagged||[]).map(mailRow).join("")||row(null,"없음"))}${H2("메일 유형","안 읽음 샘플")}${card(typeBars())}${H2("주변 행사 브리핑")}${card((D.events||[]).map(evRow).join(""))}${H2("최근 7일 메일",m.recent7d+"통")}${card((m.recent||[]).slice(0,10).map(mailRow).join("")+`<div class="row" onclick="go('mailall')"><div class="m"><b class="t-c">전체 메일 보기</b></div></div>`)}`};
@@ -182,20 +191,73 @@ V.gh=()=>H2("GitHub",`PR ${D.dev.openPRs} · 알림 —`)+card((D.dev.repos||[])
 V.x=()=>H2("X · "+D.x.account)+card((D.x.mentions||[]).map(m=>`<a style="text-decoration:none;color:inherit" href="${esc(m.url)}" target="_blank" rel="noopener">${row(null,m.text,m.spam?"스팸 추정":"")}</a>`).join("")||row(null,"멘션 없음"));
 V.meet=()=>H2("회의 (Granola)")+card(row(null,"연결 필요",D.meet.note));
 V.conn=()=>H2("연결")+card(D.conn.categories.map(c=>row(null,c.key,c.items.map(i=>i[0]+(i[1]>1?" ×"+i[1]:"")).join(" · ")+(c.note?" · "+c.note:""))).join(""));
-V.more=()=>`${tileSet(["side","eng","drive","gh","x","meet","reply"])}${H2("연결 · 개인정보")}${card(row("conn","연결 계정",D.conn.categories.map(c=>c.key).join(" · "))+row("routines","자동화·루틴","자동화 트레이닝 (비활성)")+row(null,"개인정보 보호","데이터는 AES-256-GCM 암호문으로만 공개 · 이 기기에서만 해독")+row(null,"새로고침 방법","봇 상태는 5분마다 자동 · 금융·메일·일정은 Grok Bot에게 'JARVIS 업데이트'"))}<div class="note">연결 데이터 수집 ${hm(D.collectedAt)} CT · 봇 상태 ${esc(D.generatedAt)}</div>`;
+V.more=()=>`${tileSet(["orders","family","side","eng","drive","gh","x","meet","reply"])}${card(row("invest","투자 · 자동 매매","손익 PnL 데이터 없음")+row("fortune","오늘의 운세","재미용"))}${H2("연결 · 개인정보")}${card(row("conn","연결 계정",D.conn.categories.map(c=>c.key).join(" · "))+row("routines","자동화·루틴","자동화 트레이닝 (비활성)")+row(null,"개인정보 보호","데이터는 AES-256-GCM 암호문으로만 공개 · 이 기기에서만 해독")+row(null,"새로고침 방법","봇 상태는 5분마다 자동 · 금융·메일·일정은 Grok Bot에게 'JARVIS 업데이트'"))}<div class="note">연결 데이터 수집 ${hm(D.collectedAt)} CT · 봇 상태 ${esc(D.generatedAt)}</div>`;
+// ---------- jarvis7: 추천 · 운세 · 관심사 ----------
+const RC=()=>D.reco||{items:[],news:[]},IN=()=>D.interests||{},MX=()=>D.mailx||{};let LIVE={};
+const krw=v=>v==null?"—":"₩"+Math.round(v).toLocaleString("ko-KR");const usd=v=>v==null?"—":"$"+(v>=100?Math.round(v).toLocaleString("en-US"):v.toFixed(v<10?3:2));
+const pc=v=>v==null?"—":`<span class="${v>=0?"t-ok":"t-err"}">${v>=0?"▲":"▼"}${Math.abs(v).toFixed(2)}%</span>`;
+async function liveFetch(){const j=async u=>{const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw 0;return r.json()};const L={};
+ await Promise.allSettled([
+  j("https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH,KRW-XRP").then(a=>{L.up={};a.forEach(x=>L.up[x.market.slice(4)]={krw:x.trade_price,chg:x.signed_change_rate*100});L.upAt=new Date().toISOString()}),
+  j("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,ripple&vs_currencies=usd&include_24hr_change=true").then(a=>{L.cg={BTC:a.bitcoin,ETH:a.ethereum,XRP:a.ripple}}),
+  j("https://open.er-api.com/v6/latest/USD").then(a=>{L.fx=a.rates.KRW;L.fxAt=a.time_last_update_utc}),
+  j("https://api.open-meteo.com/v1/forecast?latitude=30.5052&longitude=-97.8203&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FChicago").then(a=>{L.wx=a.current})]);
+ LIVE=L;if(/^#?(interest|home|crypto|fx|wx)/.test(location.hash.slice(1)||"home")&&!$("q").value)render()}
+const WMO={0:"맑음",1:"대체로 맑음",2:"구름 조금",3:"흐림",45:"안개",48:"안개",51:"이슬비",53:"이슬비",55:"이슬비",61:"비",63:"비",65:"강한 비",80:"소나기",81:"소나기",95:"뇌우"};
+function coinsNow(){const s=(IN().crypto||{}).coins||[];return s.map(c=>{const u=LIVE.up&&LIVE.up[c.sym],g=LIVE.cg&&LIVE.cg[c.sym];return {...c,krw:u?u.krw:c.krw,chg:u?u.chg:c.chg,usd:g?g.usd:c.usd,usdChg:g?g.usd_24h_change:c.usdChg,live:!!u}})}
+const fxNow=()=>LIVE.fx||(IN().fx||{}).usdkrw;const wxNow=()=>{const s=IN().weather||{};return LIVE.wx?{tempF:LIVE.wx.temperature_2m,desc:WMO[LIVE.wx.weather_code]||"",wind:LIVE.wx.wind_speed_10m,hum:LIVE.wx.relative_humidity_2m,live:1}:s};
+const liveTag=l=>l?'<span class="nw" style="background:var(--ok)">LIVE</span>':'<span class="mut" style="font-size:10.5px">스냅샷</span>';
+// fortune — 재미용, 결정적 PRNG
+function prng(str){let h=1779033703^str.length;for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=h<<13|h>>>19}return()=>{h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);return((h^=h>>>16)>>>0)/4294967296}}
+const TTI=["원숭이","닭","개","돼지","쥐","소","호랑이","토끼","용","뱀","말","양"];
+function zodiac(m,d){const Z=[["염소자리",19],["물병자리",18],["물고기자리",20],["양자리",19],["황소자리",20],["쌍둥이자리",20],["게자리",22],["사자자리",22],["처녀자리",22],["천칭자리",22],["전갈자리",21],["사수자리",21],["염소자리",31]];return d<=Z[m-1][1]?Z[m-1][0]:Z[m][0]}
+function fortune(){const day=D.time.now.slice(0,10),bd=localStorage.getItem("jv_bday")||"",r=prng(day+"|"+bd);const pick=a=>a[Math.floor(r()*a.length)],sc=()=>Math.round(55+r()*45);
+ let who=null;if(/^\d{4}-\d{2}-\d{2}$/.test(bd)){const y=+bd.slice(0,4),m=+bd.slice(5,7),d=+bd.slice(8,10);who={tti:TTI[y%12]+"띠",star:zodiac(m,d)}}
+ const g=[["작은 결정이 큰 흐름을 만드는 날. 미뤄둔 일을 하나만 끝내세요.","주변의 도움이 자연스럽게 들어오는 날입니다.","무리하지 않으면 무난하게 흘러가는 하루.","새로운 정보가 기회로 이어질 수 있어요. 메모해 두세요.","가족과 보내는 시간에서 에너지를 얻는 날."]],
+  mo=["지출보다 점검이 이득인 날 — 구독 하나만 정리해도 충분.","충동구매 주의. 장바구니는 하루 묵혀 두세요.","작은 수입이나 환급 소식이 있을 수 있어요.","재테크 공부가 잘 되는 날. 결정은 다음으로.","돈 흐름이 안정적입니다. 계획대로 가세요."],
+  he=["가벼운 산책 20분이 컨디션을 올려줍니다.","수분 섭취와 스트레칭을 챙기세요.","수면 리듬이 중요한 날. 일찍 잠자리에.","눈 피로 주의 — 화면에서 잠깐씩 떨어지세요.","몸이 가벼운 날. 운동하기 좋아요."],
+  col=[["청록","#22e3f5"],["빨강","#ff5c6c"],["노랑","#ffd24a"],["초록","#3ddc97"],["보라","#a78bfa"],["흰색","#e8f6f8"],["남색","#3b5bdb"],["주황","#ff9f43"]],
+  adv=["오늘의 한 걸음이 경제적 자유의 한 계단.","말 한마디를 부드럽게 — 관계운이 따라옵니다.","정리하는 사람이 이기는 날.","급할수록 확인 한 번 더.","감사 인사 하나가 좋은 기운을 부릅니다.","영어 한 문장이라도 소리 내어 말해 보세요."];
+ const c=pick(col);return {day,who,total:sc(),money:sc(),health:sc(),gT:pick(g[0]),mT:pick(mo),hT:pick(he),color:c,num:1+Math.floor(r()*45),adv:pick(adv)}}
+const star=n=>"★".repeat(Math.round(n/20))+"☆".repeat(5-Math.round(n/20));
+V.fortune=()=>{const f=fortune(),bd=localStorage.getItem("jv_bday")||"";return `${H2("오늘의 운세",md(f.day)+" · 재미용")}<div class="brief"><div class="d">${f.who?esc(f.who.tti+" · "+f.who.star):"생일 미입력 · 날짜 기반"} · 과학적 근거 없음, 재미로만 보세요</div><ul><li>${esc(f.adv)}</li></ul></div>
+ <div class="kp">${kpi(null,"종합운",f.total+"<small>점</small>",star(f.total))}${kpi(null,"재물운",f.money+"<small>점</small>",star(f.money))}${kpi(null,"건강운",f.health+"<small>점</small>",star(f.health))}${kpi(null,"행운",`<span style="color:${f.color[1]}">●</span> ${f.color[0]} · ${f.num}`,"행운의 색 · 숫자")}</div>
+ ${card(row(null,"종합운",f.gT)+row(null,"재물운",f.mT)+row(null,"건강운",f.hT)+row(null,"한 줄 조언",f.adv))}
+ ${H2("생일로 개인화","이 기기에만 저장")}${card(`<div style="padding:10px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input type="date" id="bday" value="${esc(bd)}" style="background:#000;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px"><button class="btn" style="margin:0" onclick="localStorage.setItem('jv_bday',$('bday').value);render()">저장</button>${bd?`<button class="btn" style="margin:0" onclick="localStorage.removeItem('jv_bday');render()">지우기</button>`:""}</div><div class="note">생일은 서버·저장소로 전송되지 않고 이 브라우저 localStorage(jv_bday)에만 저장됩니다. 연결된 데이터에서 생일을 찾지 못했어요.</div>`)}`};
+const CATC={"돈":"var(--ok)","지역":"var(--c)","학습":"var(--work)","가족":"var(--warn)"};
+const recoRow=r=>row("rec7:"+r.id,r.title,`${r.cat} · ${r.why}`,null,null,nwId("reco",r.id)+`<i style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${CATC[r.cat]||"var(--c)"};margin-right:5px"></i>`);
+const newsRow=(n,i)=>`<div class="row" onclick="window.open('${esc(n.link)}','_blank','noopener')"><div class="m"><b>${nwId("news",String(i))}${esc(n.title)}</b><span>${esc(n.src)} · ${md(n.date)}${n.note?" · "+esc(n.note):""}</span></div><div class="a"><small>↗</small></div></div>`;
+V.reco=()=>{const R=RC(),it=R.items||[],cats=["돈","지역","학습","가족"];return `${H2("오늘의 추천",it.length+"개 · "+hm(R.at))}${tileSet(["grok","fortune","crypto","family"])}
+ ${cats.map(c=>{const l=it.filter(r=>r.cat===c).sort((a,b)=>a.prio-b.prio);return l.length?H2({"돈":"돈 · 절약 · 패시브 아이디어","지역":"이번 주말 · 주변 행사","학습":"영어","가족":"가족 · 학교"}[c],l.length+"개")+card(l.map(recoRow).join("")):""}).join("")}
+ ${H2("코인 뉴스","업비트·KRW 관련")}${card((R.news||[]).map(newsRow).join("")||row(null,"데이터 없음"))}<div class="note">${esc(R.disclaimer||"")}</div>`};
+V.rec7=id=>{const r=(RC().items||[]).find(x=>x.id===id);if(!r)return card(row(null,"찾을 수 없음"));markSeen("reco",id);return H2("추천 상세",r.cat)+card(`<dl class="kv"><dt>추천</dt><dd><b>${esc(r.title)}</b></dd><dt>이유</dt><dd>${esc(r.why)}</dd><dt>출처</dt><dd>${esc(r.src)}</dd>${r.link?`<dt>링크</dt><dd><a href="${esc(r.link)}" target="_blank" rel="noopener" style="color:var(--c)">열기 ↗</a></dd>`:""}</dl>`)+`<div class="note">${esc(RC().disclaimer||"")}</div>`};
+V.crypto=()=>{const cs=coinsNow(),fx=fxNow(),C=IN().crypto||{};return `${H2("코인 시세",(cs.some(c=>c.live)?"실시간 · ":"스냅샷 · ")+hm(LIVE.upAt||C.at))}<div class="kp">${cs.map(c=>kpi(null,c.sym+" "+(c.live?"LIVE":""),krw(c.krw),`${usd(c.usd)} · 업비트 ${c.chg.toFixed(2)}%`)).join("")}${kpi("fx","USD/KRW",fx?fx.toFixed(1):"—","환율")}</div>
+ ${card(cs.map(c=>row(null,c.sym,`업비트 KRW 24h ${c.chg.toFixed(2)}% · 글로벌 USD 24h ${c.usdChg==null?"—":c.usdChg.toFixed(2)+"%"}${c.high?` · 고 ${krw(c.high)} 저 ${krw(c.low)}`:""}`,krw(c.krw),usd(c.usd))).join("")+row(null,"김치 프리미엄(추정)",C.kimchiNote||"",C.kimchi==null?"—":C.kimchi+"%"))}
+ ${H2("코인 뉴스")}${card((RC().news||[]).map(newsRow).join(""))}<div class="note">출처: ${esc(C.src||"")} · 실시간은 페이지에서 직접 공개 API 조회, 실패 시 수집 스냅샷</div>`};
+V.fx=()=>{const f=IN().fx||{};return H2("USD/KRW 환율")+`<div class="kp">${kpi(null,"1 USD",fxNow()?"₩"+fxNow().toFixed(2):"—",LIVE.fx?"LIVE":"스냅샷")}${kpi(null,"$1,000 =",fxNow()?krw(fxNow()*1000):"—","송금 전 참고")}</div>`+`<div class="note">출처 ${esc(f.src||"—")} · 기준 ${esc(LIVE.fxAt||f.at||"—")} (UTC)</div>`};
+V.wx=()=>{const w=wxNow(),s=IN().weather||{};return H2("시더파크 날씨",w.live?"LIVE":"스냅샷 "+hm(s.at))+`<div class="kp">${kpi(null,"지금",w.tempF==null?"—":Math.round(w.tempF)+"<small>°F</small>",w.desc||"")}${kpi(null,"바람 · 습도",(w.wind??"—")+"<small>mph</small>",`습도 ${w.hum??"—"}%`)}</div>`+card((s.daily||[]).map(d=>row(null,`${md(d.date)} (${"일월화수목금토"[new Date(d.date+"T12:00").getDay()]})`,`${d.desc} · 강수 ${d.pop}%`,`${Math.round(d.hi)}° / ${Math.round(d.lo)}°`)).join(""))+`<div class="note">출처 Open-Meteo</div>`};
+V.family=()=>{const x=MX(),it=(RC().items||[]).filter(r=>r.cat==="가족");return H2("가족 · 학교","은지님 · 아이들")+card(it.map(recoRow).join(""))+H2("학교·가족 메일",(x.school||[]).length+"건")+card((x.school||[]).map(m=>row("mail:"+m.id,m.subject,`${m.from} · ${hm(m.date)}`)).join("")||row(null,"데이터 없음"))};
+V.orders=()=>{const x=MX();return H2("영수증 · 주문",(x.receipts||[]).length+"건")+card((x.receipts||[]).map(m=>row(null,m.subject,`${m.from} · ${hm(m.date)}`)).join("")||row(null,"데이터 없음"))+H2("배송")+card(row(null,"배송 메일 없음",x.packagesNote||""))+H2("여행·예약")+card(row(null,"예약 없음",x.travelNote||""))+H2("프로모션 (7일)",x.promos7d+"건")+card((x.promoTop||[]).map(m=>row(null,m.subject,`${m.from} · ${hm(m.date)}`)).join(""))};
+V.gh=()=>{const d=D.dev||{};return H2("GitHub",(d.repos||[]).length+"개 저장소")+card((d.repos||[]).map(r=>row(null,r.name,r.description||r.updated||"")).join(""))+H2("최근 커밋")+card((d.activity||[]).map(a=>row(null,a.msg,`${a.repo} · ${hm(a.date)}`)).join("")||row(null,"데이터 없음"))+`<div class="note">${esc(d.note||"GitHub 알림 권한 없음(403)")}</div>`};
+V.interest=()=>{const f=F(),sr=f.income30?Math.round(100*f.cash30/f.income30):null,wk=(f.weeks||[]);return `${tileSet(["crypto","fx","wx","fortune"])}
+ ${H2("경제적 자유 진행","실제 거래 기반")}<div class="kp">${kpi("net","순현금",money(f.net),"현금 − 카드")}${kpi("flow","저축률 30일",sr==null?"—":sr+"<small>%</small>","순현금흐름 ÷ 입금")}${kpi("flow","30일 순현금흐름",sg(f.cash30),"")}${kpi("side","부업 목표",(D.side||{}).tracked==null?"—":money(D.side.tracked),"$300–500/월")}</div>
+ ${card(`<div class="note" style="margin:6px 0">주간 지출 추이</div>`+spark(wk.map(w=>w.spend),"var(--c)",40,1)+row("invest","투자 · 자동 매매","손익(PnL)·투자 계좌 데이터 없음 — 연결 필요"))}
+ ${tileSet(["eng","events","family","orders"])}`};
+
 // ---------- search ----------
 function search(q){const s=q.toLowerCase(),hit=x=>String(x||"").toLowerCase().includes(s),f=F(),m=M();
  const tx=(f.tx||[]).filter(t=>hit(t.name)||hit(t.cat)||hit(t.date)||hit(String(Math.abs(t.amount))));
  const ms=[...(m.recent||[]),...(m.important||[])].filter((x,i,a)=>a.findIndex(y=>y.id===x.id)===i).filter(x=>hit(x.subject)||hit(x.from)||hit(x.type)||hit(x.snippet));
  const ev=(D.events||[]).filter(e=>hit(e.subject)||hit(e.top)),hol=(D.cal.holidays||[]).filter(h=>hit(h.title));
  const bots=D.bots.filter(b=>hit(b.name)||hit(b.summary)||hit(b.description)),docs=(D.docs.files||[]).filter(x=>hit(x.name)),rec=(f.recurring||[]).filter(r=>hit(r.name));
- const n=tx.length+ms.length+ev.length+hol.length+bots.length+docs.length+rec.length,sec=(t,l,fn)=>l.length?H2(t,l.length+"건")+card(l.slice(0,30).map(fn).join("")):"";
- return H2(`'${q}' 검색 결과`,n+"건")+(n?"":card(row(null,"결과 없음","거래·메일·행사·일정·봇·파일에서 찾지 못함")))+sec("봇",bots,botRow)+sec("거래",tx,txRow)+(tx.length>1?`<div class="note">거래 합계 ${money(tx.reduce((a,t)=>a+t.amount,0),2)}</div>`:"")+sec("정기결제",rec,r=>row("rec:"+f.recurring.indexOf(r),r.name,r.kind,money(r.amount,2)))+sec("메일",ms,mailRow)+sec("행사",ev,evRow)+sec("일정",hol,h=>row("hol:"+h.date,h.title,md(h.date)))+sec("파일",docs,docRow)}
+ const rc=(RC().items||[]).filter(r=>hit(r.title)||hit(r.why)||hit(r.cat)),nw=(RC().news||[]).filter(x=>hit(x.title)||hit(x.src));
+ const n=rc.length+nw.length+tx.length+ms.length+ev.length+hol.length+bots.length+docs.length+rec.length,sec=(t,l,fn)=>l.length?H2(t,l.length+"건")+card(l.slice(0,30).map(fn).join("")):"";
+ return H2(`'${q}' 검색 결과`,n+"건")+(n?"":card(row(null,"결과 없음","거래·메일·행사·일정·봇·파일에서 찾지 못함")))+sec("추천",rc,recoRow)+sec("뉴스",nw,(x)=>newsRow(x,RC().news.indexOf(x)))+sec("봇",bots,botRow)+sec("거래",tx,txRow)+(tx.length>1?`<div class="note">거래 합계 ${money(tx.reduce((a,t)=>a+t.amount,0),2)}</div>`:"")+sec("정기결제",rec,r=>row("rec:"+f.recurring.indexOf(r),r.name,r.kind,money(r.amount,2)))+sec("메일",ms,mailRow)+sec("행사",ev,evRow)+sec("일정",hol,h=>row("hol:"+h.date,h.title,md(h.date)))+sec("파일",docs,docRow)}
 // ---------- router ----------
 let stack=[];
 function go(p){location.hash=p}
 function cur(){return decodeURIComponent((location.hash||"#home").slice(1))||"home"}
-const TITLE={net:"계좌·잔액",spend:"지출",flow:"현금흐름",card:"카드",bills:"청구 예정",recur:"정기결제",pending:"대기 결제",txall:"전체 거래",unread:"메일",flag:"확인 필요",cal:"일정",events:"주변 행사",drive:"Drive",gh:"GitHub",x:"X",meet:"회의",side:"부업",eng:"영어",routines:"루틴",conn:"연결",newall:"새 소식"};
+const TITLE={net:"계좌·잔액",spend:"지출",flow:"현금흐름",card:"카드",bills:"청구 예정",recur:"정기결제",pending:"대기 결제",txall:"전체 거래",unread:"메일",flag:"확인 필요",cal:"일정",events:"주변 행사",drive:"Drive",gh:"GitHub",x:"X",meet:"회의",side:"부업",eng:"영어",routines:"루틴",conn:"연결",newall:"새 소식",fortune:"운세",crypto:"코인",fx:"환율",wx:"날씨",family:"가족·학교",orders:"영수증·주문",rec7:"추천",grok:"구독",invest:"투자"};
 function render(){if(!D)return;const p=cur(),q=$("q").value.trim();const [k,...r]=p.split(":");const a=r.join(":");const tab=TABS.find(t=>t[0]===k);
  const home=k==="home"&&!q;$("back").classList.toggle("on",!home);$("ttl").innerHTML=home?'혁진님의 <b>JARVIS</b>':esc(q?"검색":tab?tab[2]:(TITLE[k]||"상세"));
  $("fresh").textContent=`봇 ${rel(GA())} · 금융·메일 ${rel(D.collectedAt)} 수집 (${hm(D.collectedAt)} CT)`;

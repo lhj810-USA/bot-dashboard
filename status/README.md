@@ -29,3 +29,6 @@ python3 -c 'import json,datetime;json.dump({"status":"idle","updatedAt":datetime
 ```
 
 봇 ID: 총괄 927a7b6f-fb9c-4669-8bc9-cf48f34f70b6 · 감시자 173243fe-b09d-49c5-9541-2dbaff3b72d6 · 영어공부 c16480ab-9b7e-4832-9edc-b6a27ff82899 · Event 알림 61c15c0d-aeeb-488f-99bf-88878e64b446 · 대장 c134c704-d944-4fbb-8f13-b6d70c4d75f8 · 아르바이트 92919409-9721-49b6-b150-79aaee08b3a2 · 실험 ec952ea5-d6ba-48db-8957-34895ac75c50 · 집사 c8f69e15-9014-4347-b118-d63b3ec13b29
+
+
+v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES-GCM 암호문만 저장소에 공개).

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""JARVIS v8 payload builder: data.json (bots, local only) + secrets/collected.json (connector snapshot collected
+"""JARVIS v9 payload builder: data.json (bots, local only) + secrets/collected.json (connector snapshot collected
 by the agent on 'JARVIS 업데이트') -> payload.enc.json (AES-256-GCM, key = PBKDF2-SHA256 310k from passcode).
 Only ciphertext is written to the repo. NEW tracking: secrets/firstseen.json (item id -> first seen on box)."""
 import json, os, hashlib, base64, datetime, zoneinfo, sys
@@ -35,6 +35,9 @@ for m in (M.get("recent") or [])+(M.get("important") or []):
     if not any(x["id"]=="mail:"+m["id"] for x in feed): item("mail:"+m["id"],"mail","sched",m["subject"],f"{m['type']} · {m['from']}",m["date"],"warn" if m["type"] in("가족·학교",) else "info",m["id"])
 for e in EV: item("ev:"+e["id"],"event","sched",e["subject"],(f"{e['count']}개 · " if e.get("count") else "")+(e.get("top") or "")[:100],e["date"],"info",e["id"])
 for f in DOC.get("files") or []: item(f"doc:{f['id']}:{f['modified']}","doc","more",f["name"],f"Drive · {f['kind']}",f["modified"],"info",f["id"])
+RC=col.get("reco") or {}
+for r in RC.get("items") or []: item("reco:"+r["id"],"reco","reco",r["title"],r["why"][:120],r.get("date") or RC.get("at"),"warn" if r.get("prio")==1 else "info",r["id"])
+for i,n in enumerate(RC.get("news") or []): item("news:"+n["link"],"news","interest",n["title"],n["src"],n["date"]+"T12:00:00-05:00","info",str(i))
 json.dump(FS,open(fsf,"w")); os.chmod(fsf,0o600)
 feed.sort(key=lambda x:x["ts"],reverse=True); feed=[x for x in feed if (iso(x["ts"]) or now)>=now-datetime.timedelta(days=10)][:120]
 appr=[b["name"] for b in bots if b.get("summaryLive") and "승인" in (b.get("summary") or "")]
@@ -53,7 +56,7 @@ for c in conn["categories"]:
     if c["key"]=="개발": c["note"]="GitHub 알림 권한 없음(403)"
 plain={"v":3,"generatedAt":data["generatedAt"],"collectedAt":col.get("collectedAt"),"health":data["health"],"bots":bots,"approvals":appr,
  "headline":hl,"weekTrend":tr,"time":tctx,"fin":F,"mail":M,"cal":C,"events":EV,"docs":DOC,"dev":col.get("dev"),"x":col.get("x"),"meet":col.get("meetings"),
- "side":col.get("sideIncome"),"routines":col.get("routines"),"automations":data.get("automations"),"conn":conn,"feed":feed}
+ "side":col.get("sideIncome"),"routines":col.get("routines"),"automations":data.get("automations"),"conn":conn,"feed":feed,"reco":col.get("reco"),"interests":col.get("interests"),"mailx":col.get("mailx"),"fortune":col.get("fortune")}
 raw=json.dumps(plain,ensure_ascii=False,sort_keys=True).encode()
 h=hashlib.sha256(raw).hexdigest(); hf=os.path.join(S,"payload.hash"); out=os.path.join(D,"payload.enc.json")
 if os.path.exists(out) and os.path.exists(hf) and open(hf).read()==h and "--force" not in sys.argv: print("unchanged"); sys.exit(0)
