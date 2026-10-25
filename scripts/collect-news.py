@@ -5,14 +5,15 @@ S="/workspace/bot-dashboard-secrets";OUT=S+"/news.json"
 if "--force" not in sys.argv and os.path.exists(OUT) and time.time()-os.path.getmtime(OUT)<1700: print("news skip (fresh)");sys.exit()
 GN=lambda q,ko=False:"https://news.google.com/rss/search?q="+urllib.parse.quote(q+" when:3d")+("&hl=ko&gl=KR&ceid=KR:ko" if ko else "&hl=en-US&gl=US&ceid=US:en")
 SEC={"top":[("Google 뉴스 US","https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en"),("BBC World","https://feeds.bbci.co.uk/news/world/rss.xml"),("NPR","https://feeds.npr.org/1001/rss.xml")],
- "local":[("Google 뉴스 · Cedar Park",GN('"Cedar Park" Texas')),("Google 뉴스 · Austin",GN("Austin TX")),("Google 뉴스 · Williamson County",GN('"Williamson County" Texas')),("KXAN","https://www.kxan.com/feed/")],
+ "local":[("Google 뉴스 · local",GN("local news"))],
  "us":[("NPR National","https://feeds.npr.org/1003/rss.xml"),("NPR Business","https://feeds.npr.org/1006/rss.xml"),("Google 뉴스 · US economy",GN("US economy"))],
  "kr":[("Google 뉴스 한국","https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko"),("한겨레","https://www.hani.co.kr/rss/"),("연합뉴스TV","https://www.yonhapnewstv.co.kr/browse/feed/"),("연합뉴스","https://www.yna.co.kr/rss/news.xml")]}
 # 관심사 → 검색어 (대화 관심사 지도에서 도출)
-INT=[("코인·업비트",["업비트 비트코인",False],["bitcoin price",False]),("한·미 증시",["코스피 나스닥",True],["stock market today",False]),("ETF",["ETF inflows",False]),
- ("FOMC·거시",["FOMC Fed rates",False]),("L-1·이민",["L-1 visa",False],["USCIS immigration rule",False]),("패시브 인컴·투자",["passive income investing",False]),
- ("영어 공부",["영어 학습 방법",True],["learn English tips",False]),("텍사스 행사",["Austin events this weekend",False]),("Tesla·Samsung·NVDA",["Tesla stock",False],["Nvidia stock",False],["삼성전자 주가",True]),
- ("AI",["AI model launch",False]),("가족·학교·Cedar Park",["Leander ISD",False],['"Cedar Park" family',False]),("SpaceX·우주",["SpaceX launch",False]),("스톡 이미지",['"Adobe Stock" OR "stock photo" contributors',False])]
+# 개인 관심사·지역 설정은 비밀 폴더 news-config.json에서 로드(저장소엔 일반 기본값만)
+INT=[("AI",["AI news",False]),("시장",["stock market today",False])]
+RX={"AI":r"\bai\b|openai|llm","시장":r"stock|market|증시"}
+_C=json.load(open(S+"/news-config.json")) if os.path.exists(S+"/news-config.json") else {}
+INT=[tuple(x) for x in _C.get("INT",INT)];RX=_C.get("RX",RX);SEC["local"]=[tuple(x) for x in _C.get("LOCAL",SEC["local"])]
 def fetch(u):
   r=urllib.request.Request(u,headers={"User-Agent":"Mozilla/5.0 (JARVIS personal dashboard RSS reader)"});return urllib.request.urlopen(r,timeout=15).read()
 def ts(s):
@@ -50,9 +51,6 @@ try:
 except Exception: pass
 def wt(topic):
   hit=[n for k,n in W.items() if any(w in k for w in re.split(r"[·\s]",topic) if len(w)>1)];return max(hit) if hit else 5
-RX={"코인·업비트":r"bitcoin|crypto|비트코인|업비트|ethereum|xrp|이더리움|코인","한·미 증시":r"stock|nasdaq|s&p|dow|코스피|증시|코스닥","ETF":r"\betf","FOMC·거시":r"fed\b|fomc|rate|inflation|금리|cpi","L-1·이민":r"visa|immigra|uscis|h-1b|l-1|green card|비자",
- "패시브 인컴·투자":r"passive|dividend|income|invest","영어 공부":r"영어|english|토익|ielts|toefl","텍사스 행사":r"austin|cedar park|round rock|texas|leander","Tesla·Samsung·NVDA":r"tesla|nvidia|nvda|삼성|samsung",
- "AI":r"\bai\b|openai|인공지능|llm|gpt|model","가족·학교·Cedar Park":r"isd|school|cedar park|leander|학교","SpaceX·우주":r"spacex|starship|falcon|launch|nasa","스톡 이미지":r"adobe|stock photo|firefly|shutterstock|getty"}
 pool=[]
 for row in INT:
   topic,qs=row[0],row[1:]
