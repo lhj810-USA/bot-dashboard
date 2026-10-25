@@ -1,4 +1,4 @@
-const C="bot-dash-v12b",SHELL=["./","index.html","config.js","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","icons/apple-touch-icon.png","css/v12.css","js/v12a.js","js/v12b.js"];
+const C="bot-dash-v12c",SHELL=["./","index.html","config.js","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","icons/apple-touch-icon.png","css/v12.css","js/v12a.js","js/v12b.js","js/v12c.js"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(SHELL)));self.skipWaiting()});
 self.addEventListener("activate",e=>e.waitUntil(self.clients.claim()));
 self.addEventListener("fetch",e=>{const u=new URL(e.request.url);if(e.request.method!=="GET"||u.origin!==location.origin||u.pathname.includes("/api/"))return;
