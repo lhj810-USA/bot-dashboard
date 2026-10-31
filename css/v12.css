@@ -3,8 +3,8 @@ body{zoom:var(--fz,1)}
 html[data-theme=green]{--c:#3cf59a;--line:rgba(60,245,154,.14);--card:#06140d;--card2:#0a1d13}
 html[data-theme=amber]{--c:#ffbf3c;--line:rgba(255,191,60,.15);--card:#150f04;--card2:#1d1608}
 html[data-theme=minimal]{--c:#d7e3e7;--line:rgba(255,255,255,.10);--card:#0b0b0b;--card2:#121212;--ok:#9fe3b9;--warn:#e9c77b;--err:#f08a99;--work:#9cbcf0}
-html[data-theme=light]{filter:invert(1) hue-rotate(180deg);background:#000}
-html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] iframe{filter:invert(1) hue-rotate(180deg)}
+
+
 html[data-dens=c] .tiles{gap:5px}html[data-dens=c] .tiles.home .tile{min-height:88px;padding:7px 8px}html[data-dens=c] .card{padding:2px 9px}
 html[data-dens=r] .tiles{gap:12px}html[data-dens=r] .tiles.home .tile{min-height:128px;padding:13px 14px}
 .vchips,.qa{display:flex;gap:6px;overflow-x:auto;margin-top:10px;scrollbar-width:none}.vchips::-webkit-scrollbar,.qa::-webkit-scrollbar{display:none}

@@ -1,0 +1,30 @@
+/* v13 — 비주얼 시스템 (navy glass) + 실제 라이트 테마 */
+:root{--r:16px;--g1:8px;--g2:16px;--glow:0 0 18px color-mix(in srgb,var(--c) 45%,transparent);--sh:0 10px 30px rgba(0,0,0,.35);--line:rgba(130,170,255,.13);--card:rgba(12,18,38,.78);--card2:rgba(20,28,56,.85);--tx:#eaf1ff;--sub:#a8b6d6;--mut:#7584a8}
+html:not([data-theme]) body,html[data-theme=cyan] body,html[data-theme=green] body,html[data-theme=amber] body{background:radial-gradient(1100px 620px at 12% -8%,#22245e 0%,transparent 60%),radial-gradient(900px 540px at 105% 8%,#0d3350 0%,transparent 58%),radial-gradient(800px 600px at 50% 110%,#1a1040 0%,transparent 60%),#050716;background-attachment:fixed}
+header{background:rgba(6,9,26,.82)}#tabs{background:rgba(6,9,26,.95)}#cmd{background:rgba(6,9,26,.94)}
+.tile,.card{background:var(--card);box-shadow:var(--sh);border-radius:var(--r)}
+.tile.mt .v{font-size:24px;font-weight:750;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.glass{background:linear-gradient(160deg,rgba(30,40,90,.55),rgba(10,14,34,.75));border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.05)}
+.pills{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}.pills::-webkit-scrollbar{display:none}
+.pill{flex:none;border:1px solid var(--line);background:var(--card2);color:var(--tx);border-radius:999px;padding:7px 14px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.pill.on{background:var(--c);color:#04101a;border-color:transparent;box-shadow:var(--glow);font-weight:650}.pill .n{margin-left:6px;opacity:.7;font-variant-numeric:tabular-nums}.pill.on .n{opacity:.85}
+.btnp{border:0;background:#3b82f6;color:#fff;border-radius:999px;padding:8px 16px;font:inherit;font-weight:650;cursor:pointer}.btng{border:1px solid var(--line);background:transparent;color:var(--sub);border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer}
+.dchip{display:inline-block;margin-left:6px;vertical-align:middle;font-size:11px;font-weight:650;padding:2px 7px;border-radius:999px}.dchip.up{background:rgba(56,224,140,.15);color:var(--ok)}.dchip.dn{background:rgba(255,77,102,.15);color:var(--err)}
+.dnbv{font-size:22px;font-weight:800;fill:var(--tx)}.dnbs{font-size:8px;fill:var(--mut)}.dnbarc{filter:drop-shadow(0 0 4px var(--c))}
+.skel{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding-top:8px}.sk{height:110px;border-radius:16px;background:linear-gradient(90deg,rgba(120,140,200,.08),rgba(120,140,200,.18),rgba(120,140,200,.08));background-size:200% 100%;animation:sk 1.3s infinite}@keyframes sk{to{background-position:-200% 0}}
+/* 퍼널 히어로 */
+.whero{padding:16px 16px 12px;margin:6px 0 12px}.wh-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.wh-t{font-weight:750;font-size:16px}.wh-t small{display:block;font-size:10px;letter-spacing:.18em;color:var(--mut);font-weight:500}
+.fwrap{position:relative;min-height:150px}#fcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fgrid{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.fst{background:none;border:0;color:var(--tx);text-align:left;padding:4px 2px;cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:4px;min-height:150px;justify-content:space-between}
+.fl{font-size:11px;color:var(--sub)}.fv{white-space:nowrap;font-size:clamp(17px,4.6vw,34px);font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;text-shadow:0 2px 12px rgba(0,0,0,.6)}.fst.neg .fv{color:var(--err)}.fr{font-size:11px;color:var(--c);font-weight:650}
+.est{font-style:normal;font-size:9px;margin-left:4px;padding:1px 5px;border-radius:999px;background:rgba(255,176,32,.18);color:var(--warn)}.wh-n{font-size:10.5px;color:var(--mut);margin-top:6px;line-height:1.45}
+/* 실제 라이트 테마 */
+html[data-theme=light]{--c:#2563eb;--ok:#059669;--warn:#d97706;--err:#dc2626;--work:#2563eb;--tx:#0f172a;--sub:#475569;--mut:#64748b;--line:rgba(15,23,42,.10);--card:#ffffff;--card2:#f1f5f9;--sh:0 6px 20px rgba(15,23,42,.08);color-scheme:light}
+html[data-theme=light] body{background:radial-gradient(900px 500px at 10% -10%,#e0e7ff,transparent 60%),radial-gradient(800px 500px at 100% 0,#dbeafe,transparent 55%),#f5f7fb;color:var(--tx)}
+html[data-theme=light] header{background:rgba(255,255,255,.88)}html[data-theme=light] #tabs,html[data-theme=light] #cmd{background:rgba(255,255,255,.96)}
+html[data-theme=light] .glass{background:linear-gradient(160deg,#ffffff,#eef2ff);box-shadow:var(--sh)}html[data-theme=light] .fv{text-shadow:none}
+html[data-theme=light] input,html[data-theme=light] select,html[data-theme=light] textarea{background:#fff;color:var(--tx);border-color:var(--line)}
+html[data-theme=light] .pill.on{color:#fff}html[data-theme=light] .sk{background:linear-gradient(90deg,#e2e8f0,#f1f5f9,#e2e8f0);background-size:200% 100%}
+html.thx body,html.thx .tile,html.thx .card,html.thx .glass,html.thx header,html.thx #tabs,html.thx #cmd{transition:background .4s,color .4s,border-color .4s}
+@media(min-width:900px){.fwrap{min-height:190px}.fst{min-height:190px}}
+@media(prefers-reduced-motion:reduce){.sk{animation:none}}
