@@ -9,7 +9,7 @@ const _chLine0=chLine;chLine=function(pts,o={}){let h=_chLine0(pts,o);if(!pts||p
  const a=+pts[0][1],b=+pts[pts.length-1][1];if(a&&isFinite(a)&&isFinite(b)){const dl=(b-a)/Math.abs(a)*100;if(isFinite(dl))h=h.replace("<svg",`<svg data-dl="${dl.toFixed(1)}"`)}return h};
 const dchip=v=>v==null||!isFinite(v)?"":`<span class="dchip ${v>=0?"up":"dn"}">${v>=0?"▲":"▼"}${Math.abs(v)>=100?Math.round(Math.abs(v)):Math.abs(v).toFixed(1)}%</span>`;
 const _mTile0=mTile;mTile=function(t){let h=_mTile0(t);if(!t||!t.sp)return h;const m=String(t.sp).match(/data-dl="(-?[\d.]+)"/);
- if(m&&!/dchip/.test(t.v))h=h.replace(/(<div class="v">[\s\S]*?)(<\/div>)/,(x,a,b)=>a+dchip(+m[1])+b);return h};
+ if(m&&!/dchip/.test(t.v)&&!/^(goal|flow|fire|side|habits|ai)$/.test(t.k)&&Math.abs(+m[1])<300)h=h.replace(/(<div class="v">[\s\S]*?)(<\/div>)/,(x,a,b)=>a+dchip(+m[1])+b);return h};
 /* 2) 굵은 도넛 + 큰 중앙 숫자 */
 function donutBig(pct,o={}){const r=40,c=2*Math.PI*r,p=Math.max(0,Math.min(100,pct||0));return `<svg class="dnb" viewBox="0 0 100 100" width="${o.s||112}" height="${o.s||112}" role="img" aria-label="${esc(o.l||"")} ${p.toFixed(1)}%"><circle cx="50" cy="50" r="${r}" fill="none" stroke="rgba(127,140,180,.18)" stroke-width="13"/><circle cx="50" cy="50" r="${r}" fill="none" stroke="${o.c||"var(--c)"}" stroke-width="13" stroke-linecap="round" stroke-dasharray="${(c*p/100).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 50 50)" class="dnbarc"/><text x="50" y="${o.sub?50:56}" text-anchor="middle" class="dnbv">${o.v!=null?o.v:p.toFixed(p<10?1:0)+"%"}</text>${o.sub?`<text x="50" y="66" text-anchor="middle" class="dnbs">${esc(o.sub)}</text>`:""}</svg>`}
 /* 3) 카운트업 (첫 홈 진입 1회, 모션 감소 시 생략) */

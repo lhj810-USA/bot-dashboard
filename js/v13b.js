@@ -50,7 +50,7 @@ V.tl=()=>{const it=tlItems(),G=[...new Set(it.map(x=>x.g))],t0=new Date(TODAY()+
 ACT.tlf=a=>{TLF=a;render()};
 /* 기회 보드 (칸반, 암호화 로컬 저장) */
 const COLS=[["look","알아보기"],["doing","진행"],["exec","실행"],["done","완료"]];
-function BD(){const b=SS("board");if(!b.cards){b.cards=[];const ai=D.ai||{};let n=0;(ai.actions||[]).forEach(a=>b.cards.push({id:"c"+(++n),t:a.t||a.title||String(a),col:"look",tag:"AI 행동",p:2}));(ai.opportunities||[]).slice(0,4).forEach(a=>b.cards.push({id:"c"+(++n),t:a.t||a.title||String(a),col:"look",tag:"기회",p:1}));b.n=n;b.dec={};saveSec()}return b}
+let _bdOK=false;function BD(){if(!_bdOK){if(!SECS||_secP){if(sessionStorage.getItem("jv_pw")||localStorage.getItem("jv_pw"))loadSec();return {cards:[],dec:{},n:0}}_bdOK=true}if(!SECS.board||Array.isArray(SECS.board))SECS.board={};const b=SECS.board;if(!b.cards){b.cards=[];const ai=D.ai||{};let n=0;(ai.actions||[]).forEach(a=>b.cards.push({id:"c"+(++n),t:a.t||a.title||String(a),col:"look",tag:"AI 행동",p:2}));(ai.opportunities||[]).slice(0,4).forEach(a=>b.cards.push({id:"c"+(++n),t:a.t||a.title||String(a),col:"look",tag:"기회",p:1}));b.n=n;b.dec={};saveSec()}return b}
 let BTF="all";
 V.board=()=>{const b=BD(),tags=[...new Set(b.cards.map(c=>c.tag))],dec=decisions(b);
  const dh=dec.length?H2("결정 대기",dec.length+"건")+`<div class="card">${dec.map(d=>`<div class="dec"><div class="m"><b>${esc(d.t)}</b><small>${esc(d.s)}</small></div><button class="btnp" data-act="dok:${esc(d.id)}">보드에 추가</button><button class="btng" data-act="dno:${esc(d.id)}">보류</button></div>`).join("")}</div>`:"";
