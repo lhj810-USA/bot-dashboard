@@ -6,6 +6,7 @@ while true; do
   python3 scripts/update-data.py >/dev/null 2>&1
   /workspace/bot-dashboard-venv/bin/python scripts/collect-market.py >/dev/null 2>&1   # 공개 시세·환율·날씨 (30분 간격)
   python3 scripts/collect-news.py >/dev/null 2>&1   # 공개 RSS 뉴스 (30분 간격)
+  python3 scripts/collect-fun.py >/dev/null 2>&1   # 유튜브 RSS·이색 볼거리 (6시간 간격)
   python3 scripts/ai-brief.py >/dev/null 2>&1   # AI 브리핑 (로컬 규칙 엔진)
   /workspace/bot-dashboard-venv/bin/python scripts/build-payload.py >/dev/null 2>&1
   if [ -n "$(git status --porcelain payload.enc.json)" ]; then
