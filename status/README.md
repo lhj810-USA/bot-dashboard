@@ -57,3 +57,6 @@ v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES
 ## v14
 - collect-fun.py: 6h throttle, YouTube RSS (26 verified channels) + oddity feeds. Reddit returns 403 → not used. NASA APOD DEMO_KEY API 500 → HTML fallback.
 - New routes: want, mopp, me, odd, yt. Tap-test section 14.
+
+## v14.1
+- js/v14b.js: TTS player (wraps speechSynthesis.speak), interests engine (SECS.int), Takeout importer (client-side, aggregates only). Tap-test section 14.1 stubs speechSynthesis via init script.

@@ -109,3 +109,10 @@
 - `#odd` 이색 볼거리: NASA APOD, Wikipedia(오늘의 글·사진·역사 속 오늘), Atlas Obscura, ScienceDaily, Smithsonian, HN. 좋아요/저장, Top 20.
 - `#yt` 오늘의 유튜브 10: 검증된 채널 26곳(`scripts/yt-channels.json`)의 RSS에서 정확히 10개 선별(채널당 1·태그당 3), 추천 이유 태그, 👍/관심 없음 학습.
 - 수집: `scripts/collect-fun.py` (publish-loop 내부, 6시간마다) → `secrets/fun.json` → 암호화 payload의 `fun`.
+
+## v14.1 — 음성 멈춤 · 관심사 관리 (2026-11-01)
+- 음성 미니 플레이어: 읽는 동안 하단에 ■ 멈춤 / ⏸ 일시정지·▶ 이어듣기 / 속도 0.8·1·1.2×. 욕구 요약·브리핑·비서 등 모든 낭독에 적용 (`speechSynthesis.speak`를 감쌈). 화면 이동·앱 숨김 시 자동 정지. 문장 단위로 나눠 읽어 Chrome의 15초 끊김과 pause() 버그를 피함 (일시정지 = cancel 후 같은 문장부터 재개).
+- `#interests` 관심사 관리 (나의 프로필에서 진입): 출처 배지(말씀하신 것 / 직접 선택 / 대화에서 추정 / 유튜브 기록 / 뉴스 클릭)와 가중치, 입력·음성(ko-KR SpeechRecognition) 추가, 카테고리별 추천 칩, ▲▼ 조정·숨김·삭제, "왜?" 근거 보기, "JARVIS는 이렇게 관심사를 알아요" 안내. 이 기기에 암호화 저장되고 욕구 요약·유튜브 10·돈 기회 순위에 반영돼요.
+- 유튜브 Takeout 가져오기: watch-history.json/.html, subscriptions.csv, Liked videos.csv를 브라우저 안에서만 분석. 채널별 횟수(상위 40)와 분야별 횟수만 암호화 저장하고, 원본 파일·영상 제목은 저장하지 않음. 구독·자주 보는 채널은 유튜브 10에서 가산점.
+- 자동 연동이 안 되는 이유: YouTube Data API는 로그인(OAuth)을 해도 시청 기록을 읽는 기능이 없고, 지금 연결된 커넥터에도 없어요.
+- 테스트용 가짜 Takeout 파일: `scripts/fixtures/` (공개 채널 ID와 SYNTHETIC 표시가 붙은 지어낸 제목뿐, 개인 데이터 없음).
