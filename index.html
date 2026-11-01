@@ -612,7 +612,7 @@ async function send(id,t){t=(t||"").trim();if(!t){T("명령을 입력하세요")
 $("cmd").onsubmit=async e=>{e.preventDefault();if(await send($("sel").value,$("txt").value))$("txt").value=""};
 $("refresh").onclick=async()=>{const pw=sessionStorage.getItem("jv_pw")||localStorage.getItem("jv_pw");if(pw)await unlock(pw,!!localStorage.getItem("jv_pw"));T("갱신됨 · 연결 데이터는 'JARVIS 업데이트'로 새로 수집")};
 $("speak").onclick=()=>{if(!D)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance("혁진님, 오늘의 브리핑입니다. "+D.headline.join(". "));u.lang="ko-KR";speechSynthesis.speak(u)}catch(e){T("음성 출력 미지원")}};
-(async()=>{try{api=(await fetch(AU("api/health"))).ok}catch(e){api=false}const pw=localStorage.getItem("jv_pw")||sessionStorage.getItem("jv_pw");if(pw)unlock(pw,!!localStorage.getItem("jv_pw"))})();
+(async()=>{try{api=(await fetch(AU("api/health"))).ok}catch(e){api=false}const pw=localStorage.getItem("jv_pw")||sessionStorage.getItem("jv_pw");if(pw)unlock(pw,!!localStorage.getItem("jv_pw")).then(ok=>{if(!ok&&/올바르지/.test($("er").textContent)){localStorage.removeItem("jv_pw");sessionStorage.removeItem("jv_pw");$("er").textContent="저장된 접근 코드가 바뀌었어요. 새 접근 코드를 입력하세요";$("lock").style.display="flex"}})})();
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 const b64=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");s+="=".repeat((4-s.length%4)%4);return Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
 $("pushOn").onclick=async()=>{try{if(!("PushManager" in window)){T("푸시 미지원 · iPhone은 홈 화면 앱에서");return}if(await Notification.requestPermission()!=="granted"){T("알림 권한 거부");return}
@@ -630,5 +630,5 @@ $("txt").addEventListener("change",()=>{const {b,rest}=route($("txt").value);if(
 </script>
 <script src="js/v12a.js"></script>
 <script src="js/v12b.js"></script>
-<script src="js/v12c.js"></script><script src="js/v13a.js"></script><script src="js/v13b.js"></script><script src="js/v13c.js"></script><script src="js/v14a.js"></script><script src="js/v14b.js"></script>
+<script src="js/v12c.js"></script><script src="js/v13a.js"></script><script src="js/v13b.js"></script><script src="js/v13c.js"></script><script src="js/v14a.js"></script><script src="js/v14b.js"></script><script src="js/v14c.js"></script>
 </body></html>

@@ -212,6 +212,27 @@ with sync_playwright() as p:
     with pg.expect_download() as dl: tap(pg.locator("#sexp"))
     chk(dl.value.suggested_filename.startswith("jarvis-settings"),"export file")
     tap(pg.locator("#srst"));tap(pg.locator("#srst"));chk(pg.evaluate("JSON.parse(localStorage.jv_set).view")=="기본","reset")
+    # ===== 14.2 passcode change: device store survives =====
+    OLD="synthetic-old-code-142"
+    def mkctx():
+        c=b.new_context(viewport={"width":390,"height":844},reduced_motion="reduce");q=c.new_page();q.on("pageerror",lambda e:errs.append(str(e)));q.set_default_timeout(4000);return c,q
+    seed=f"""async()=>{{const salt=crypto.getRandomValues(new Uint8Array(16)),k=await pwKey({OLD!r},salt),iv=crypto.getRandomValues(new Uint8Array(12)),c=new Uint8Array(await crypto.subtle.encrypt({{name:"AES-GCM",iv}},k,new TextEncoder().encode(JSON.stringify({{me:{{city:"복구테스트시티"}}}}))));localStorage.setItem("jv_sec",JSON.stringify({{v:1,s:h64(salt),i:h64(iv),c:h64(c)}}));localStorage.removeItem("jv_sec_locked")}}"""
+    c2,q=mkctx();q.goto(URL);q.wait_for_timeout(800);q.evaluate(seed);q.reload();q.wait_for_timeout(800)
+    q.fill("#pw",PW);q.click("#lf button");q.wait_for_timeout(4500)
+    chk(q.locator("#secrec").is_visible(),"old-code store → recovery prompt");chk(q.evaluate("localStorage.jv_sec_locked||''").count("c")>0 and q.evaluate("!localStorage.jv_sec"),"undecryptable store backed up, not overwritten")
+    q.evaluate("location.hash='me'");q.wait_for_timeout(300);q.evaluate("saveSec()");q.wait_for_timeout(400);chk(q.evaluate("!localStorage.jv_sec"),"no save while locked")
+    q.fill("#secold","wrong-code");q.click("#secgo");q.wait_for_timeout(2500);chk("맞지 않아요" in q.inner_text("#secer"),"wrong old code rejected")
+    q.fill("#secold",OLD);q.click("#secgo");q.wait_for_timeout(3000);chk(q.locator("#secrec").count()==0 and q.evaluate("(SECS.me||{}).city")=="복구테스트시티","recovered with old code")
+    q.wait_for_timeout(600);chk(q.evaluate("!!localStorage.jv_sec && !localStorage.jv_sec_locked"),"re-encrypted, backup cleared")
+    chk(q.evaluate(f"(async()=>{{try{{await secDec(localStorage.jv_sec,{PW!r});return true}}catch(e){{return false}}}})()") and "복구테스트시티" not in q.evaluate("localStorage.jv_sec"),"store now opens with current code, encrypted")
+    c2.close()
+    c2,q=mkctx();q.goto(URL);q.wait_for_timeout(800);q.evaluate(seed);q.reload();q.wait_for_timeout(800);q.fill("#pw",PW);q.click("#lf button");q.wait_for_timeout(4500)
+    q.click("#secskip");chk(q.locator("#secrec").count()==1 and "정말" in q.inner_text("#secskip"),"skip needs confirmation");q.click("#secskip");q.wait_for_timeout(600)
+    chk(q.locator("#secrec").count()==0 and q.evaluate("JSON.parse(localStorage.jv_sec_locked).length")==1,"skip keeps backup")
+    q.evaluate("ACT.secrec()");chk(q.locator("#secrec").is_visible(),"retry later from palette action");c2.close()
+    c2,q=mkctx();q.goto(URL);q.wait_for_timeout(500);q.evaluate("localStorage.jv_pw='stale-remembered-code'");q.reload();q.wait_for_timeout(4000)
+    chk(q.locator("#lock").is_visible() and q.locator("#pw").is_visible() and not q.evaluate("localStorage.jv_pw"),"stale remembered code → unlock screen, cleared")
+    q.fill("#pw",PW);q.click("#lf button");q.wait_for_timeout(4000);chk(not q.locator("#lock").is_visible(),"then unlock works");c2.close()
     chk(not errs,f"page errors {errs}")
     b.close()
 print(f"tap-test: {ok} passed, {len(fail)} failed");[print(" FAIL",f) for f in fail[:40]]
