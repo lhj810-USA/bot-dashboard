@@ -147,6 +147,26 @@ with sync_playwright() as p:
     for r in ["money","inv","news","bots"]:
         nav(r);chk(pg.locator(".anat .an-st > div").count()>=1,"category hero "+r)
     nav("set");tap(pg.locator(".seg button",has_text="라이트"));chk(pg.evaluate("getComputedStyle(document.body).backgroundColor")!="rgb(0, 0, 0)" and pg.evaluate("getComputedStyle(document.documentElement).filter")=="none","real light theme (no invert)");tap(pg.locator(".seg button",has_text="시안"))
+    # ===== 14 v14 =====
+    nav("home");chk(pg.locator(".want").count()>=1 and pg.locator(".strip .ytc").count()>=1 and pg.locator(".oc").count()>=3,"home v14 blocks")
+    nav("want");chk(len(pg.locator("#wtx").inner_text())>40,"want paragraph");chk(pg.locator(".wl li").count()==3,"3 ranked wants");chk("추정" in pg.locator(".want").inner_text(),"inference label")
+    tap(pg.locator("[data-act='speak']").first);chk(not errs,"speak no error")
+    tap(pg.locator("[data-act^='wfb:']").first);chk("want" in pg.evaluate("Object.keys(SECS||{})").__str__(),"want feedback stored")
+    nav("mopp");n=pg.locator(".oc").count();chk(n>=8,f"opps {n}");chk(pg.locator(".oc a[href^='http']").count()==n,"every opp has source link")
+    p=pg.locator("[data-act^='ocf:']").nth(1);tap(p);chk(pg.locator(".oc").count()<n,"opp filter");tap(pg.locator("[data-act='ocf:all']"))
+    o=pg.locator(".oc").first;oid=o.get_attribute("data-oid");tap(o.locator("[data-act^='osave:']"));chk(pg.evaluate(f"((SECS.board||{{}}).cards||[]).some(c=>c.oid==='{oid}')"),"opp → board")
+    c=pg.locator("[data-act^='ck:']").first;tap(c);chk(pg.locator("[data-act^='ck:']").first.is_checked(),"checklist check")
+    nav("me");pg.locator("[data-mef='city']").fill("테스트시티");tap(pg.locator("[data-act='mesave']"));pg.wait_for_timeout(500)
+    nav("odd");n=pg.locator(".odc").count();chk(n>=10,f"oddities {n}");tap(pg.locator("[data-act^='odf:']").nth(3));chk(pg.locator(".odc").count()<n,"odd filter");tap(pg.locator("[data-act='odf:all']"))
+    tap(pg.locator("[data-act^='olk:']").first);tap(pg.locator("[data-act='odf:saved']"));chk(pg.locator(".odc").count()>=1,"odd like → saved")
+    nav("yt");y=pg.locator(".ytc:not(.sm)");chk(y.count()==10,f"youtube exactly 10 ({y.count()})")
+    chk(all("i.ytimg.com/vi/" in (y.nth(i).locator("img").get_attribute("src") or "") and "watch?v=" in (y.nth(i).locator("a.yti").get_attribute("href") or "") for i in range(y.count())),"yt thumbs+links valid")
+    first=y.first.locator("a.yti").get_attribute("data-yt");tap(y.first.locator("[data-act^='ylk:']"));tap(pg.locator(".ytc:not(.sm)").first.locator("[data-act^='yno:']"));pg.wait_for_timeout(300)
+    chk(pg.locator(f".ytc:not(.sm) a[data-yt='{first}']").count()==0 and pg.locator(".ytc:not(.sm)").count()==10,"not-interested replaces, still 10")
+    pg.reload();pg.wait_for_timeout(1500)
+    if pg.locator("#pw").is_visible(): pg.fill("#pw",PW);pg.click("#lf button")
+    pg.wait_for_timeout(3500);nav("me");chk(pg.locator("[data-mef='city']").input_value()=="테스트시티","profile persisted");chk("테스트시티" not in pg.evaluate("localStorage.jv_sec||''"),"profile encrypted")
+    pg.locator("[data-mef='city']").fill("");tap(pg.locator("[data-act='mesave']"))
     # ===== 12 settings =====
     nav("set")
     for th in ["라이트","앰버","시안"]:

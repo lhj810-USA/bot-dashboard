@@ -53,3 +53,7 @@ v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES
 
 ## v12 (jarvis10)
 대시보드 v12: AI 브리핑(박스 규칙 엔진 `scripts/ai-brief.py` → 암호화 페이로드 `ai`), 부자되기 도구 13종, 홈 보기·편집·테마·팔레트. 이 폴더의 봇 상태 JSON 형식은 변경 없음.
+
+## v14
+- collect-fun.py: 6h throttle, YouTube RSS (26 verified channels) + oddity feeds. Reddit returns 403 → not used. NASA APOD DEMO_KEY API 500 → HTML fallback.
+- New routes: want, mopp, me, odd, yt. Tap-test section 14.

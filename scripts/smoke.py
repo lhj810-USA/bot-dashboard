@@ -4,7 +4,7 @@ import sys
 from playwright.sync_api import sync_playwright
 URL=sys.argv[1] if len(sys.argv)>1 else "http://localhost:8787/"
 PW=open("/workspace/bot-dashboard-secrets/passcode").read().strip()
-R=["home","cats","money","inv","rich","rich:net","rich:goal","rich:cut","rich:fire","rich:dca","rich:side","rich:debt","rich:subs","rich:port","rich:watch","rich:fx","rich:opp","rich:habits","ai","ai:ask","set","set:gallery","news","news:top","brief","reco","imap","bots","x:spend","coin:BTC","fx","wx","family","c:life","conn"]
+R=["home","cats","money","inv","rich","rich:net","rich:goal","rich:cut","rich:fire","rich:dca","rich:side","rich:debt","rich:subs","rich:port","rich:watch","rich:fx","rich:opp","rich:habits","ai","ai:ask","set","set:gallery","news","news:top","brief","reco","imap","bots","x:spend","coin:BTC","fx","wx","family","c:life","conn","want","mopp","me","odd","yt","const","tl","board"]
 with sync_playwright() as p:
     b=p.chromium.launch(executable_path="/usr/bin/google-chrome")
     ctx=b.new_context(viewport={"width":390,"height":844},has_touch=True,is_mobile=True,device_scale_factor=2,reduced_motion="reduce");pg=ctx.new_page();errs=[]
