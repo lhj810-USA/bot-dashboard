@@ -60,3 +60,8 @@ v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES
 
 ## v14.1
 - js/v14b.js: TTS player (wraps speechSynthesis.speak), interests engine (SECS.int), Takeout importer (client-side, aggregates only). Tap-test section 14.1 stubs speechSynthesis via init script.
+
+## v15
+- Morning brief cards, readiness score, since-last-visit, net-worth pacing, recurring calendar with price-change, freshness banner.
+- Connector refresh 2026-11-14 (finance, Gmail, Calendar, Drive). Interest map not re-counted (local bot transcript stores empty).
+- Tap-test section 15. Research memo: docs/research-2026-11.md (no personal data).
