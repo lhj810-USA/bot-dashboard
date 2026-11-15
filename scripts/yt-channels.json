@@ -1,10 +1,331 @@
-{"note":"검증된 공개 채널 ID (YouTube RSS로 제목 확인 2026-11-01). tags: finance, trading, ai, english, korean, travel, fun, science",
-"channels":[
-["UCV6KDgJskWaEckne5aPA0aQ","Graham Stephan",["finance"]],["UCGy7SkBjcIAgTiwkXEtPnYg","Andrei Jikh",["finance","trading"]],["UCDXTQ8nWmx_EhZ2v-kp7QxA","Ben Felix",["finance"]],["UCFCEuCsyWP0YkP3CZ3Mr01Q","The Plain Bagel",["finance"]],
-["UCsJ6RuBiTVWRX156FVbeaGg","슈카월드",["finance","korean"]],["UChlv4GSd7OQl3js-jkLOnFA","삼프로TV",["finance","korean","trading"]],["UCASM0cgfkJxQ1ICmRilfHLw","Patrick Boyle",["finance","trading"]],["UCqK_GSMbpiV8spgD3ZGloSw","Coin Bureau",["trading"]],
-["UCbfYPyITQ-7l4upoX8nvctg","Two Minute Papers",["ai","science"]],["UCNJ1Ymd5yFuUPtn21xtRbbw","AI Explained",["ai"]],["UCsBjURrPoezykLs9EqgamOA","Fireship",["ai"]],["UCYO_jab_esuFRV4b17AJtAw","3Blue1Brown",["ai","science"]],["UCXUPKJO5MZQN11PqgIvyuvQ","Andrej Karpathy",["ai"]],
-["UCz4tgANd4yy8Oe0iXCdSWfA","English with Lucy",["english"]],["UCHaHD477h-FeBbVh9Sh7syA","BBC Learning English",["english"]],
-["UCUj6rrhMTR9pipbAWBAMvUQ","침착맨",["korean","fun"]],["UCGX5sP4ehBkihHwt5bs5wvg","피식대학",["korean","fun"]],
-["UC4ijq8Cg-8zQKx8OH12dUSw","Kara and Nate",["travel"]],["UCyEd6QBSgat5kkC6svyjudA","Mark Wiens",["travel","fun"]],
-["UCY1kMZp36IQSyNx_9h4mpCg","Mark Rober",["fun","science"]],["UCX6OQ3DkcsbYNE6H8uQQuVA","MrBeast",["fun"]],["UCHnyfMqiRRG1u-2MsSQLbXA","Veritasium",["science","fun"]],["UCsXVk37bltHxD1rDPwtNM8Q","Kurzgesagt",["science","fun"]],["UC6nSFpj9HTCZ5t-N3Rm3-HA","Vsauce",["science","fun"]],["UCBa659QWEk1AI4Tg--mrJ2A","Tom Scott",["fun","science"]],["UC9RM-iSvTu1uPJb8X5yp3EQ","Wendover Productions",["travel","science"]]
-]}
+{
+  "note": "검증된 공개 채널 ID (canonical/externalId, 2026-11-14). tags: finance, trading, ai, english, korean, travel, fun, science, space, world",
+  "channels": [
+    [
+      "UCV6KDgJskWaEckne5aPA0aQ",
+      "Graham Stephan",
+      [
+        "finance"
+      ]
+    ],
+    [
+      "UCGy7SkBjcIAgTiwkXEtPnYg",
+      "Andrei Jikh",
+      [
+        "finance",
+        "trading"
+      ]
+    ],
+    [
+      "UCDXTQ8nWmx_EhZ2v-kp7QxA",
+      "Ben Felix",
+      [
+        "finance"
+      ]
+    ],
+    [
+      "UCFCEuCsyWP0YkP3CZ3Mr01Q",
+      "The Plain Bagel",
+      [
+        "finance"
+      ]
+    ],
+    [
+      "UCsJ6RuBiTVWRX156FVbeaGg",
+      "슈카월드",
+      [
+        "finance",
+        "korean"
+      ]
+    ],
+    [
+      "UChlv4GSd7OQl3js-jkLOnFA",
+      "삼프로TV",
+      [
+        "finance",
+        "korean",
+        "trading"
+      ]
+    ],
+    [
+      "UCASM0cgfkJxQ1ICmRilfHLw",
+      "Patrick Boyle",
+      [
+        "finance",
+        "trading"
+      ]
+    ],
+    [
+      "UCqK_GSMbpiV8spgD3ZGloSw",
+      "Coin Bureau",
+      [
+        "trading"
+      ]
+    ],
+    [
+      "UCbfYPyITQ-7l4upoX8nvctg",
+      "Two Minute Papers",
+      [
+        "ai",
+        "science"
+      ]
+    ],
+    [
+      "UCNJ1Ymd5yFuUPtn21xtRbbw",
+      "AI Explained",
+      [
+        "ai"
+      ]
+    ],
+    [
+      "UCsBjURrPoezykLs9EqgamOA",
+      "Fireship",
+      [
+        "ai"
+      ]
+    ],
+    [
+      "UCYO_jab_esuFRV4b17AJtAw",
+      "3Blue1Brown",
+      [
+        "ai",
+        "science"
+      ]
+    ],
+    [
+      "UCXUPKJO5MZQN11PqgIvyuvQ",
+      "Andrej Karpathy",
+      [
+        "ai"
+      ]
+    ],
+    [
+      "UCz4tgANd4yy8Oe0iXCdSWfA",
+      "English with Lucy",
+      [
+        "english"
+      ]
+    ],
+    [
+      "UCHaHD477h-FeBbVh9Sh7syA",
+      "BBC Learning English",
+      [
+        "english"
+      ]
+    ],
+    [
+      "UCUj6rrhMTR9pipbAWBAMvUQ",
+      "침착맨",
+      [
+        "korean",
+        "fun"
+      ]
+    ],
+    [
+      "UCGX5sP4ehBkihHwt5bs5wvg",
+      "피식대학",
+      [
+        "korean",
+        "fun"
+      ]
+    ],
+    [
+      "UC4ijq8Cg-8zQKx8OH12dUSw",
+      "Kara and Nate",
+      [
+        "travel"
+      ]
+    ],
+    [
+      "UCyEd6QBSgat5kkC6svyjudA",
+      "Mark Wiens",
+      [
+        "travel",
+        "fun"
+      ]
+    ],
+    [
+      "UCY1kMZp36IQSyNx_9h4mpCg",
+      "Mark Rober",
+      [
+        "fun",
+        "science"
+      ]
+    ],
+    [
+      "UCX6OQ3DkcsbYNE6H8uQQuVA",
+      "MrBeast",
+      [
+        "fun"
+      ]
+    ],
+    [
+      "UCHnyfMqiRRG1u-2MsSQLbXA",
+      "Veritasium",
+      [
+        "science",
+        "fun"
+      ]
+    ],
+    [
+      "UCsXVk37bltHxD1rDPwtNM8Q",
+      "Kurzgesagt",
+      [
+        "science",
+        "fun"
+      ]
+    ],
+    [
+      "UC6nSFpj9HTCZ5t-N3Rm3-HA",
+      "Vsauce",
+      [
+        "science",
+        "fun"
+      ]
+    ],
+    [
+      "UCBa659QWEk1AI4Tg--mrJ2A",
+      "Tom Scott",
+      [
+        "fun",
+        "science"
+      ]
+    ],
+    [
+      "UC9RM-iSvTu1uPJb8X5yp3EQ",
+      "Wendover Productions",
+      [
+        "travel",
+        "science"
+      ]
+    ],
+    [
+      "UCLA_DiR1FfKNvjuUpBHmylQ",
+      "NASA",
+      [
+        "science",
+        "space"
+      ]
+    ],
+    [
+      "UCAuUUnT6oDeKwE6v1NGQxug",
+      "TED",
+      [
+        "science",
+        "fun"
+      ]
+    ],
+    [
+      "UCLXo7UDZvByw2ixzpQCufnA",
+      "Vox",
+      [
+        "world",
+        "fun"
+      ]
+    ],
+    [
+      "UC16niRr50-MSBwiO3YDb3RA",
+      "BBC News",
+      [
+        "world"
+      ]
+    ],
+    [
+      "UCZYTClx2T1of7BRZ86-8fow",
+      "SciShow",
+      [
+        "science"
+      ]
+    ],
+    [
+      "UC2C_jShtL725hvbm1arSV9w",
+      "CGP Grey",
+      [
+        "fun",
+        "science"
+      ]
+    ],
+    [
+      "UCP5tjEmvPItGyLhmjdwP7Ww",
+      "RealLifeLore",
+      [
+        "world",
+        "science"
+      ]
+    ],
+    [
+      "UCBJycsmduvYEL83R_U4JriQ",
+      "Marques Brownlee",
+      [
+        "fun"
+      ]
+    ],
+    [
+      "UCXuqSBlHAE6Xw-yeJA0Tunw",
+      "Linus Tech Tips",
+      [
+        "fun"
+      ]
+    ],
+    [
+      "UCgNg3vwj3xt7QOrcIDaHdFg",
+      "PolyMatter",
+      [
+        "world"
+      ]
+    ],
+    [
+      "UCwnKziETDbHJtx78nIkfYug",
+      "CaspianReport",
+      [
+        "world"
+      ]
+    ],
+    [
+      "UCVUjd2vUGrWvLOP9ni9nHCQ",
+      "KBS News",
+      [
+        "world",
+        "korean"
+      ]
+    ],
+    [
+      "UChlgI3UHCOnwUGzWzbJ3H5w",
+      "YTN",
+      [
+        "world",
+        "korean"
+      ]
+    ],
+    [
+      "UCkinYTS9IHqOEwR1Sze2JTw",
+      "SBS 뉴스",
+      [
+        "world",
+        "korean"
+      ]
+    ],
+    [
+      "UCHpw8xwDNhU9gdohEcJu4aA",
+      "The Guardian",
+      [
+        "world"
+      ]
+    ],
+    [
+      "UCmmPgObSUPw1HL2lq6H4ffA",
+      "Geography Now",
+      [
+        "world"
+      ]
+    ],
+    [
+      "UCpVm7bg6pXKo1Pr6k5kxG9A",
+      "National Geographic",
+      [
+        "science",
+        "fun"
+      ]
+    ]
+  ]
+}
