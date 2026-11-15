@@ -8,8 +8,8 @@ while true; do
   python3 scripts/collect-news.py >/dev/null 2>&1   # 공개 RSS 뉴스 (30분 간격)
   python3 scripts/collect-fun.py >/dev/null 2>&1   # 유튜브 RSS·이색 볼거리 (6시간 간격)
   python3 scripts/ai-brief.py >/dev/null 2>&1   # AI 브리핑 (로컬 규칙 엔진)
-  /workspace/bot-dashboard-venv/bin/python scripts/build-payload.py >/dev/null 2>&1
   python3 scripts/snapshot-patterns.py >/dev/null 2>&1   # 패턴 스냅샷 (5시간 내 중복 생략; 7AM/6PM 루틴이 수집 후 --force 가능)
+  /workspace/bot-dashboard-venv/bin/python scripts/build-payload.py >/dev/null 2>&1
   if [ -n "$(git status --porcelain payload.enc.json)" ]; then
     git add payload.enc.json && git -c user.name=lhj810-USA -c user.email=lhj810-USA@users.noreply.github.com commit -qm "payload: auto update (encrypted)" && (git pull -q --rebase -X theirs || git rebase --abort) && git push -q
   fi
