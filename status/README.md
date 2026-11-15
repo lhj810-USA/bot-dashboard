@@ -65,3 +65,8 @@ v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES
 - Morning brief cards, readiness score, since-last-visit, net-worth pacing, recurring calendar with price-change, freshness banner.
 - Connector refresh 2026-11-14 (finance, Gmail, Calendar, Drive). Interest map not re-counted (local bot transcript stores empty).
 - Tap-test section 15. Research memo: docs/research-2026-11.md (no personal data).
+
+## v16
+- Pattern snapshots: scripts/snapshot-patterns.py appends dated aggregates in the secrets folder; patterns-pub is merged into the encrypted payload only. Hourly spend is not invented (feeds have no time-of-day). Usage log lives encrypted in jv_sec.
+- New routes: patterns, needs, forecast, bills14, nwchg, reply, week, watchm. Desktop HUD grid at 1024px+.
+- Tap-test section 16. SW cache bot-dash-v16-patterns.
