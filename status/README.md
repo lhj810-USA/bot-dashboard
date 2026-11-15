@@ -70,3 +70,8 @@ v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES
 - Pattern snapshots: scripts/snapshot-patterns.py appends dated aggregates in the secrets folder; patterns-pub is merged into the encrypted payload only. Hourly spend is not invented (feeds have no time-of-day). Usage log lives encrypted in jv_sec.
 - New routes: patterns, needs, forecast, bills14, nwchg, reply, week, watchm. Desktop HUD grid at 1024px+.
 - Tap-test section 16. SW cache bot-dash-v16-patterns.
+
+## v17
+- Living HUD (particles, neural links, speaking waveform), hand-rolled canvas globe, world-affairs brief, interest video wall with in-app playback, local rule-based assistant.
+- scripts/collect-world.py (USGS, clocks, Wikipedia on-this-day, regional headlines). YouTube collect falls back to public channel pages when official RSS 404s.
+- New routes: globe, world, videos, inews, space, near, jarvis. Tap-test section 17. SW bot-dash-v17-living.
