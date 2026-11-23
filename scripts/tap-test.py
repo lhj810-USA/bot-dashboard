@@ -214,7 +214,7 @@ with sync_playwright() as p:
     chk(order1!=order0,"tab reorder stored")
     tap(pg.locator("[data-tab='set']"))
     chk("set" in pg.evaluate("JSON.parse(localStorage.jv_set||'{}').tabs||[]"),"tab show 설정 stored")
-    chk(pg.locator("#tabs button").count()==5,"dock stays 5 hubs")
+    chk(pg.locator("#tabs button").count()==6,"dock stays 6 hubs incl. 비서")
     pg.fill("#qal","테스트QA");tap(pg.locator("#qadd"));nav("dash");chk("테스트QA" in pg.locator(".qa").inner_text(),"quick action added")
     nav("set");pg.fill("#vnm","테스트뷰");tap(pg.locator("#vadd"));nav("dash");chk(on(pg.locator(".vchips [data-view='테스트뷰']")),"view added+active")
     nav("set:gallery");g0=pg.locator("[data-gw]").first;gk=g0.get_attribute("data-gw");st0=on(g0);tap(g0);chk(on(pg.locator(f"[data-gw='{gk}']"))!=st0,"gallery toggle")
@@ -315,8 +315,8 @@ with sync_playwright() as p:
     chk(pg.locator(".focus18 li button").count()==3,"home direction 3")
     chk(pg.locator(".hubs5 button").count()==5,"home 5 hub doors")
     chk(pg.locator(".greet17").count()>=1,"home greeting")
-    chk(pg.locator("#jfab").count()==1,"assistant fab")
-    chk(pg.locator("#tabs button").count()==5,"dock has 5 hubs")
+    chk(pg.locator("#jfab").count()==0,"no floating assistant fab over dock")
+    chk(pg.locator("#tabs button").count()==6,"dock has 6 hubs incl. 비서")
     tap(pg.locator(".hubs5 button").nth(0));chk(H()=="wealth","hub door → 돈")
     nav("wealth");good("wealth");chk("순자산" in V() and pg.locator(".wealth18").count()==1,"wealth hub")
     nav("life");good("life");chk(pg.locator(".life18 .area").count()>=6 and "데이터 없음" in V(),"life 6 areas incl. empty health")
@@ -324,6 +324,94 @@ with sync_playwright() as p:
     nav("play");good("play");chk(pg.locator(".play18").count()==1,"play magazine")
     nav("world");chk(pg.locator(".reg").count()>=3 and "헤드라인" in V(),"world still has regions")
     nav("home");tap(pg.locator(".hubs5 [data-go='life']"));chk(H()=="life","hub door 나")
+    # ===== 19 v19 all routes, feature tiles, new panels & zero-overlap check =====
+    nav("all"); good("all")
+    chk(pg.locator(".all19 .tile19").count() >= 70, "all-features launcher 70+ items")
+    pg.fill("#allq", "구독"); pg.wait_for_timeout(150)
+    chk(pg.locator(".all19 .tile19[data-go='subs19']").count() == 1, "all-features search finds subs19")
+    tap(pg.locator(".all19 .tile19[data-go='subs19']")); chk(H() == "subs19", "all -> subs19"); good("subs19")
+    nav("all"); pg.fill("#allq", ""); pg.wait_for_timeout(120)
+
+    # New v19 routes & fixed V.x / V.orders / V.mail
+    for rt in ["goals19", "packages19", "travel19", "dday19", "notes19", "orders", "xprof", "x", "routines", "conn", "drive", "gh", "eng", "side", "meet", "cal", "events", "sched", "unread", "important", "flag", "mailall", "mailx", "fx", "crypto", "stk", "paper", "wx", "news", "newall", "fortune", "reco", "imap", "const", "tl", "board", "want", "mopp", "me", "yt", "odd", "brief15", "score", "since", "nwtl", "recur", "nudge", "patterns", "needs", "forecast", "bills14", "nwchg", "reply", "week", "watchm", "globe", "world", "videos", "inews", "space", "near", "jarvis", "dash"]:
+        nav(rt); good("route:" + rt)
+    nav("x:spend"); good("x:spend preserved")
+    nav("xprof"); chk("팔로워" in V(), "xprof shows X profile")
+    nav("packages19"); chk("배송" in V(), "packages19")
+    if pg.locator("#v [data-go^='mail:']").count():
+        tap(pg.locator("#v [data-go^='mail:']").first)
+        chk("메일 상세" in V() and "찾을 수 없음" not in V(), "mailx item opens mail detail")
+
+    # Notes encrypted add/toggle/delete
+    nav("notes19")
+    pg.fill("#n19t", "비밀메모테스트19")
+    tap(pg.locator("[data-act='n19add']")); pg.wait_for_timeout(400)
+    chk("비밀메모테스트19" in V(), "note added")
+    chk("비밀메모테스트19" not in pg.evaluate("localStorage.jv_sec||''"), "note stored encrypted")
+    tap(pg.locator(".ntog").first); chk("done" in (pg.locator(".ntog").first.get_attribute("class") or ""), "note toggled")
+    tap(pg.locator(".ndel").first); chk("비밀메모테스트19" not in V(), "note deleted")
+
+    # Goals & D-day encrypted add/delete
+    nav("goals19")
+    pg.fill("#g19n", "비상금19"); pg.fill("#g19v", "5000"); tap(pg.locator("[data-act='g19add']")); pg.wait_for_timeout(300)
+    chk("비상금19" in V(), "goal added")
+    tap(pg.locator("[data-act^='g19del:']").first); chk("비상금19" not in V(), "goal deleted")
+
+    nav("dday19")
+    pg.fill("#d19t", "디데이테스트19"); pg.fill("#d19d", "2026-12-31"); tap(pg.locator("[data-act='d19add']")); pg.wait_for_timeout(300)
+    chk("디데이테스트19" in V(), "dday added")
+    tap(pg.locator("[data-act^='d19del:']").first); chk("디데이테스트19" not in V(), "dday deleted")
+
+    # Bot command picker on #life
+    nav("life")
+    chk(pg.locator(".botc19 .bcmd").count() == 8, "8 bot command buttons on life")
+    tap(pg.locator(".botc19 .bcmd").first)
+    chk(bool(pg.evaluate("document.getElementById('sel').value")), "bot command picker selects bot")
+
+    # Feature tiles across hubs work
+    for hub in ["wealth", "life", "world", "play", "jarvis"]:
+        nav(hub)
+        cnt = pg.locator(".tile19").count()
+        chk(cnt >= 6, f"{hub} has {cnt} feature tiles")
+        for i in range(cnt):
+            nav(hub)
+            tl = pg.locator(".tile19").nth(i)
+            exp = tl.get_attribute("data-go")
+            tap(tl)
+            chk(H() == exp, f"{hub} tile {exp} -> {H()}")
+            good(f"{hub}->{exp}")
+
+    # Bottom overlap & >=48px target check at 390x844 and 360x740
+    def check_overlap(page, label):
+        for rt in ["home", "wealth", "life", "world", "play", "jarvis", "all"]:
+            page.evaluate(f"location.hash={rt!r}"); page.wait_for_timeout(240)
+            page.evaluate("window.scrollTo(0, document.body.scrollHeight)"); page.wait_for_timeout(120)
+            r = page.evaluate("""()=>{
+              const rect = el => { const b = el.getBoundingClientRect(); return {w:b.width,h:b.height,left:b.left,right:b.right,top:b.top,bottom:b.bottom}; };
+              const tabs = rect(document.getElementById('tabs'));
+              const cmd = rect(document.getElementById('cmd'));
+              const fab = rect(document.getElementById('fab'));
+              const tabBtns = [...document.querySelectorAll('#tabs button')].map(rect);
+              const cmdBtns = [...document.querySelectorAll('#cmd select,#cmd input,#cmd button')].map(rect);
+              const vKids = [...document.querySelectorAll('#v > * > *, #v > *')].filter(el=>{const s=getComputedStyle(el);return s.display!=='none'&&s.visibility!=='hidden'&&el.getBoundingClientRect().height>0});
+              const lastBottom = Math.max(...vKids.map(e=>e.getBoundingClientRect().bottom));
+              return {vw:document.documentElement.clientWidth,sw:document.documentElement.scrollWidth,tabs,cmd,fab,tabBtns,cmdBtns,lastBottom};
+            }""")
+            ov = lambda a,b: not (a["right"]<=b["left"]+0.5 or b["right"]<=a["left"]+0.5 or a["bottom"]<=b["top"]+0.5 or b["bottom"]<=a["top"]+0.5)
+            chk(not ov(r["tabs"], r["cmd"]), f"{label} {rt} tabs vs cmd no overlap")
+            chk(not ov(r["fab"], r["cmd"]) and not ov(r["fab"], r["tabs"]), f"{label} {rt} fab clear")
+            chk(r["lastBottom"] <= r["cmd"]["top"] + 0.5, f"{label} {rt} content clear of cmd ({r['lastBottom']:.0f}<={r['cmd']['top']:.0f})")
+            chk(r["sw"] <= r["vw"] + 1, f"{label} {rt} no horiz overflow ({r['sw']}<={r['vw']})")
+            chk(min(x["h"] for x in r["tabBtns"]) >= 48 and min(x["w"] for x in r["tabBtns"]) >= 48, f"{label} {rt} tab >=48px")
+            chk(min(x["h"] for x in r["cmdBtns"]) >= 48, f"{label} {rt} cmd >=48px")
+
+    check_overlap(pg, "390x844")
+    c360 = b.new_context(viewport={"width": 360, "height": 740}, has_touch=True, is_mobile=True, reduced_motion="reduce")
+    p360 = c360.new_page(); p360.on("pageerror", lambda e: errs.append(str(e))); p360.set_default_timeout(4000)
+    p360.goto(URL); p360.wait_for_timeout(500); p360.fill("#pw", PW); p360.click("#lf button"); p360.wait_for_selector(".home18", timeout=15000)
+    check_overlap(p360, "360x740")
+    c360.close()
+
     # reduced motion: no throw
     nav("home")
     chk(not errs, "no page errors before stale: "+str(errs)[:160] if errs else "ok")

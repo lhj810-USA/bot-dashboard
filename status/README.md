@@ -80,3 +80,7 @@ v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES
 - Premium design system, 5 hubs (오늘/돈/나/세계/재미) + assistant everywhere. Life profile, trajectory (estimates labeled), magazine play, 3-second home.
 - Old home tiles remain at #dash. Tap-test section 18. SW cache bot-dash-v18-premium.
 - No plaintext personal data in the repo.
+
+## v19
+- Fixed bottom chrome overlap (6-tab dock + synced #cmd + integrated #fab in .sbox, >=48px targets, safe-area padding).
+- Restored all v11–v18 routes into hub feature grids + searchable #all launcher; added #subs19, #goals19, #packages19, #travel19, #dday19, #notes19; fixed #x/#orders/#mail/#stk/#newall. SW cache bot-dash-v19.
