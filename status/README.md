@@ -75,3 +75,8 @@ v9: 페이로드에 reco / interests / mailx / fortune 키 추가 (여전히 AES
 - Living HUD (particles, neural links, speaking waveform), hand-rolled canvas globe, world-affairs brief, interest video wall with in-app playback, local rule-based assistant.
 - scripts/collect-world.py (USGS, clocks, Wikipedia on-this-day, regional headlines). YouTube collect falls back to public channel pages when official RSS 404s.
 - New routes: globe, world, videos, inews, space, near, jarvis. Tap-test section 17. SW bot-dash-v17-living.
+
+## v18
+- Premium design system, 5 hubs (오늘/돈/나/세계/재미) + assistant everywhere. Life profile, trajectory (estimates labeled), magazine play, 3-second home.
+- Old home tiles remain at #dash. Tap-test section 18. SW cache bot-dash-v18-premium.
+- No plaintext personal data in the repo.
