@@ -186,7 +186,7 @@ with sync_playwright() as p:
     nav("me");chk(pg.locator("[data-go='interests']").count()>=1,"profile → interests link")
     nav("interests");chk("JARVIS는 이렇게 관심사를 알아요" in V(),"interests explainer");chk(pg.locator(".irow .isb",has_text="대화에서 추정").count()>=1,"conversation source badge")
     pg.fill("#iin","테스트관심사");tap(pg.locator("[data-act='iadd']"));r=pg.locator(".irow",has_text="테스트관심사");chk(r.count()==1 and "말씀하신 것" in r.inner_text(),"interest added (said)")
-    ch=pg.locator("[data-act^='ipick:']").first;pt=ch.inner_text();tap(ch);chk(pg.locator(".irow",has_text=pt).filter(has_text="직접 선택").count()>=1,"interest picked")
+    ch=pg.locator("[data-act^='ipick:']").first;pt=ch.inner_text();tap(ch);pg.wait_for_timeout(150);chk(pg.locator(".irow",has_text=pt).filter(has_text="직접 선택").count()>=1,"interest picked")
     w0=float(r.locator(".ir-a .mut").inner_text().split()[-1]);tap(r.locator("[data-act^='iadj:']").first);r=pg.locator(".irow",has_text="테스트관심사");chk(float(r.locator(".ir-a .mut").inner_text().split()[-1])>w0,"interest boost")
     tap(r.locator("[data-act^='iwhy:']"));chk(pg.locator(".irow",has_text="테스트관심사").locator(".iwhy").count()==1,"why explainer")
     tap(pg.locator(".irow",has_text="테스트관심사").locator("[data-act^='imute:']"));chk("muted" in (pg.locator(".irow",has_text="테스트관심사").get_attribute("class") or ""),"interest mute")
@@ -294,9 +294,8 @@ with sync_playwright() as p:
     chk(pg.locator(".orbit17 button").count()>=6,"dash orbital launcher")
     chk(pg.locator(".greet17").count()>=1,"dash greeting")
     chk(pg.locator("#jcore").count()==1,"header living core")
-    nav("globe");pg.wait_for_timeout(400)
-    chk(pg.locator("#globe").count()==1,"globe canvas")
-    chk("Austin" in V() and "Seoul" in V(),"world clocks Austin/Seoul")
+    nav("globe");pg.wait_for_timeout(600)
+    chk(pg.locator("#map20_main.leaflet-container").count()==1,"v20 real leaflet map on #globe")
     nav("world");chk(pg.locator(".reg").count()>=3 and "헤드라인" in V(),"world affairs regions")
     nav("videos");chk("관심 영상" in V(),"videos page")
     nav("inews");chk(pg.locator(".oc17").count()+pg.locator(".wall").count()>=1,"offbeat visual wall")
@@ -381,9 +380,54 @@ with sync_playwright() as p:
             chk(H() == exp, f"{hub} tile {exp} -> {H()}")
             good(f"{hub}->{exp}")
 
+    # ===== 20 real Leaflet map + tiles, encrypted Photos, Grok memory & extra sources =====
+    tile_hits = []
+    def on_req(req):
+        if "cartocdn.com" in req.url or "openstreetmap.org" in req.url:
+            tile_hits.append(req.url)
+    pg.on("request", on_req)
+    nav("globe"); pg.wait_for_timeout(1200)
+    chk(pg.locator("#map20_main.leaflet-container").count() == 1, "v20 map leaflet mounted")
+    chk(pg.locator("#map20_main .leaflet-tile").count() >= 1 or len(tile_hits) >= 1, "v20 leaflet requested/rendered map tiles")
+    chk(pg.locator(".map20-layers .mpill20").count() >= 6, "v20 map layer toggles")
+    tap(pg.locator("[data-act='maplayer:photo']")); pg.wait_for_timeout(400)
+    chk("on" in (pg.locator("[data-act='maplayer:photo']").get_attribute("class") or ""), "v20 photo layer toggled on")
+    tap(pg.locator("[data-act='maplayer:all']")); pg.wait_for_timeout(300)
+    tap(pg.locator("[data-act='mapfs']")); pg.wait_for_timeout(200)
+    chk("fs" in (pg.locator("#map20_wrap").get_attribute("class") or ""), "v20 map fullscreen on")
+    tap(pg.locator("[data-act='mapfs']")); pg.wait_for_timeout(200)
+    chk("fs" not in (pg.locator("#map20_wrap").get_attribute("class") or ""), "v20 map fullscreen off")
+
+    nav("home"); pg.wait_for_timeout(600)
+    chk(pg.locator("#map20_home.leaflet-container").count() == 1, "v20 mini map on home")
+    nav("world"); pg.wait_for_timeout(600)
+    chk(pg.locator("#map20_world.leaflet-container").count() == 1, "v20 mini map on world")
+    chk("Austin" in V() and "Seoul" in V(), "world clocks Austin/Seoul")
+
+    nav("photos"); pg.wait_for_timeout(1400)
+    chk("내 사진" in V() and pg.locator(".pcard20 img").count() >= 10, "v20 photos decrypted & grid rendered")
+    chk(pg.locator(".mstrip20 .mpill20").count() >= 3, "v20 photos month timeline pills")
+    chk(pg.locator("#photo_up20").count() == 1, "v20 on-device photo uploader present")
+    tap(pg.locator(".pcard20").first); pg.wait_for_timeout(300)
+    chk(pg.locator(".modal20").count() == 1, "v20 photo lightbox opens")
+    tap(pg.locator("button[data-act='photoclose']")); pg.wait_for_timeout(200)
+
+    nav("memory"); pg.wait_for_timeout(500)
+    chk("Grok 기억" in V() and pg.locator(".tcloud20 .tchip20").count() >= 6, "v20 memory panel + topic cloud")
+    chk(pg.locator(".tl20-item").count() >= 5, "v20 memory bot timeline")
+    chk(pg.locator("#grok_up20").count() == 1, "v20 grok.com export uploader present")
+    tap(pg.locator("[data-act^='membot:']").nth(1)); pg.wait_for_timeout(200)
+    tap(pg.locator("[data-act='membot:all']")); pg.wait_for_timeout(200)
+
+    nav("jarvis"); pg.fill("#askq", "내 목표 뭐야?"); tap(pg.locator("button[data-act='askgo']")); pg.wait_for_timeout(300)
+    chk("목표" in V() or "경제적" in V(), "v20 assistant cites grok memory")
+
+    for rt20 in ["docs20", "mailstats20", "xprof", "dday19", "wealth"]:
+        nav(rt20); good("v20:" + rt20)
+
     # Bottom overlap & >=48px target check at 390x844 and 360x740
     def check_overlap(page, label):
-        for rt in ["home", "wealth", "life", "world", "play", "jarvis", "all"]:
+        for rt in ["home", "wealth", "life", "world", "play", "jarvis", "all", "globe", "photos", "memory", "docs20", "mailstats20"]:
             page.evaluate(f"location.hash={rt!r}"); page.wait_for_timeout(240)
             page.evaluate("window.scrollTo(0, document.body.scrollHeight)"); page.wait_for_timeout(120)
             r = page.evaluate("""()=>{
