@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """JARVIS 터치 탭 회귀 테스트 (390x844, 모바일 터치 에뮬레이션).
 모든 카테고리·가맹점·필터 칩·세그먼트 버튼·홈 타일을 실제 tap()으로 눌러 기대한 화면/필터가 활성화되는지 확인.
-사용: python scripts/tap-test.py [URL]   (암호는 비밀 폴더 passcode 파일에서 읽음, 저장소에 없음)"""
-import sys,urllib.parse
+사용: python scripts/tap-test.py [URL] [chromium|webkit]   (암호는 비밀 폴더 passcode 파일에서 읽음, 저장소에 없음)
+webkit = iPhone Safari 엔진(Playwright WebKit, iPhone 14 프로필)"""
+import sys,os,urllib.parse
 from playwright.sync_api import sync_playwright
 URL=sys.argv[1] if len(sys.argv)>1 else "http://localhost:8787/"
+ENGINE=(sys.argv[2] if len(sys.argv)>2 else os.environ.get("ENGINE","chromium")).lower()
 PW=open("/workspace/bot-dashboard-secrets/passcode").read().strip()
 ok=0;fail=[]
 def chk(c,msg):
@@ -12,8 +14,16 @@ def chk(c,msg):
     if c: ok+=1
     else: fail.append(msg)
 with sync_playwright() as p:
-    b=p.chromium.launch(executable_path="/usr/bin/google-chrome")
-    ctx=b.new_context(viewport={"width":390,"height":844},has_touch=True,is_mobile=True,device_scale_factor=2,reduced_motion="reduce",permissions=["clipboard-read","clipboard-write"]);pg=ctx.new_page();errs=[]
+    if ENGINE=="webkit":
+        b=p.webkit.launch()
+        dev={k:v for k,v in p.devices["iPhone 14"].items() if k!="default_browser_type"};dev.update(viewport={"width":390,"height":844},reduced_motion="reduce")
+        ctx=b.new_context(**dev)
+    else:
+        b=p.chromium.launch(executable_path="/usr/bin/google-chrome")
+        ctx=b.new_context(viewport={"width":390,"height":844},has_touch=True,is_mobile=True,device_scale_factor=2,reduced_motion="reduce",permissions=["clipboard-read","clipboard-write"])
+    pg=ctx.new_page();errs=[]
+    if ENGINE=="webkit":  # WebKit은 클립보드 권한 부여 API가 없어 쓰기 내용을 페이지 안에서 캡처해 같은 검사를 수행
+        pg.add_init_script("try{const c=navigator.clipboard||{};Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:t=>{window._clip=String(t);return Promise.resolve()},readText:()=>Promise.resolve(window._clip||''),write:c.write&&c.write.bind(c)}})}catch(e){}")
     pg.add_init_script("speechSynthesis.speak=u=>{(window._spk=window._spk||[]).push(u.text)};speechSynthesis.cancel=()=>{window._cn=(window._cn||0)+1}")
     pg.on("pageerror",lambda e:errs.append(str(e)));pg.set_default_timeout(4000)
     pg.goto(URL);pg.wait_for_timeout(700);pg.fill("#pw",PW);pg.click("#lf button");pg.wait_for_timeout(4500)
@@ -383,7 +393,7 @@ with sync_playwright() as p:
     # ===== 20 real Leaflet map + tiles, encrypted Photos, Grok memory & extra sources =====
     tile_hits = []
     def on_req(req):
-        if "cartocdn.com" in req.url or "openstreetmap.org" in req.url:
+        if "arcgisonline.com" in req.url or "openstreetmap.org" in req.url:
             tile_hits.append(req.url)
     pg.on("request", on_req)
     nav("globe"); pg.wait_for_timeout(1200)
@@ -465,5 +475,5 @@ with sync_playwright() as p:
     pg.evaluate("location.hash='home'");pg.wait_for_timeout(200)
     chk(not errs,f"page errors {errs}")
     b.close()
-print(f"tap-test: {ok} passed, {len(fail)} failed");[print(" FAIL",f) for f in fail[:40]]
+print(f"tap-test[{ENGINE}]: {ok} passed, {len(fail)} failed");[print(" FAIL",f) for f in fail[:40]]
 sys.exit(1 if fail else 0)

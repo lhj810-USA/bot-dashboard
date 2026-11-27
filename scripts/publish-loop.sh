@@ -12,6 +12,7 @@ while true; do
   python3 scripts/collect-grok-memory.py >/dev/null 2>&1   # Grok 봇 기억 집계
   /workspace/bot-dashboard-venv/bin/python scripts/collect-photos.py >/dev/null 2>&1   # 사진 썸네일 암호화
   python3 scripts/ai-brief.py >/dev/null 2>&1   # AI 브리핑 (로컬 규칙 엔진)
+  python3 scripts/ai-insights.py >/dev/null 2>&1   # v21 AI 제안·추천·재미 (루틴 에이전트 보강 보존)
   python3 scripts/snapshot-patterns.py >/dev/null 2>&1   # 패턴 스냅샷 (5시간 내 중복 생략; 7AM/6PM 루틴이 수집 후 --force 가능)
   /workspace/bot-dashboard-venv/bin/python scripts/build-payload.py >/dev/null 2>&1
   if [ -n "$(git status --porcelain payload.enc.json photos.enc.json)" ]; then

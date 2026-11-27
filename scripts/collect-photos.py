@@ -127,6 +127,12 @@ def main():
         except Exception:
             pass
 
+    # 사용자가 지운(문서·신분 서류) 사진은 비밀 폴더의 photo-exclude.json 목록으로 계속 제외 (재다운로드돼도 무시)
+    exclude = set()
+    try:
+        exclude = set(json.load(open(os.path.join(SEC, "photo-exclude.json"))))
+    except Exception:
+        pass
     files = sorted(
         f for f in glob.glob(os.path.join(CACHE_DIR, "*"))
         if os.path.splitext(f)[1].lower() in (".jpg", ".jpeg", ".png", ".webp")
@@ -136,7 +142,7 @@ def main():
 
     for fp in files:
         fn = os.path.basename(fp)
-        if re.search(r"(scan_|운전면허|여권|비자|idcard)", fn, re.I):
+        if fn in exclude or re.search(r"(scan_|운전면허|여권|비자|idcard|ds-?160|passport)", fn, re.I):
             continue
         try:
             with Image.open(fp) as raw_im:
